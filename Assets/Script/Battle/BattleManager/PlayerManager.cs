@@ -58,7 +58,6 @@ public class PlayerManager : BattleEntityManager
             }
         }
 
-        // 2️⃣ Move to an empty move-area tile
         if (clickedTile.isMoveArea && SelectedEntity != null)
         {
             SelectedEntity.StartCoroutine(SelectedEntity.MoveToGridPosition(clickedTile.gridX, clickedTile.gridZ));
@@ -67,7 +66,6 @@ public class PlayerManager : BattleEntityManager
             return;
         }
 
-        // 3️⃣ Clear all selections if clicked elsewhere
         ClearAllMoveAreas();
     }
 
