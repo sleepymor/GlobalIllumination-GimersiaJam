@@ -181,6 +181,10 @@ public class EntityMaster : MonoBehaviour
                 if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied)
                     continue;
 
+                // ✅ NEW: Skip non-walkable tiles
+                if (!neighbor.tileData.isMoveArea) // or neighbor.isWalkable if you use that
+                    continue;
+
                 int newCost = costSoFar + neighbor.moveCost;
                 if (newCost > data.moveRange)
                     continue;
@@ -189,6 +193,7 @@ public class EntityMaster : MonoBehaviour
                 cameFrom[neighbor] = current;
                 queue.Enqueue((neighbor, newCost));
             }
+
         }
 
         if (!cameFrom.ContainsKey(goal))

@@ -150,55 +150,59 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void ShowAttackAreaBFS(int attackRange)
+public void ShowAttackAreaBFS(int attackRange)
+{
+    GridManager grid = FindObjectOfType<GridManager>();
+    if (grid == null) return;
+
+    Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
+    HashSet<Tile> visited = new HashSet<Tile>();
+
+    queue.Enqueue((this, attackRange));
+    visited.Add(this);
+
+    var attackerFaction = PlayerManager.Instance.SelectedEntity?.Faction;
+
+    while (queue.Count > 0)
     {
-        GridManager grid = FindObjectOfType<GridManager>();
-        if (grid == null) return;
+        var (currentTile, rangeLeft) = queue.Dequeue();
 
-        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
-        HashSet<Tile> visited = new HashSet<Tile>();
-
-        queue.Enqueue((this, attackRange));
-        visited.Add(this);
-
-        while (queue.Count > 0)
+        if (currentTile != this)
         {
-            var (currentTile, rangeLeft) = queue.Dequeue();
-
-            if (currentTile != this)
+            // Only show attack if tile has an enemy
+            if (currentTile.isOccupied && currentTile.occupyingEntity.Faction != attackerFaction)
                 currentTile.ActivateAttackAreaObject();
+        }
 
-            if (rangeLeft <= 0)
+        if (rangeLeft <= 0)
+            continue;
+
+        Vector2Int coords = grid.GetTileCoordinates(currentTile);
+        Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+        foreach (var dir in dirs)
+        {
+            Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
+            if (neighbor == null || visited.Contains(neighbor))
                 continue;
 
-            Vector2Int coords = grid.GetTileCoordinates(currentTile);
-            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-
-            foreach (var dir in dirs)
+            // Only propagate through walkable tiles
+            if (!neighbor.tileData.isMoveArea)
             {
-                Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
-                if (neighbor == null || visited.Contains(neighbor))
-                    continue;
+                // Show attack only if there is an enemy
+                if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != attackerFaction)
+                    neighbor.ActivateAttackAreaObject();
 
-                // 🚫 Skip walls or obstacles UNLESS they have an enemy
-                if (!neighbor.tileData.isMoveArea)
-                {
-                    if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != PlayerManager.Instance.SelectedEntity.Faction)
-                    {
-                        // ✅ Show red if there’s an enemy on an unwalkable tile
-                        neighbor.ActivateAttackAreaObject();
-                    }
-                    visited.Add(neighbor);
-                    continue;
-                }
-
-                // ✅ Normal propagation through walkable tiles
-                queue.Enqueue((neighbor, rangeLeft - 1));
                 visited.Add(neighbor);
+                continue;
             }
+
+            // ✅ Normal propagation
+            queue.Enqueue((neighbor, rangeLeft - 1));
+            visited.Add(neighbor);
         }
     }
-
+}
 
     public void ActivateMoveAreaObject()
     {
