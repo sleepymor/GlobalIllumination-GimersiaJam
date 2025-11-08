@@ -207,8 +207,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129264808}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4226183, y: -0, z: -0, w: 0.9063078}
-  m_LocalPosition: {x: 56.797604, y: 48.303875, z: -10.837931}
+  m_LocalRotation: {x: 0.28401536, y: -0, z: -0, w: 0.95881975}
+  m_LocalPosition: {x: 106.79761, y: 22.303875, z: -12.337931}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -271,9 +271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 1948118702}
-  height: 70
-  tiltAngle: 50
-  offset: {x: 0, y: -20, z: -30}
+  height: 69
+  tiltAngle: 33
+  offset: {x: 0, y: -45, z: -32}
 --- !u!114 &129264814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db20cb4e813ee1916a10057894d9afc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
+  _width: 20
   _height: 10
   _tileSize: 10
   _tilePrefab: {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
