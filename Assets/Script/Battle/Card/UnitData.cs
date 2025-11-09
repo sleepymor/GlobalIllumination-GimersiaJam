@@ -1,15 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SpellData", menuName = "Scriptable Objects/SpellData")]
-public class SpellData : Card
+[CreateAssetMenu(fileName = "UnitData", menuName = "Scriptable Objects/UnitData")]
+public class UnitData : Card
 {
     [Header("Card Info")]
-    public string spellName;
+    public string unitName;
 
     [Header("Stats")]
-    public DamageType DamageType;
-    public int amount;
-    public int spellRange;
+    public int attack;
+    public int health;
+    public int crit;
+    public int moveRange;
+    public int attackRange;
     public int summonCost;
 
     [Header("Visual")]
@@ -17,17 +19,10 @@ public class SpellData : Card
     public Sprite worldSprite;
     public GameObject prefab;
 
-    
-    public override string CardName => spellName;
+    // Implement base properties
+    public override string CardName => unitName;
     public override Sprite CardSprite => cardSprite;
     public override Sprite WorldSprite => worldSprite;
     public override GameObject Prefab => prefab;
     public override int SummonCost => summonCost;
-}
-
-public enum DamageType
-{
-    DOT,
-    AOE,
-    Freeze,
 }

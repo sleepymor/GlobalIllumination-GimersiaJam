@@ -9,6 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e917ed853a99084c92c326eeeb9c74f, type: 3}
-  m_Name: Spell1
+  m_Script: {fileID: 11500000, guid: e937deb9697664244980215baef13611, type: 3}
+  m_Name: Sword
   m_EditorClassIdentifier: 
+  itemName: Sword
+  BuffType: 1
+  amount: 50
+  summonCost: 2
+  cardSprite: {fileID: 1215142997, guid: 4273afd34dcbc2e4c9ca0500f6dee081, type: 3}
+  worldSprite: {fileID: 0}
+  prefab: {fileID: 0}
