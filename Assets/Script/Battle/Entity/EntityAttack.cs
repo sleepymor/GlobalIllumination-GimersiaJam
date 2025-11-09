@@ -38,7 +38,7 @@ public class EntityAttack : MonoBehaviour
         _e._animator.Play("Attack");
 
         // Wait for attack to reach the hit frame
-        yield return new WaitForSeconds(0.5f); // adjust to your animation
+        yield return new WaitForSeconds(1f); // adjust to your animation
 
         _e._animator.Play("Idle");
 
