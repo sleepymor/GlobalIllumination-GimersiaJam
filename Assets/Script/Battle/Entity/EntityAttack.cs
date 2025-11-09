@@ -67,6 +67,15 @@ public class EntityAttack : MonoBehaviour
 
         target.health.TakeDamage(_e.data.attack, _e.data.critChance);
         isAlreadyAttacking = true;
+
+        // Counter attack from target
+        int distance = Mathf.Abs(target.GridX - _e.GridX) + Mathf.Abs(target.GridZ - _e.GridZ);
+        if (!target.status.IsDead && distance == 1)
+        {
+            yield return new WaitForSeconds(0.3f); // small delay before counter
+            target.attack.Attack(_e);
+            target.attack.SetHadAttacking(rue);
+        }
     }
 
 }
