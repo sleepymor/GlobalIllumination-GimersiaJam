@@ -1,36 +1,3 @@
-/*
- * PlayerManager.cs
- * ------------------------
- * Singleton class that manages all player-controlled entities in a turn-based strategy game.
- * Inherits from BattleEntityManager to leverage generic team and tile management.
- *
- * Responsibilities:
- * - Maintain a list of all active player units in the scene.
- * - Handle player input: selecting units, moving them, and attacking enemies.
- * - Manage movement and attack range highlights on the grid.
- * - Ensure units cannot move or attack more than once per turn.
- * - End the player’s turn and pass control to the enemy.
- *
- * Core Features:
- * - TileClicked(Tile): Main handler for when a tile is clicked, managing selection, movement, and attacks.
- * - SelectEntity(EntityMaster): Selects a player unit and clears previous highlights.
- * - ShowMovementAndAttackAreas(EntityMaster): Highlights possible movement and attack tiles.
- * - TryAttack(EntityMaster, EntityMaster): Executes an attack if the target is in range.
- * - MoveAndEnableAttack(EntityMaster, Tile): Coroutine for moving a unit and showing attack options afterward.
- * - ClearMoveAreasOnly(): Clears only movement tiles, keeping attack tiles highlighted.
- * - ClearAllMoveAndAttackAreas(): Clears all movement and attack highlights.
- *
- * Notes:
- * - Designed to work closely with Tile, GridManager, and EntityMaster classes.
- * - Keeps track of a SelectedEntity for turn-based actions.
- * - Movement and attack BFS logic are delegated to Tile.
- *
- * Usage:
- * - Attach this script to a singleton PlayerManager GameObject in the scene.
- * - Tiles automatically call TileClicked() when clicked.
- * - EndTurn() should be called to switch control to the enemy.
- */
-
 using UnityEngine;
 using System.Collections;
 

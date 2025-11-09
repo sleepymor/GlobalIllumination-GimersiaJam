@@ -1109,6 +1109,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2470217883534837545, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470217883534837545, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4473471216752999400, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
       propertyPath: gridX
       value: 0

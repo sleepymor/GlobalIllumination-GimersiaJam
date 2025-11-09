@@ -30,7 +30,7 @@ public class EntityAttack : MonoBehaviour
     private bool isAlreadyAttacking = false;
 
     public bool IsAlreadyAttacking => isAlreadyAttacking;
-    public int AttackRange;
+    [HideInInspector] public int AttackRange;
 
     public void Initialize(EntityMaster e)
     {
@@ -100,4 +100,8 @@ public class EntityAttack : MonoBehaviour
     }
 
 
+    public void BackShot()
+    {
+        
+    }
 }
