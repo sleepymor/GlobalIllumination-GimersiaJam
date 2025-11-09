@@ -23,10 +23,10 @@
 
 using UnityEngine;
 
-public class EntityHealth : MonoBehaviour
+public class EntityHealth
 {
     private EntityMaster _e;
-    public void Initialize(EntityMaster e)
+    public EntityHealth(EntityMaster e)
     {
         _e = e;
     }
@@ -43,11 +43,13 @@ public class EntityHealth : MonoBehaviour
     public void TakeDamage(int amount, int critChance = 0)
     {
         _e.data.currentHP -= amount;
-        Debug.Log($"[EntityMaster] {_e.data.entityName} took {amount} damage! HP left: {_e.data.currentHP}");
 
         if (_e.data.currentHP <= 0)
         {
-            StartCoroutine(_e.death.DieAnim());
+            Debug.Log($"[{_e.name}] has died!");
+
+            _e.StartCoroutine(_e.anim.DieAnim());
+
         }
     }
 }

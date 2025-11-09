@@ -145,8 +145,8 @@ public class EnemyManager : BattleEntityManager
         GridManager grid = FindObjectOfType<GridManager>();
         if (grid == null) return null;
 
-        Tile startTile = grid.GetTileAt(self.GridX, self.GridZ);
-        Tile targetTile = grid.GetTileAt(target.GridX, target.GridZ);
+        Tile startTile = grid.GetTileAt(self.pos.GridX, self.pos.GridZ);
+        Tile targetTile = grid.GetTileAt(target.pos.GridX, target.pos.GridZ);
         if (startTile == null || targetTile == null) return null;
 
         Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();

@@ -50,7 +50,7 @@ public abstract class BattleEntityManager : MonoBehaviour
     public virtual void RefreshTeam()
     {
         TeamList = FindObjectsOfType<EntityMaster>()
-            .Where(e => e.Faction == GetFactionType() && !e.status.IsDead)
+            .Where(e => e.data.faction == GetFactionType() && !e.status.IsDead)
             .ToList();
 
         Debug.Log($"[{GetType().Name}] Team refreshed. Count: {TeamList.Count}");
@@ -63,7 +63,7 @@ public abstract class BattleEntityManager : MonoBehaviour
 
     public virtual void AddEntity(EntityMaster entity)
     {
-        if (entity != null && entity.Faction == GetFactionType() && !TeamList.Contains(entity))
+        if (entity != null && entity.data.faction == GetFactionType() && !TeamList.Contains(entity))
         {
             TeamList.Add(entity);
             Debug.Log($"[{GetType().Name}] Added: {entity.name}");
@@ -77,7 +77,7 @@ public abstract class BattleEntityManager : MonoBehaviour
             TeamList.Remove(entity);
 
             // Clear the tile if still linked
-            Tile tile = FindObjectOfType<GridManager>()?.GetTileAt(entity.GridX, entity.GridZ);
+            Tile tile = FindObjectOfType<GridManager>()?.GetTileAt(entity.pos.GridX, entity.pos.GridZ);
             if (tile != null && tile.GetOccupyingEntity() == entity)
                 tile.SetOccupyingEntity(null);
 

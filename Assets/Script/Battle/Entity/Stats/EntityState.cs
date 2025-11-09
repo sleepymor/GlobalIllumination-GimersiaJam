@@ -27,9 +27,7 @@
  * - Effects durations decrement automatically each turn.
  */
 
-using UnityEngine;
-
-public class EntityState : MonoBehaviour
+public class EntityState
 {
     private bool isDead = false;
     public bool IsDead => isDead;
@@ -40,7 +38,7 @@ public class EntityState : MonoBehaviour
     private int regenAmount = 0;
 
     private EntityMaster _e;
-    public void Initialize(EntityMaster e)
+    public EntityState(EntityMaster e)
     {
         _e = e;
     }
@@ -103,8 +101,4 @@ public class EntityState : MonoBehaviour
     {
         _e.health.Heal(regenAmount);
     }
-
-
-
-
 }

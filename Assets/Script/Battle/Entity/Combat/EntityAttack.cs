@@ -24,7 +24,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class EntityAttack : MonoBehaviour
+public class EntityAttack
 {
     private EntityMaster _e;
     private bool isAlreadyAttacking = false;
@@ -32,7 +32,7 @@ public class EntityAttack : MonoBehaviour
     public bool IsAlreadyAttacking => isAlreadyAttacking;
     [HideInInspector] public int AttackRange;
 
-    public void Initialize(EntityMaster e)
+    public EntityAttack(EntityMaster e)
     {
         _e = e;
         AttackRange = _e.data.attackRange;
@@ -45,36 +45,33 @@ public class EntityAttack : MonoBehaviour
     public bool CanAttack(EntityMaster target)
     {
         if (target == null || target.status.IsDead) return false;
-        if (target.Faction == _e.Faction) return false;
+        if (target.data.faction == _e.data.faction) return false;
 
-        int distance = Mathf.Abs(target.GridX - _e.GridX) + Mathf.Abs(target.GridZ - _e.GridZ);
+        int distance = Mathf.Abs(target.pos.GridX - _e.pos.GridX) + Mathf.Abs(target.pos.GridZ - _e.pos.GridZ);
         return distance <= _e.data.attackRange;
     }
     public void Attack(EntityMaster target)
     {
         if (!CanAttack(target)) return;
-        StartCoroutine(AttackRoutine(target));
+        target.StartCoroutine(AttackRoutine(target));
     }
 
     private IEnumerator AttackRoutine(EntityMaster target)
     {
-        _e._animator.Play("Attack");
+        _e.anim.AttackAnim();
 
-        // Wait for attack to reach the hit frame
-        yield return new WaitForSeconds(1f); // adjust to your animation
+        yield return new WaitForSeconds(1f);
 
-        _e._animator.Play("Idle");
+        _e.anim.IdleAnim();
 
-        // The lower the health, the weaker the attack
         int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
         target.health.TakeDamage(scaledDamage, _e.data.critChance);
         isAlreadyAttacking = true;
 
-        // Counter attack from target
-        int distance = Mathf.Abs(target.GridX - _e.GridX) + Mathf.Abs(target.GridZ - _e.GridZ);
+        int distance = Mathf.Abs(target.pos.GridX - _e.pos.GridX) + Mathf.Abs(target.pos.GridZ - _e.pos.GridZ);
         if (!target.status.IsDead && distance == 1)
         {
-            yield return new WaitForSeconds(0.3f); // small delay before counter
+            yield return new WaitForSeconds(0.3f);
             target.attack.CounterAttack(_e);
         }
 
@@ -82,19 +79,17 @@ public class EntityAttack : MonoBehaviour
 
     public void CounterAttack(EntityMaster attacker)
     {
-        StartCoroutine(CounterAttackRoutine(attacker));
+        attacker.StartCoroutine(CounterAttackRoutine(attacker));
     }
 
     private IEnumerator CounterAttackRoutine(EntityMaster target)
     {
-        _e._animator.Play("Attack");
+        _e.anim.AttackAnim();
 
-        // Wait for attack to reach the hit frame
-        yield return new WaitForSeconds(1f); // adjust to your animation
+        yield return new WaitForSeconds(1f);
 
-        _e._animator.Play("Idle");
+        _e.anim.IdleAnim();
 
-        // The lower the health, the weaker the attack
         int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
         target.health.TakeDamage(scaledDamage, _e.data.critChance);
     }

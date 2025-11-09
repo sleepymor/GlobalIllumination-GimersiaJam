@@ -12,12 +12,6 @@ GameObject:
   - component: {fileID: -3856791589528915358}
   - component: {fileID: 2470217883534837545}
   - component: {fileID: 4473471216752999400}
-  - component: {fileID: 286796407928965024}
-  - component: {fileID: -8234510225451250360}
-  - component: {fileID: -8832286806230440299}
-  - component: {fileID: -378663300267994121}
-  - component: {fileID: 3295712993575113262}
-  - component: {fileID: 5693894389094886033}
   m_Layer: 0
   m_Name: Character 2
   m_TagString: Untagged
@@ -134,90 +128,7 @@ MonoBehaviour:
   gridZ: 0
   heightAboveTile: 5
   moveSpeed: 30
+  Faction: 0
   gridManager: {fileID: 0}
   currentTile: {fileID: 0}
   materials: []
-  healthManager: {fileID: 0}
-  attackManager: {fileID: 0}
-  deathManager: {fileID: 0}
-  summonManager: {fileID: 0}
-  movementManager: {fileID: 0}
-  statusManager: {fileID: 0}
---- !u!114 &286796407928965024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61cbbc2733ad5173befc63806496e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-8234510225451250360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043fee311754dec218e10df0dd9ebc4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathSinkSpeed: 5
-  deathFadeSpeed: 5
---- !u!114 &-8832286806230440299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f96512639ceb92508966dcc8fcdcb8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackRange: 0
---- !u!114 &-378663300267994121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f39bf3dc841992148648b6567f46aaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  summonRiseSpeed: 5
-  summonFadeSpeed: 5
---- !u!114 &3295712993575113262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ee2c00a8b5bd9ac96dc881a142763d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveRange: 0
---- !u!114 &5693894389094886033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782075751541447720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146ae3634027a0787a78234dcda4f82d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
