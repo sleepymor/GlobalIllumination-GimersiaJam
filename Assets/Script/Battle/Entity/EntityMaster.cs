@@ -1,3 +1,26 @@
+/*
+ * EntityMaster.cs
+ * -----------------
+ * This is the main controller script for all entities (player or enemy) in the battle system.
+ * It acts as a central hub that holds references to all modular components of an entity, 
+ * such as health, movement, attack, death, summon, and state management.
+ *
+ * Responsibilities:
+ * - Initialize and manage all entity sub-components.
+ * - Provide a unified interface to access key entity data like grid position, faction, and materials.
+ * - Set up the entity in the scene, including snapping to the grid and registering with the appropriate manager (PlayerManager or EnemyManager).
+ * - Cache renderers and materials for visual effects (e.g., damage, death, summon).
+ * - Maintain a reference to the Animator for playing animations across different actions.
+ *
+ * This design allows entity behaviors to be modular and maintainable, separating concerns 
+ * between movement, combat, death, and other states while keeping the EntityMaster as the central orchestrator.
+ *
+ * Usage:
+ * - Attach this script to any GameObject representing a battle entity.
+ * - Ensure all modular components (EntityHealth, EntityAttack, EntityMovement, EntityDeath, EntitySummon, EntityState) are attached to the same GameObject.
+ * - Configure the EntityData and Animator in the Inspector.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

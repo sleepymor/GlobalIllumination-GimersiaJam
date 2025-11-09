@@ -1,3 +1,28 @@
+/*
+ * Tile.cs
+ * -----------------
+ * This class represents a single tile on the battle grid in a turn-based strategy system.
+ * It handles tile-specific data, visuals, and interactions with the player and game managers.
+ *
+ * Responsibilities:
+ * - Store tile data, including grid coordinates, move cost, and whether it is occupied.
+ * - Manage visual elements such as base color, hover effects, and move/attack highlights.
+ * - Handle input events (clicks) via IPointerClickHandler, allowing the player to select units, move, or attack.
+ * - Compute movement and attack ranges using BFS algorithms to highlight reachable tiles.
+ * - Track occupancy by an EntityMaster, and provide utility functions for clearing or activating move/attack areas.
+ *
+ * Notes:
+ * - The tile communicates directly with PlayerManager to handle selection and actions.
+ * - Movement and attack BFS logic are included in this class; for larger projects, this could be refactored into a separate helper.
+ * - Hover effects and visual highlights are modular via GameObjects, making it easy to customize appearance.
+ *
+ * Usage:
+ * - Attach this script to a tile GameObject in the scene.
+ * - Assign TileData and the optional hover/move/attack objects in the Inspector.
+ * - Initialize the tile via Init() to set its base color and offset.
+ * - Tiles automatically respond to player clicks during their faction’s turn.
+ */
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;

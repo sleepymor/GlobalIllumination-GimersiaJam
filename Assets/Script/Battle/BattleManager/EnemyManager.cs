@@ -1,3 +1,32 @@
+/*
+ * EnemyManager.cs
+ * ------------------------
+ * Singleton class that manages all enemy entities in a turn-based strategy game.
+ * Inherits from BattleEntityManager to leverage generic team and tile management.
+ *
+ * Responsibilities:
+ * - Maintain a list of all active enemy units in the scene.
+ * - Execute the enemy turn logic: move towards the nearest player and attack if in range.
+ * - Handle turn transitions, ending the enemy turn and passing control to the player.
+ *
+ * Core Features:
+ * - RunEnemyTurn(): Coroutine that iterates over all enemies and performs movement and attacks.
+ * - IsEnemyValid(): Checks if an enemy can act (not dead, has not moved).
+ * - FindNearestTarget(): Finds the closest player-controlled entity for targeting.
+ * - FindClosestTileTowardsTarget(): Calculates which tile the enemy can move to that brings it closest to its target.
+ * - TryAttackTarget(): Executes an attack if the target is within range.
+ * - EndTurn(): Ends the enemy's turn and switches to the player’s turn.
+ *
+ * Notes:
+ * - Designed to work with GridManager, PlayerManager, and EntityMaster classes.
+ * - Automatically skips dead units and units that have already moved.
+ * - Uses BFS-based movement calculations to find reachable tiles.
+ *
+ * Usage:
+ * - Attach this script to a singleton EnemyManager GameObject in the scene.
+ * - Call RunEnemyTurn() when the enemy phase begins.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,3 +1,26 @@
+/*
+ * EntityAttack.cs
+ * -----------------
+ * Handles attacking behavior for an EntityMaster in a turn-based strategy game.
+ *
+ * Responsibilities:
+ * - Determine if a target is within attack range and valid to attack.
+ * - Trigger attack animations and apply damage to the target.
+ * - Track whether the entity has already attacked this turn.
+ * - Support initialization from the EntityMaster for data and animator references.
+ *
+ * Usage:
+ * - Attach this script to the same GameObject as EntityMaster.
+ * - Initialize with EntityAttack.Initialize(entityMaster) after Awake.
+ * - Call Attack(target) to perform an attack on a valid target.
+ * - CanAttack(target) can be used to check if an attack is possible without performing it.
+ *
+ * Notes:
+ * - Uses a coroutine to handle attack timing and animation playback.
+ * - Animation names ("Attack", "Idle") should match the Animator controller.
+ * - Interacts with the EntityHealth component of the target to apply damage.
+ */
+
 using UnityEngine;
 using System.Collections;
 

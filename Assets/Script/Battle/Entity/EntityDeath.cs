@@ -1,3 +1,26 @@
+/*
+ * EntityDeath.cs
+ * -----------------
+ * Handles the death behavior of an EntityMaster in a turn-based strategy game.
+ *
+ * Responsibilities:
+ * - Play death animations including sinking into the ground and fading out.
+ * - Mark the entity as dead in the EntityState component.
+ * - Remove the entity from its respective manager (PlayerManager or EnemyManager).
+ * - Clean up attack/move highlights after death.
+ * - Destroy the entity GameObject after the death sequence is complete.
+ *
+ * Usage:
+ * - Attach this script to the same GameObject as EntityMaster.
+ * - Initialize with EntityDeath.Initialize(entityMaster) after Awake.
+ * - Trigger the death sequence by calling StartCoroutine(entityDeath.DieAnim()).
+ *
+ * Notes:
+ * - Death animation speed is controlled by `deathSinkSpeed` and `deathFadeSpeed`.
+ * - The entity’s materials are modified for fade effects, so ensure all renderers are cached in EntityMaster.
+ * - This class interacts with PlayerManager and EnemyManager to maintain proper game state.
+ */
+
 using UnityEngine;
 using System.Collections;
 

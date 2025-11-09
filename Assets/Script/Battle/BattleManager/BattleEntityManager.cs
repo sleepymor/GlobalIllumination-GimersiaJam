@@ -1,3 +1,31 @@
+/*
+ * BattleEntityManager.cs
+ * ------------------------
+ * Abstract base class for managing all entities of a specific faction in a turn-based strategy game.
+ *
+ * Responsibilities:
+ * - Maintain a list of all active entities for the faction (TeamList).
+ * - Track which entity is currently selected (SelectedEntity).
+ * - Provide utility methods for clearing tile highlights, resetting moves, and managing entity lifecycle.
+ * - Enforce a contract for derived classes to define their faction type and implement EndTurn behavior.
+ *
+ * Core Features:
+ * - RefreshTeam(): Rebuilds the active entity list for the faction.
+ * - AddEntity()/RemoveEntity(): Manage entities dynamically during gameplay.
+ * - ClearAllMoveAreas() / ClearAllAttackAreas(): Remove tile highlights.
+ * - ResetEntityMoves(): Reset movement flags for all team members at the start of the turn.
+ * - allTiles cache for quick access to all tiles in the scene.
+ *
+ * Usage:
+ * - Derive specific managers (e.g., PlayerManager, EnemyManager) from this class.
+ * - Implement GetFactionType() to specify the faction.
+ * - Implement EndTurn() to define turn-ending behavior for the faction.
+ *
+ * Notes:
+ * - Designed to work with GridManager and Tile classes for tile-based movement and attack range.
+ * - All entity operations automatically skip dead units via the EntityMaster.status.IsDead flag.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

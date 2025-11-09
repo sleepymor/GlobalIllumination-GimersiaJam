@@ -1,3 +1,28 @@
+/*
+ * EntityMovement.cs
+ * -----------------
+ * Handles the movement logic for an EntityMaster in a grid-based, turn-based strategy game.
+ *
+ * Responsibilities:
+ * - Track movement state (isMoving, hasMoved) for the current turn.
+ * - Provide movement range based on the entity's data.
+ * - Snap the entity instantly to a grid tile or move smoothly via animation.
+ * - Perform pathfinding (BFS with cost tracking) to navigate from current tile to a target tile.
+ * - Update tile occupancy when moving.
+ * - Interact with the EntityMaster and GridManager to maintain proper position and state.
+ *
+ * Usage:
+ * - Attach this script to the same GameObject as EntityMaster.
+ * - Initialize with EntityMaster.Initialize(thisEntity) after Awake.
+ * - Call SnapToGridPosition(x, z) to teleport the entity.
+ * - Call MoveToGridPosition(x, z) as a coroutine to move smoothly across tiles.
+ * - Use SetHadMove(bool) to manually reset the movement state if needed.
+ *
+ * Notes:
+ * - Movement stops if the entity is dead or already moving.
+ * - The BFS pathfinding ensures the entity does not exceed its movement range or move into occupied tiles.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

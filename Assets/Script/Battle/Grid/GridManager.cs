@@ -1,3 +1,29 @@
+/*
+ * GridManager.cs
+ * -----------------
+ * Manages the creation, storage, and querying of the battle grid in a turn-based strategy game.
+ *
+ * Responsibilities:
+ * - Generate a 2D grid of Tile instances based on the serialized TileRows.
+ * - Store tile references in a 2D array for quick access.
+ * - Provide utilities to get a tile at a specific coordinate or retrieve neighbors for pathfinding.
+ * - Convert between Tile instances and grid coordinates.
+ * - Return all tiles as a flat array for operations like clearing highlights.
+ *
+ * Usage:
+ * - Attach this script to a GameObject in the scene.
+ * - Assign TileRow prefabs in the Inspector and set tileSize.
+ * - Call GenerateGrid() to instantiate the grid (called automatically in Awake if not generated).
+ * - Use GetTileAt(x, z) to retrieve a tile at specific coordinates.
+ * - Use GetNeighbors(tile) for pathfinding or range calculations.
+ * - GetAllTiles() can be used to iterate over every tile in the grid.
+ *
+ * Notes:
+ * - This class assumes the grid is rectangular and that each TileRow has the same number of tiles.
+ * - Tiles are instantiated as children of the GridManager GameObject for organization.
+ * - Handles bounds checking automatically to prevent null reference errors.
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
