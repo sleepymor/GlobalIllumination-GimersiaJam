@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 15d3322085fab29c1bb79b6e38db4cdf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tileData: {instanceID: 0}
+  - _hoverObject: {instanceID: 0}
+  - _moveAreaObject: {instanceID: 0}
+  - _attackAreaObject: {instanceID: 0}
+  - _summonAreaObject: {instanceID: 0}
+  - occupyingEntity: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

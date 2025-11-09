@@ -1,40 +1,71 @@
+/*
+ * Tile.cs
+ * -----------------
+ * This class represents a single tile on the battle grid in a turn-based strategy system.
+ * It handles tile-specific data, visuals, and interactions with the player and game managers.
+ *
+ * Responsibilities:
+ * - Store tile data, including grid coordinates, move cost, and whether it is occupied.
+ * - Manage visual elements such as base color, hover effects, and move/attack highlights.
+ * - Handle input events (clicks) via IPointerClickHandler, allowing the player to select units, move, or attack.
+ * - Compute movement and attack ranges using BFS algorithms to highlight reachable tiles.
+ * - Track occupancy by an EntityMaster, and provide utility functions for clearing or activating move/attack areas.
+ *
+ * Notes:
+ * - The tile communicates directly with PlayerManager to handle selection and actions.
+ * - Movement and attack BFS logic are included in this class; for larger projects, this could be refactored into a separate helper.
+ * - Hover effects and visual highlights are modular via GameObjects, making it easy to customize appearance.
+ *
+ * Usage:
+ * - Attach this script to a tile GameObject in the scene.
+ * - Assign TileData and the optional hover/move/attack objects in the Inspector.
+ * - Initialize the tile via Init() to set its base color and offset.
+ * - Tiles automatically respond to player clicks during their faction’s turn.
+ */
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-
 [RequireComponent(typeof(Renderer), typeof(Collider))]
 public class Tile : MonoBehaviour, IPointerClickHandler
 {
+    [Header("Tile Data")]
+    public TileData tileData;
+
     [Header("Tile Colors")]
     [SerializeField] private Color _baseColor = Color.white;
     [SerializeField] private Color _offsetColor = Color.gray;
 
-    [Header("Hover & Move Area Objects")]
+    [Header("Hover/Move/Attack/Summon Objects")]
     [SerializeField] private GameObject _hoverObject;
     [SerializeField] private GameObject _moveAreaObject;
+    [SerializeField] private GameObject _attackAreaObject;
+    [SerializeField] private GameObject _summonAreaObject;
+
+    [HideInInspector] public int moveCost;
+    [HideInInspector] public bool isMoveArea, isAttackArea;
 
     private Renderer _renderer;
     private Material _materialInstance;
     private Color _originalColor;
 
-    [HideInInspector] public int gridX;
-    [HideInInspector] public int gridZ;
-    public bool _isMoveArea = false;
-
+    [HideInInspector] public int gridX, gridZ;
     [HideInInspector] public bool isOccupied = false;
-    [HideInInspector] public int moveCost = 2;
-    public EntityMaster occupyingEntity;
+    [HideInInspector] public EntityMaster occupyingEntity;
 
-    
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _materialInstance = new Material(_renderer.sharedMaterial);
         _renderer.material = _materialInstance;
 
+        moveCost = tileData.moveCost;
+        isMoveArea = tileData.isMoveArea;
+
         _hoverObject?.SetActive(false);
-        if (_moveAreaObject != null) _moveAreaObject.SetActive(false);
+        _moveAreaObject?.SetActive(false);
+        _attackAreaObject?.SetActive(false);
     }
 
     public void Init(bool isOffset)
@@ -57,30 +88,49 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Case 1: Tile has an entity (occupied) and it’s a player unit
+        Faction currentTurn = TurnManager.GetCurrentTurn();
+        if (currentTurn != Faction.PLAYER) return;
+
+        // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
-            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.HasMoved)
+            if (occupyingEntity.data.faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
             {
-                TurnManager.SelectedEntity = occupyingEntity;
-                TurnManager.Instance.ClearAllMoveAreas();
-                ShowMoveAreaBFS(occupyingEntity.MoveRange);
+                var playerManager = PlayerManager.Instance;
+                playerManager.ClearAllMoveAreas();
+
+                playerManager.SetSelectedEntity(occupyingEntity);
+                ShowMoveAreaBFS(occupyingEntity.move.MoveRange);
+
+                ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
+
                 return;
             }
         }
 
-        // Case 2: Tile is a move-area tile and a player entity is selected
-        if (_isMoveArea && TurnManager.SelectedEntity != null)
+        if (isMoveArea && PlayerManager.Instance.SelectedEntity != null)
         {
-            TurnManager.SelectedEntity.StartCoroutine(
-                TurnManager.SelectedEntity.MoveToGridPosition(gridX, gridZ)
-            );
-            TurnManager.Instance.ClearAllMoveAreas();
-            TurnManager.SelectedEntity = null;
+            var entity = PlayerManager.Instance.SelectedEntity;
+            PlayerManager.Instance.TileClicked(this);
             return;
         }
 
-        TurnManager.Instance.ClearAllMoveAreas();
+        if (isAttackArea && PlayerManager.Instance.SelectedEntity != null)
+        {
+            var attacker = PlayerManager.Instance.SelectedEntity;
+
+            if (isOccupied && occupyingEntity != null && occupyingEntity.data.faction != attacker.data.faction)
+            {
+                Debug.Log($"[Tile] {attacker.name} attacks {occupyingEntity.name}!");
+                attacker.attack.Attack(occupyingEntity);
+            }
+
+            PlayerManager.Instance.ClearAllMoveAreas();
+            PlayerManager.Instance.SetSelectedEntity(null);
+            return;
+        }
+
+        PlayerManager.Instance.ClearAllMoveAreas();
     }
 
     public void ShowMoveAreaBFS(int moveRange)
@@ -97,24 +147,18 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         while (queue.Count > 0)
         {
             var (currentTile, rangeLeft) = queue.Dequeue();
-
             currentTile.ActivateMoveAreaObject();
-
             if (rangeLeft <= 0) continue;
 
             Vector2Int coords = grid.GetTileCoordinates(currentTile);
-            Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
-            foreach (var dir in directions)
+            foreach (var dir in dirs)
             {
                 Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
-                if (neighbor == null) continue;
-                if (visited.Contains(neighbor)) continue;
+                if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied) continue;
 
-                if (neighbor.isOccupied) continue;
-
-                int moveCost = neighbor.moveCost; 
-                int newRange = rangeLeft - moveCost;
+                int newRange = rangeLeft - neighbor.moveCost;
                 if (newRange < 0) continue;
 
                 queue.Enqueue((neighbor, newRange));
@@ -123,10 +167,66 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void ShowAttackAreaBFS(int attackRange)
+    {
+        GridManager grid = FindObjectOfType<GridManager>();
+        if (grid == null) return;
+
+        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
+        HashSet<Tile> visited = new HashSet<Tile>();
+
+        queue.Enqueue((this, attackRange));
+        visited.Add(this);
+
+        var attackerFaction = PlayerManager.Instance.SelectedEntity?.data.faction;
+
+        while (queue.Count > 0)
+        {
+            var (currentTile, rangeLeft) = queue.Dequeue();
+
+            if (currentTile != this)
+            {
+                // Only show attack if tile has an enemy
+                if (currentTile.isOccupied && currentTile.occupyingEntity.data.faction != attackerFaction)
+                    currentTile.ActivateAttackAreaObject();
+            }
+
+            if (rangeLeft <= 0)
+                continue;
+
+            Vector2Int coords = grid.GetTileCoordinates(currentTile);
+            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+            foreach (var dir in dirs)
+            {
+                Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
+                if (neighbor == null || visited.Contains(neighbor))
+                    continue;
+
+                if (!neighbor.tileData.isMoveArea)
+                {
+                    if (neighbor.isOccupied && neighbor.occupyingEntity.data.faction != attackerFaction)
+                        neighbor.ActivateAttackAreaObject();
+
+                    visited.Add(neighbor);
+                    continue;
+                }
+
+                queue.Enqueue((neighbor, rangeLeft - 1));
+                visited.Add(neighbor);
+            }
+        }
+    }
+
     public void ActivateMoveAreaObject()
     {
-        _isMoveArea = true;
+        isMoveArea = true;
         _moveAreaObject?.SetActive(true);
+    }
+    public void ActivateAttackAreaObject()
+    {
+        isAttackArea = true;
+        _attackAreaObject?.SetActive(true);
     }
 
     public void SetOccupyingEntity(EntityMaster entity)
@@ -146,9 +246,19 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         return new Vector3(pos.x, pos.y + heightOffset, pos.z);
     }
 
+    public EntityMaster GetOccupyingEntity() => occupyingEntity;
+
+
+    public void ClearAttackArea()
+    {
+        isAttackArea = false;
+        _attackAreaObject?.SetActive(false);
+    }
     public void ClearMoveArea()
     {
-        _isMoveArea = false;
+        isMoveArea = false;
         _moveAreaObject?.SetActive(false);
+        isAttackArea = false; // 🟩 NEW
+        _attackAreaObject?.SetActive(false); // 🟩 NEW
     }
 }
