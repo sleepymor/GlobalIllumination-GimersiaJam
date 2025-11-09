@@ -40,7 +40,7 @@ public class EntityMaster : MonoBehaviour
     public int GridX => gridX;
     public int GridZ => gridZ;
 
-    public Faction Faction => data.faction;
+    public Faction Faction;
 
     private Renderer[] renderers;
     [HideInInspector] public GridManager gridManager;
@@ -57,13 +57,14 @@ public class EntityMaster : MonoBehaviour
 
     void Awake()
     {
+        data = Instantiate(data);
+        Faction = data.faction;
         health = GetComponent<EntityHealth>();
         summon = GetComponent<EntitySummon>();
         move = GetComponent<EntityMovement>();
         attack = GetComponent<EntityAttack>();
         death = GetComponent<EntityDeath>();
         status = GetComponent<EntityState>();
-
         _animator = GetComponent<Animator>();
 
         health.Initialize(this);

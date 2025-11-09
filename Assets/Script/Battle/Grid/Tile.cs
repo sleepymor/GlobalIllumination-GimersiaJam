@@ -37,22 +37,20 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color _baseColor = Color.white;
     [SerializeField] private Color _offsetColor = Color.gray;
 
-    [Header("Hover & Move/Attack Objects")]
+    [Header("Hover/Move/Attack/Summon Objects")]
     [SerializeField] private GameObject _hoverObject;
     [SerializeField] private GameObject _moveAreaObject;
-    [SerializeField] private GameObject _attackAreaObject; // 🟩 NEW
+    [SerializeField] private GameObject _attackAreaObject;
+    [SerializeField] private GameObject _summonAreaObject;
 
     [HideInInspector] public int moveCost;
-    [HideInInspector] public bool isMoveArea;
-    [HideInInspector] public bool isAttackArea; // 🟩 NEW
+    [HideInInspector] public bool isMoveArea, isAttackArea;
 
     private Renderer _renderer;
     private Material _materialInstance;
     private Color _originalColor;
 
-    [HideInInspector] public int gridX;
-    [HideInInspector] public int gridZ;
-
+    [HideInInspector] public int gridX, gridZ;
     [HideInInspector] public bool isOccupied = false;
     [HideInInspector] public EntityMaster occupyingEntity;
 
@@ -67,7 +65,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
         _hoverObject?.SetActive(false);
         _moveAreaObject?.SetActive(false);
-        _attackAreaObject?.SetActive(false); // 🟩 NEW
+        _attackAreaObject?.SetActive(false);
     }
 
     public void Init(bool isOffset)
