@@ -23,7 +23,7 @@
 
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class EntityAttack : MonoBehaviour
 {
     private EntityMaster _e;
@@ -65,7 +65,9 @@ public class EntityAttack : MonoBehaviour
 
         _e._animator.Play("Idle");
 
-        target.health.TakeDamage(_e.data.attack, _e.data.critChance);
+        // The lower the health, the weaker the attack
+        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
+        target.health.TakeDamage(scaledDamage, _e.data.critChance);
         isAlreadyAttacking = true;
 
         // Counter attack from target
@@ -73,9 +75,29 @@ public class EntityAttack : MonoBehaviour
         if (!target.status.IsDead && distance == 1)
         {
             yield return new WaitForSeconds(0.3f); // small delay before counter
-            target.attack.Attack(_e);
-            target.attack.SetHadAttacking(rue);
+            target.attack.CounterAttack(_e);
         }
+
     }
+
+    public void CounterAttack(EntityMaster attacker)
+    {
+        StartCoroutine(CounterAttackRoutine(attacker));
+    }
+
+    private IEnumerator CounterAttackRoutine(EntityMaster target)
+    {
+        _e._animator.Play("Attack");
+
+        // Wait for attack to reach the hit frame
+        yield return new WaitForSeconds(1f); // adjust to your animation
+
+        _e._animator.Play("Idle");
+
+        // The lower the health, the weaker the attack
+        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
+        target.health.TakeDamage(scaledDamage, _e.data.critChance);
+    }
+
 
 }

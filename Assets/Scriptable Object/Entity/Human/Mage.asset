@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Player
   prefab: {fileID: 1782075751541447720, guid: 7796ea753c8fba853a54eacc920ffabd, type: 3}
-  maxHP: 5
-  currentHP: 0
+  maxHP: 10
+  currentHP: -1
   attack: 5
   attackRange: 2
   moveRange: 7
