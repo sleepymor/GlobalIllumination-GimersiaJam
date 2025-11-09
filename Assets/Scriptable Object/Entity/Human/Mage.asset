@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b62c8324393aa3cab05defd3c9be8a, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: 
+  entityName: Player
+  prefab: {fileID: 1782075751541447720, guid: 7796ea753c8fba853a54eacc920ffabd, type: 3}
+  maxHP: 5
+  currentHP: 0
+  attack: 5
+  attackRange: 2
+  moveRange: 7
+  critChance: 10
+  faction: 2

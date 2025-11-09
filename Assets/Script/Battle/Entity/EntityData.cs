@@ -13,8 +13,15 @@ public class EntityData : ScriptableObject
     public int critChance;
     public Faction faction;
 
-    public void setCurrentHP(int hp)
-    {
-        this.currentHP = hp;
-    }
+
+
 }
+
+public enum Faction
+{
+    PLAYER,
+    ALLY,
+    ENEMY,
+    WILD
+}
+

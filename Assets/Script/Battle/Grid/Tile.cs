@@ -71,28 +71,26 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
-            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.HasMoved)
+            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.movementManager.HasMoved)
             {
                 var playerManager = PlayerManager.Instance;
                 playerManager.ClearAllMoveAreas();
 
                 playerManager.SetSelectedEntity(occupyingEntity);
-                ShowMoveAreaBFS(occupyingEntity.MoveRange);
+                ShowMoveAreaBFS(occupyingEntity.movementManager.MoveRange);
 
                 // 🟩 Also show attack range immediately
-                ShowAttackAreaBFS(occupyingEntity.AttackRange);
+                ShowAttackAreaBFS(occupyingEntity.attackManager.AttackRange);
 
                 return;
             }
         }
 
-        // 🔹 Case 2: Move to tile
         if (isMoveArea && PlayerManager.Instance.SelectedEntity != null)
         {
             var entity = PlayerManager.Instance.SelectedEntity;
-            entity.StartCoroutine(entity.MoveToGridPosition(gridX, gridZ));
-            PlayerManager.Instance.ClearAllMoveAreas();
-            PlayerManager.Instance.SetSelectedEntity(null);
+            // Only call PlayerManager.TileClicked to trigger movement coroutine
+            PlayerManager.Instance.TileClicked(this); // Or send to MoveAndEnableAttack
             return;
         }
 
@@ -104,7 +102,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             if (isOccupied && occupyingEntity != null && occupyingEntity.Faction != attacker.Faction)
             {
                 Debug.Log($"[Tile] {attacker.name} attacks {occupyingEntity.name}!");
-                attacker.Attack(occupyingEntity); // 🟩 You must have an Attack() function in EntityMaster
+                attacker.attackManager.Attack(occupyingEntity);
             }
 
             PlayerManager.Instance.ClearAllMoveAreas();
@@ -150,59 +148,59 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-public void ShowAttackAreaBFS(int attackRange)
-{
-    GridManager grid = FindObjectOfType<GridManager>();
-    if (grid == null) return;
-
-    Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
-    HashSet<Tile> visited = new HashSet<Tile>();
-
-    queue.Enqueue((this, attackRange));
-    visited.Add(this);
-
-    var attackerFaction = PlayerManager.Instance.SelectedEntity?.Faction;
-
-    while (queue.Count > 0)
+    public void ShowAttackAreaBFS(int attackRange)
     {
-        var (currentTile, rangeLeft) = queue.Dequeue();
+        GridManager grid = FindObjectOfType<GridManager>();
+        if (grid == null) return;
 
-        if (currentTile != this)
+        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
+        HashSet<Tile> visited = new HashSet<Tile>();
+
+        queue.Enqueue((this, attackRange));
+        visited.Add(this);
+
+        var attackerFaction = PlayerManager.Instance.SelectedEntity?.Faction;
+
+        while (queue.Count > 0)
         {
-            // Only show attack if tile has an enemy
-            if (currentTile.isOccupied && currentTile.occupyingEntity.Faction != attackerFaction)
-                currentTile.ActivateAttackAreaObject();
-        }
+            var (currentTile, rangeLeft) = queue.Dequeue();
 
-        if (rangeLeft <= 0)
-            continue;
-
-        Vector2Int coords = grid.GetTileCoordinates(currentTile);
-        Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-
-        foreach (var dir in dirs)
-        {
-            Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
-            if (neighbor == null || visited.Contains(neighbor))
-                continue;
-
-            // Only propagate through walkable tiles
-            if (!neighbor.tileData.isMoveArea)
+            if (currentTile != this)
             {
-                // Show attack only if there is an enemy
-                if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != attackerFaction)
-                    neighbor.ActivateAttackAreaObject();
-
-                visited.Add(neighbor);
-                continue;
+                // Only show attack if tile has an enemy
+                if (currentTile.isOccupied && currentTile.occupyingEntity.Faction != attackerFaction)
+                    currentTile.ActivateAttackAreaObject();
             }
 
-            // ✅ Normal propagation
-            queue.Enqueue((neighbor, rangeLeft - 1));
-            visited.Add(neighbor);
+            if (rangeLeft <= 0)
+                continue;
+
+            Vector2Int coords = grid.GetTileCoordinates(currentTile);
+            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+            foreach (var dir in dirs)
+            {
+                Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
+                if (neighbor == null || visited.Contains(neighbor))
+                    continue;
+
+                // Only propagate through walkable tiles
+                if (!neighbor.tileData.isMoveArea)
+                {
+                    // Show attack only if there is an enemy
+                    if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != attackerFaction)
+                        neighbor.ActivateAttackAreaObject();
+
+                    visited.Add(neighbor);
+                    continue;
+                }
+
+                // ✅ Normal propagation
+                queue.Enqueue((neighbor, rangeLeft - 1));
+                visited.Add(neighbor);
+            }
         }
     }
-}
 
     public void ActivateMoveAreaObject()
     {

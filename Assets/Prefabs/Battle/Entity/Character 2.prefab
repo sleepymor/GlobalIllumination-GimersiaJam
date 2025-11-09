@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: -3856791589528915358}
   - component: {fileID: 2470217883534837545}
   - component: {fileID: 4473471216752999400}
-  - component: {fileID: -6255448074471554874}
-  - component: {fileID: -571345529448688504}
-  - component: {fileID: 2843058758158216979}
-  - component: {fileID: -1339679402966034791}
-  - component: {fileID: -5792346562951788170}
+  - component: {fileID: 286796407928965024}
+  - component: {fileID: -8234510225451250360}
+  - component: {fileID: -8832286806230440299}
+  - component: {fileID: -378663300267994121}
+  - component: {fileID: 3295712993575113262}
   m_Layer: 0
-  m_Name: Character1
+  m_Name: Character 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ Animator:
   m_GameObject: {fileID: 1782075751541447720}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 822b5afb27cebb1cd8b47f0880222aa6, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef675a1daf6e3ca099733a27332280f1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1173269127, guid: 9a5bf2182e0bef82ea7e200b27543cdf, type: 3}
+  m_Sprite: {fileID: -849627633, guid: f942e5821c8e89628b035584aba453dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fbd03c6dbb8a5a92db4c2b0fc7d549ac, type: 2}
+  data: {fileID: 11400000, guid: bca9e1975d5b3aae181187419252b5bf, type: 2}
   gridX: 4
   gridZ: 0
   heightAboveTile: 5
@@ -141,7 +141,7 @@ MonoBehaviour:
   deathManager: {fileID: 0}
   summonManager: {fileID: 0}
   movementManager: {fileID: 0}
---- !u!114 &-6255448074471554874
+--- !u!114 &286796407928965024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61cbbc2733ad5173befc63806496e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-571345529448688504
+--- !u!114 &-8234510225451250360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathSinkSpeed: 5
   deathFadeSpeed: 5
---- !u!114 &2843058758158216979
+--- !u!114 &-8832286806230440299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 0
---- !u!114 &-1339679402966034791
+--- !u!114 &-378663300267994121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   summonRiseSpeed: 5
   summonFadeSpeed: 5
---- !u!114 &-5792346562951788170
+--- !u!114 &3295712993575113262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

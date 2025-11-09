@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerManager : BattleEntityManager
 {
@@ -22,51 +23,99 @@ public class PlayerManager : BattleEntityManager
     {
         if (TurnManager.GetCurrentTurn() != Faction.PLAYER) return;
 
-        // 1️⃣ Select player entity
+        // If clicked on a tile with a player entity that can move, select it
         if (clickedTile.isOccupied && clickedTile.occupyingEntity != null)
         {
             EntityMaster clickedEntity = clickedTile.occupyingEntity;
 
-            // Selecting a friendly unit
-            if (clickedEntity.Faction == Faction.PLAYER && !clickedEntity.HasMoved)
+            if (clickedEntity.Faction == Faction.PLAYER && !clickedEntity.movementManager.HasMoved)
             {
-                ClearAllMoveAreas();
-                SelectedEntity = clickedEntity;
-
-                // Show move & attack range
-                clickedTile.ShowMoveAreaBFS(clickedEntity.MoveRange);
-                clickedTile.ShowAttackAreaBFS(clickedEntity.data.attackRange);
+                SelectEntity(clickedEntity);
+                ShowMovementAndAttackAreas(clickedEntity);
                 return;
             }
 
-            // Attacking an enemy unit
+            // If clicked on an enemy while a player entity is selected, attempt attack
             if (SelectedEntity != null && clickedEntity.Faction == Faction.ENEMY)
             {
-                if (SelectedEntity.CanAttack(clickedEntity))
-                {
-                    SelectedEntity.Attack(clickedEntity);
-                    SelectedEntity.SetHadAttacking(true);
-                    ClearAllMoveAreas();
-                    SelectedEntity = null;
-                    return;
-                }
-                else
-                {
-                    Debug.Log("[PlayerManager] Target out of range!");
-                    return;
-                }
+                TryAttack(SelectedEntity, clickedEntity);
+                return;
             }
         }
 
+        // If clicked on a movement tile
         if (clickedTile.isMoveArea && SelectedEntity != null)
         {
-            SelectedEntity.StartCoroutine(SelectedEntity.MoveToGridPosition(clickedTile.gridX, clickedTile.gridZ));
-            ClearAllMoveAreas();
-            SelectedEntity = null;
+            StartCoroutine(MoveAndEnableAttack(SelectedEntity, clickedTile));
             return;
         }
 
-        ClearAllMoveAreas();
+        // Otherwise, clear selection and highlights
+        ClearAllMoveAndAttackAreas();
+    }
+
+    private void SelectEntity(EntityMaster entity)
+    {
+        ClearAllMoveAndAttackAreas();
+        SelectedEntity = entity;
+    }
+
+    private void ShowMovementAndAttackAreas(EntityMaster entity)
+    {
+        Tile currentTile = entity.currentTile;
+        if (currentTile != null)
+        {
+            currentTile.ShowMoveAreaBFS(entity.movementManager.MoveRange);
+            currentTile.ShowAttackAreaBFS(entity.data.attackRange);
+        }
+    }
+
+    private void TryAttack(EntityMaster attacker, EntityMaster target)
+    {
+        if (attacker.attackManager.CanAttack(target))
+        {
+            attacker.attackManager.Attack(target);
+            attacker.attackManager.SetHadAttacking(true);
+
+            // After attack, deselect
+            SelectedEntity = null;
+            ClearAllAttackAreas();
+        }
+        else
+        {
+            Debug.Log("[PlayerManager] Target out of range!");
+        }
+    }
+
+    private IEnumerator MoveAndEnableAttack(EntityMaster entity, Tile targetTile)
+    {
+        // Move to the target tile
+        yield return entity.StartCoroutine(
+            entity.movementManager.MoveToGridPosition(targetTile.gridX, targetTile.gridZ)
+        );
+
+        // Mark as moved
+        entity.movementManager.SetHadMove(true);
+
+        // Show attack area after moving
+        targetTile.ShowAttackAreaBFS(entity.data.attackRange);
+
+        // Keep the entity selected so player can attack
+        SelectedEntity = entity;
+
+        // Clear only movement highlights
+        ClearMoveAreasOnly();
+    }
+
+    // Clears only move tiles, leaves attack tiles
+    private void ClearMoveAreasOnly()
+    {
+        // Implementation depends on your Tile class
+        foreach (var tile in FindObjectsOfType<Tile>())
+        {
+            if (tile.isMoveArea)
+                tile.ClearMoveArea();
+        }
     }
 
     public void SetSelectedEntity(EntityMaster entity)
@@ -78,5 +127,22 @@ public class PlayerManager : BattleEntityManager
     {
         if (TurnManager.GetCurrentTurn() != Faction.PLAYER) return;
         TurnManager.EnemyTurn();
+    }
+
+    private void ClearAllMoveAndAttackAreas()
+    {
+        foreach (var tile in FindObjectsOfType<Tile>())
+        {
+            tile.ClearMoveArea();
+            tile.ClearAttackArea();
+        }
+    }
+
+    private void ClearAllAttackAreas()
+    {
+        foreach (var tile in FindObjectsOfType<Tile>())
+        {
+            tile.ClearAttackArea();
+        }
     }
 }
