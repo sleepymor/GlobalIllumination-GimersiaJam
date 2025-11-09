@@ -1,4 +1,28 @@
+/*
+ * EntityMaster.cs
+ * -----------------
+ * This is the main controller script for all entities (player or enemy) in the battle system.
+ * It acts as a central hub that holds references to all modular components of an entity, 
+ * such as health, movement, attack, death, summon, and state management.
+ *
+ * Responsibilities:
+ * - Initialize and manage all entity sub-components.
+ * - Provide a unified interface to access key entity data like grid position, faction, and materials.
+ * - Set up the entity in the scene, including snapping to the grid and registering with the appropriate manager (PlayerManager or EnemyManager).
+ * - Cache renderers and materials for visual effects (e.g., damage, death, summon).
+ * - Maintain a reference to the Animator for playing animations across different actions.
+ *
+ * This design allows entity behaviors to be modular and maintainable, separating concerns 
+ * between movement, combat, death, and other states while keeping the EntityMaster as the central orchestrator.
+ *
+ * Usage:
+ * - Attach this script to any GameObject representing a battle entity.
+ * - Ensure all modular components (EntityHealth, EntityAttack, EntityMovement, EntityDeath, EntitySummon, EntityState) are attached to the same GameObject.
+ * - Configure the EntityData and Animator in the Inspector.
+ */
+
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityMaster : MonoBehaviour
@@ -8,36 +32,51 @@ public class EntityMaster : MonoBehaviour
     public EntityData data;
 
     [Header("Entity Grid Position")]
-    [SerializeField] private int gridX;
-    [SerializeField] private int gridZ;
-    [SerializeField] private float heightAboveTile = 1f;
-    [SerializeField] private float moveSpeed = 3f;
-
-    [Header("Death Settings")]
-    [SerializeField] private float deathSinkSpeed = 5f;
-    [SerializeField] private float deathFadeSpeed = 5f;
-
-    [Header("Summon Settings")]
-    [SerializeField] private float summonRiseSpeed = 5f;
-    [SerializeField] private float summonFadeSpeed = 5f;
-
-    private GridManager gridManager;
-    private Tile currentTile;
-    private bool isMoving = false;
-    private bool isDead = false;
-    private bool hasMoved = false;
-    private Renderer[] renderers;
-    private Material[] materials;
+    [SerializeField] public int gridX;
+    [SerializeField] public int gridZ;
+    [SerializeField] public float heightAboveTile = 1f;
+    [SerializeField] public float moveSpeed = 3f;
 
     public int GridX => gridX;
     public int GridZ => gridZ;
-    public bool IsDead => isDead;
-    public int MoveRange => data.moveRange;
-    public bool HasMoved => hasMoved;
+
     public Faction Faction => data.faction;
+
+    private Renderer[] renderers;
+    [HideInInspector] public GridManager gridManager;
+    [HideInInspector] public Tile currentTile;
+    [HideInInspector] public Material[] materials;
+
+    [HideInInspector] public Animator _animator;
+    [HideInInspector] public EntityHealth health;
+    [HideInInspector] public EntityAttack attack;
+    [HideInInspector] public EntityDeath death;
+    [HideInInspector] public EntitySummon summon;
+    [HideInInspector] public EntityMovement move;
+    [HideInInspector] public EntityState status;
+
+    void Awake()
+    {
+        health = GetComponent<EntityHealth>();
+        summon = GetComponent<EntitySummon>();
+        move = GetComponent<EntityMovement>();
+        attack = GetComponent<EntityAttack>();
+        death = GetComponent<EntityDeath>();
+        status = GetComponent<EntityState>();
+
+        _animator = GetComponent<Animator>();
+
+        health.Initialize(this);
+        summon.Initialize(this);
+        move.Initialize(this);
+        attack.Initialize(this);
+        death.Initialize(this);
+        status.Initialize(this);
+    }
 
     private void Start()
     {
+
         gridManager = FindObjectOfType<GridManager>();
 
         if (gridManager == null)
@@ -45,11 +84,18 @@ public class EntityMaster : MonoBehaviour
             Debug.LogError("[EntityMaster] No GridManager found in scene!");
             return;
         }
-
         renderers = GetComponentsInChildren<Renderer>();
         CacheMaterials();
 
-        SnapToGridPosition(gridX, gridZ);
+        move.SnapToGridPosition(gridX, gridZ);
+        health.SetMaxHP();
+        SetManager();
+    }
+
+    private void SetManager()
+    {
+        if (data.faction == Faction.PLAYER) PlayerManager.Instance.AddEntity(this);
+        if (data.faction == Faction.ENEMY) EnemyManager.Instance.AddEntity(this);
     }
 
     private void CacheMaterials()
@@ -61,188 +107,4 @@ public class EntityMaster : MonoBehaviour
             materials[i] = renderers[i].material;
     }
 
-    public void SnapToGridPosition(int x, int z)
-    {
-        if (gridManager == null) return;
-
-        Tile tile = gridManager.GetTileAt(x, z);
-        if (tile == null)
-        {
-            Debug.LogWarning($"[EntityMaster] Invalid grid position ({x},{z})!");
-            return;
-        }
-
-        currentTile?.SetOccupyingEntity(null);
-
-        currentTile = tile;
-        currentTile.SetOccupyingEntity(this);
-
-        gridX = x;
-        gridZ = z;
-
-        Vector3 tileCenter = tile.transform.position + Vector3.up * heightAboveTile;
-        transform.position = tileCenter;
-    }
-
-    public IEnumerator MoveToGridPosition(int targetX, int targetZ)
-    {
-        if (isMoving || isDead) yield break;
-        if (gridManager == null) yield break;
-
-        bool isHorizontalFirst = Random.value > 0.5f;
-        isMoving = true;
-
-        if (isHorizontalFirst && targetX != gridX)
-            yield return MoveStepAnim(targetX, gridZ);
-
-        if (targetZ != gridZ)
-            yield return MoveStepAnim(gridX, targetZ);
-
-        if (!isHorizontalFirst && targetX != gridX)
-            yield return MoveStepAnim(targetX, gridZ);
-
-        isMoving = false;
-
-        Debug.Log($"[EntityMaster] Finished moving to ({gridX},{gridZ})");
-    }
-
-    private IEnumerator MoveStepAnim(int targetX, int targetZ)
-    {
-        Tile tile = gridManager.GetTileAt(targetX, targetZ);
-        if (tile == null) yield break;
-
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = tile.transform.position + Vector3.up * heightAboveTile;
-
-        float elapsed = 0f;
-        float distance = Vector3.Distance(startPos, targetPos);
-        float duration = distance / moveSpeed;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
-            yield return null;
-        }
-
-        transform.position = targetPos;
-
-        if (currentTile != null)
-            currentTile.SetOccupyingEntity(null);
-
-        currentTile = tile;
-        currentTile.SetOccupyingEntity(this);
-
-        gridX = targetX;
-        gridZ = targetZ;
-
-        hasMoved = true;
-    }
-
-    public IEnumerator DieAnim()
-    {
-        if (isDead) yield break;
-        isDead = true;
-        isMoving = false;
-
-        Debug.Log($"[EntityMaster] Dying... at grid ({gridX},{gridZ})");
-
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos - Vector3.up * 2f;
-
-        float sinkElapsed = 0f;
-        float fadeElapsed = 0f;
-
-        while (sinkElapsed < 1f)
-        {
-            sinkElapsed += Time.deltaTime * deathSinkSpeed;
-            fadeElapsed += Time.deltaTime * deathFadeSpeed;
-
-            transform.position = Vector3.Lerp(startPos, targetPos, sinkElapsed);
-
-            if (materials != null)
-            {
-                foreach (var mat in materials)
-                {
-                    if (mat.HasProperty("_Color"))
-                    {
-                        Color c = mat.color;
-                        c = Color.Lerp(c, Color.black, fadeElapsed);
-                        mat.color = c * Mathf.Clamp01(1f - fadeElapsed * 0.3f);
-                    }
-                }
-            }
-
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-        Debug.Log("[EntityMaster] Entity destroyed.");
-    }
-
-    public IEnumerator SummonAnim()
-    {
-        if (isDead) yield break;
-        if (currentTile == null) yield break;
-
-        Debug.Log($"[EntityMaster] Summoning at grid ({gridX},{gridZ})");
-
-        Vector3 tileCenter = currentTile.transform.position + Vector3.up * heightAboveTile;
-        Vector3 startPos = tileCenter - Vector3.up * 2f;
-        Vector3 targetPos = tileCenter;
-
-        transform.position = startPos;
-
-        if (materials != null)
-        {
-            foreach (var mat in materials)
-            {
-                if (mat.HasProperty("_Color"))
-                {
-                    Color c = mat.color;
-                    c = Color.black;
-                    mat.color = c * 0.1f;
-                }
-            }
-        }
-
-        float elapsed = 0f;
-
-        while (elapsed < 1f)
-        {
-            elapsed += Time.deltaTime * summonRiseSpeed;
-
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed);
-
-            if (materials != null)
-            {
-                foreach (var mat in materials)
-                {
-                    if (mat.HasProperty("_Color"))
-                    {
-                        Color c = mat.color;
-                        c = Color.Lerp(Color.black, Color.white, elapsed);
-                        mat.color = c;
-                    }
-                }
-            }
-
-            yield return null;
-        }
-
-        transform.position = targetPos;
-        Debug.Log("[EntityMaster] Summon complete!");
-    }
-
-    // private IEnumerator TestRoutine()
-    // {
-    //     // wait 3s -> move
-    //     yield return new WaitForSeconds(3f);
-    //     StartCoroutine(MoveToGridPosition(gridX + 2, gridZ + 1));
-
-    //     // wait 7s -> die
-    //     yield return new WaitForSeconds(7f);
-    //     StartCoroutine(Die());
-    // }
 }
