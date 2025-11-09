@@ -1,102 +1,97 @@
-/*
- * EntityMaster.cs
- * -----------------
- * This is the main controller script for all entities (player or enemy) in the battle system.
- * It acts as a central hub that holds references to all modular components of an entity, 
- * such as health, movement, attack, death, summon, and state management.
- *
- * Responsibilities:
- * - Initialize and manage all entity sub-components.
- * - Provide a unified interface to access key entity data like grid position, faction, and materials.
- * - Set up the entity in the scene, including snapping to the grid and registering with the appropriate manager (PlayerManager or EnemyManager).
- * - Cache renderers and materials for visual effects (e.g., damage, death, summon).
- * - Maintain a reference to the Animator for playing animations across different actions.
- *
- * This design allows entity behaviors to be modular and maintainable, separating concerns 
- * between movement, combat, death, and other states while keeping the EntityMaster as the central orchestrator.
- *
- * Usage:
- * - Attach this script to any GameObject representing a battle entity.
- * - Ensure all modular components (EntityHealth, EntityAttack, EntityMovement, EntityDeath, EntitySummon, EntityState) are attached to the same GameObject.
- * - Configure the EntityData and Animator in the Inspector.
- */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class EntityMaster : MonoBehaviour
 {
-
     [Header("Entity Data")]
     public EntityData data;
 
-    [Header("Entity Grid Position")]
-    [SerializeField] public int gridX;
-    [SerializeField] public int gridZ;
-    [SerializeField] public float heightAboveTile = 1f;
-    [SerializeField] public float moveSpeed = 3f;
-
-    public int GridX => gridX;
-    public int GridZ => gridZ;
-
-    public Faction Faction;
+    [SerializeField] private int spawnPosX;
+    [SerializeField] private int spawnPosZ;
+    [SerializeField] private float heightAboveTile = 0.5f;
 
     private Renderer[] renderers;
     [HideInInspector] public GridManager gridManager;
     [HideInInspector] public Tile currentTile;
     [HideInInspector] public Material[] materials;
-
-    [HideInInspector] public Animator _animator;
     [HideInInspector] public EntityHealth health;
     [HideInInspector] public EntityAttack attack;
-    [HideInInspector] public EntityDeath death;
     [HideInInspector] public EntitySummon summon;
     [HideInInspector] public EntityMovement move;
     [HideInInspector] public EntityState status;
+    [HideInInspector] public EntityEquip equip;
+    [HideInInspector] public EntityAnim anim;
+    [HideInInspector] public EntityManager manager;
+    [HideInInspector] public EntityPosition pos;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (Application.isPlaying) return;
+
+        // Coba cari GridManager di scene
+        if (gridManager == null)
+            gridManager = FindObjectOfType<GridManager>();
+
+        // Kalau belum ada grid, keluar
+        if (gridManager == null || gridManager.GetTileAt(spawnPosX, spawnPosZ) == null)
+            return;
+
+        // Pindahkan entity ke posisi tile yang sesuai
+        Tile tile = gridManager.GetTileAt(spawnPosX, spawnPosZ);
+        Vector3 targetPos = tile.transform.position + Vector3.up * heightAboveTile;
+
+        // Hanya update posisi kalau benar-benar berubah (biar tidak spam redraw)
+        if (transform.position != targetPos)
+        {
+            transform.position = targetPos;
+            currentTile = tile;
+
+#if UNITY_EDITOR
+            // biar posisi tersimpan ke scene
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
+    }
+#endif
 
     void Awake()
     {
-        data = Instantiate(data);
-        Faction = data.faction;
-        health = GetComponent<EntityHealth>();
-        summon = GetComponent<EntitySummon>();
-        move = GetComponent<EntityMovement>();
-        attack = GetComponent<EntityAttack>();
-        death = GetComponent<EntityDeath>();
-        status = GetComponent<EntityState>();
-        _animator = GetComponent<Animator>();
+        if (!Application.isPlaying) return;
 
-        health.Initialize(this);
-        summon.Initialize(this);
-        move.Initialize(this);
-        attack.Initialize(this);
-        death.Initialize(this);
-        status.Initialize(this);
+        data = Instantiate(data);
+
+        attack = new EntityAttack(this);
+        move = new EntityMovement(this);
+        summon = new EntitySummon(this);
+        health = new EntityHealth(this);
+        status = new EntityState(this);
+        equip = new EntityEquip(this);
+        pos = new EntityPosition(spawnPosX, spawnPosZ);
+
+        anim = new EntityAnim(this, GetComponent<Animator>());
     }
 
     private void Start()
     {
+        if (!Application.isPlaying) return;
 
         gridManager = FindObjectOfType<GridManager>();
-
         if (gridManager == null)
         {
             Debug.LogError("[EntityMaster] No GridManager found in scene!");
             return;
         }
+
         renderers = GetComponentsInChildren<Renderer>();
         CacheMaterials();
 
-        move.SnapToGridPosition(gridX, gridZ);
-        health.SetMaxHP();
-        SetManager();
-    }
+        manager = new EntityManager(this);
 
-    private void SetManager()
-    {
-        if (data.faction == Faction.PLAYER) PlayerManager.Instance.AddEntity(this);
-        if (data.faction == Faction.ENEMY) EnemyManager.Instance.AddEntity(this);
+        move.SnapToGridPosition(pos.gridX, pos.gridZ);
+        health.SetMaxHP();
     }
 
     private void CacheMaterials()
@@ -107,5 +102,4 @@ public class EntityMaster : MonoBehaviour
         for (int i = 0; i < renderers.Length; i++)
             materials[i] = renderers[i].material;
     }
-
 }

@@ -94,7 +94,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
-            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
+            if (occupyingEntity.data.faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
             {
                 var playerManager = PlayerManager.Instance;
                 playerManager.ClearAllMoveAreas();
@@ -119,7 +119,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             var attacker = PlayerManager.Instance.SelectedEntity;
 
-            if (isOccupied && occupyingEntity != null && occupyingEntity.Faction != attacker.Faction)
+            if (isOccupied && occupyingEntity != null && occupyingEntity.data.faction != attacker.data.faction)
             {
                 Debug.Log($"[Tile] {attacker.name} attacks {occupyingEntity.name}!");
                 attacker.attack.Attack(occupyingEntity);
@@ -178,7 +178,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         queue.Enqueue((this, attackRange));
         visited.Add(this);
 
-        var attackerFaction = PlayerManager.Instance.SelectedEntity?.Faction;
+        var attackerFaction = PlayerManager.Instance.SelectedEntity?.data.faction;
 
         while (queue.Count > 0)
         {
@@ -187,7 +187,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             if (currentTile != this)
             {
                 // Only show attack if tile has an enemy
-                if (currentTile.isOccupied && currentTile.occupyingEntity.Faction != attackerFaction)
+                if (currentTile.isOccupied && currentTile.occupyingEntity.data.faction != attackerFaction)
                     currentTile.ActivateAttackAreaObject();
             }
 
@@ -205,7 +205,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
                 if (!neighbor.tileData.isMoveArea)
                 {
-                    if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != attackerFaction)
+                    if (neighbor.isOccupied && neighbor.occupyingEntity.data.faction != attackerFaction)
                         neighbor.ActivateAttackAreaObject();
 
                     visited.Add(neighbor);

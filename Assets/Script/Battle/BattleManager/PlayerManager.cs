@@ -28,7 +28,7 @@ public class PlayerManager : BattleEntityManager
         {
             EntityMaster clickedEntity = clickedTile.occupyingEntity;
 
-            if (clickedEntity.Faction == Faction.PLAYER && !clickedEntity.move.HasMoved)
+            if (clickedEntity.data.faction == Faction.PLAYER && !clickedEntity.move.HasMoved)
             {
                 SelectEntity(clickedEntity);
                 ShowMovementAndAttackAreas(clickedEntity);
@@ -36,7 +36,7 @@ public class PlayerManager : BattleEntityManager
             }
 
             // If clicked on an enemy while a player entity is selected, attempt attack
-            if (SelectedEntity != null && clickedEntity.Faction == Faction.ENEMY)
+            if (SelectedEntity != null && clickedEntity.data.faction == Faction.ENEMY)
             {
                 TryAttack(SelectedEntity, clickedEntity);
                 return;

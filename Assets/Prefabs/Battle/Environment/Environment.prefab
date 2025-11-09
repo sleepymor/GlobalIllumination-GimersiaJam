@@ -47,14 +47,14 @@ MonoBehaviour:
   tileSize: 10
   tileRows:
   - row:
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: e94dd976b2e4520089d469e469ebb82a, type: 3}
-    - {fileID: 45358981540848354, guid: e94dd976b2e4520089d469e469ebb82a, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - row:
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: 744438f523a7d3d09bfa12a778c6f35f, type: 3}
-    - {fileID: 45358981540848354, guid: e94dd976b2e4520089d469e469ebb82a, type: 3}
-    - {fileID: 45358981540848354, guid: e94dd976b2e4520089d469e469ebb82a, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

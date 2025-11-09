@@ -28,7 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class EntityMovement : MonoBehaviour
+public class EntityMovement
 {
 
     private bool isMoving = false;
@@ -39,7 +39,7 @@ public class EntityMovement : MonoBehaviour
 
     private EntityMaster _e;
 
-    public void Initialize(EntityMaster e)
+    public EntityMovement(EntityMaster e)
     {
         _e = e;
         MoveRange = _e.data.moveRange;
@@ -60,11 +60,10 @@ public class EntityMovement : MonoBehaviour
         _e.currentTile = tile;
         _e.currentTile.SetOccupyingEntity(_e);
 
-        _e.gridX = x;
-        _e.gridZ = z;
+        _e.pos.SetPos(x, z);
 
-        Vector3 tileCenter = tile.transform.position + Vector3.up * _e.heightAboveTile;
-        transform.position = tileCenter;
+        Vector3 tileCenter = tile.transform.position + Vector3.up * _e.pos.heightAboveTile;
+        _e.transform.position = tileCenter;
     }
 
     public IEnumerator MoveToGridPosition(int targetX, int targetZ)
@@ -90,36 +89,37 @@ public class EntityMovement : MonoBehaviour
         isMoving = false;
         hasMoved = true;
 
-        Debug.Log($"[EntityMaster] Finished moving to ({_e.GridX},{_e.GridZ})");
+        Debug.Log($"[EntityMaster] Finished moving to ({_e.pos.GridX},{_e.pos.GridZ})");
     }
 
     private IEnumerator MoveStepAnim(Tile targetTile)
     {
         if (targetTile == null) yield break;
 
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = targetTile.transform.position + Vector3.up * _e.heightAboveTile;
+        Vector3 startPos = _e.transform.position;
+        Vector3 targetPos = targetTile.transform.position + Vector3.up * _e.pos.heightAboveTile;
 
         float distance = Vector3.Distance(startPos, targetPos);
-        float duration = distance / _e.moveSpeed;
+        float duration = distance / _e.anim.moveSpeed;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
+            _e.transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
             yield return null;
         }
 
-        transform.position = targetPos;
+        _e.transform.position = targetPos;
 
         // Update occupancy
         _e.currentTile?.SetOccupyingEntity(null);
         _e.currentTile = targetTile;
         _e.currentTile.SetOccupyingEntity(_e);
 
-        _e.gridX = _e.currentTile.gridX;
-        _e.gridZ = _e.currentTile.gridZ;
+        int x = _e.currentTile.gridX;
+        int z = _e.currentTile.gridZ;
+        _e.pos.SetPos(x, z);
     }
 
 
@@ -127,7 +127,7 @@ public class EntityMovement : MonoBehaviour
     {
         if (_e.gridManager == null) return null;
 
-        Tile start = _e.gridManager.GetTileAt(_e.gridX, _e.gridZ);
+        Tile start = _e.gridManager.GetTileAt(_e.pos.GridX, _e.pos.GridZ);
         Tile goal = _e.gridManager.GetTileAt(targetX, targetZ);
         if (start == null || goal == null)
         {

@@ -9,6 +9,7 @@ public class EntityData : ScriptableObject
     public int currentHP;
     public int attack;
     public int attackRange;
+    public int defense;
     public int moveRange;
     public int critChance;
     public Faction faction;
