@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e937deb9697664244980215baef13611, type: 3}
-  m_Name: ItemData
+  m_Script: {fileID: 11500000, guid: 7e15e2a684938f44eb1e4fd53cd2928a, type: 3}
+  m_Name: Pirate
   m_EditorClassIdentifier: 
-  itemName: 
+  unitName: Pirate
+  attack: 40
+  health: 500
+  crit: 200
+  moveRange: 5
+  attackRange: 1
+  summonCost: 5
+  cardSprite: {fileID: -484557588, guid: e18e5ced31e951942babca32d2660a21, type: 3}
+  worldSprite: {fileID: 0}
   prefab: {fileID: 0}
-  BuffType: 0
-  amount: 0
