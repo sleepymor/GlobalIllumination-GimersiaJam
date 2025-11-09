@@ -16,7 +16,7 @@ public class EntitySummon : MonoBehaviour
         _e.attackManager.SetHadAttacking(true);
     }
 
-    public IEnumerator SummonAnim()
+    public IEnumerator Summon()
     {
         if (_e.deathManager.IsDead) yield break;
         if (_e.currentTile == null) yield break;

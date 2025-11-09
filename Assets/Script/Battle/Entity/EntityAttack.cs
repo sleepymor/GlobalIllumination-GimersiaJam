@@ -33,7 +33,7 @@ public class EntityAttack : MonoBehaviour
 
         Debug.Log($"[EntityMaster] {_e.data.entityName} attacks {target.data.entityName} for {_e.data.attack} damage!");
 
-        target.healthManager.TakeDamage(_e.data.attack);
+        target.healthManager.TakeDamage(_e.data.attack, _e.data.critChance);
         isAlreadyAttacking = true;
     }
 

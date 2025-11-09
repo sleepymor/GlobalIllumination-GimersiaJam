@@ -13,6 +13,7 @@ public class TurnManager : MonoBehaviour
     }
     public static void PlayerTurn()
     {
+        
         _currentTurn = Faction.PLAYER;
         EnemyManager.Instance.ResetEntityMoves();
     }

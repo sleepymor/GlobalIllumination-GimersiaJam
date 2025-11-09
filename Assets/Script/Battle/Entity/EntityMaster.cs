@@ -11,18 +11,18 @@ public class EntityMaster : MonoBehaviour
     [Header("Entity Grid Position")]
     [SerializeField] public int gridX;
     [SerializeField] public int gridZ;
-    public int GridX => gridX;
-    public int GridZ => gridZ;
     [SerializeField] public float heightAboveTile = 1f;
     [SerializeField] public float moveSpeed = 3f;
 
-    public GridManager gridManager;
-
-    public Tile currentTile;
-    private Renderer[] renderers;
-    public Material[] materials;
+    public int GridX => gridX;
+    public int GridZ => gridZ;
 
     public Faction Faction => data.faction;
+
+    private Renderer[] renderers;
+    [HideInInspector] public GridManager gridManager;
+    [HideInInspector] public Tile currentTile;
+    [HideInInspector] public Material[] materials;
 
 
     [HideInInspector] public EntityHealth healthManager;
@@ -30,6 +30,7 @@ public class EntityMaster : MonoBehaviour
     [HideInInspector] public EntityDeath deathManager;
     [HideInInspector] public EntitySummon summonManager;
     [HideInInspector] public EntityMovement movementManager;
+    [HideInInspector] public EntityState statusManager;
 
     void Awake()
     {
@@ -38,12 +39,14 @@ public class EntityMaster : MonoBehaviour
         movementManager = GetComponent<EntityMovement>();
         attackManager = GetComponent<EntityAttack>();
         deathManager = GetComponent<EntityDeath>();
+        statusManager = GetComponent<EntityState>();
 
         healthManager.Initialize(this);
         summonManager.Initialize(this);
         movementManager.Initialize(this);
         attackManager.Initialize(this);
         deathManager.Initialize(this);
+        statusManager.Initialize(this);
     }
 
     private void Start()
@@ -61,6 +64,7 @@ public class EntityMaster : MonoBehaviour
 
         movementManager.SnapToGridPosition(gridX, gridZ);
         healthManager.SetMaxHP();
+        SetManager();
     }
 
     private void SetManager()

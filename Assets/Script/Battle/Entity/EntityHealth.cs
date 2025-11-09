@@ -17,7 +17,7 @@ public class EntityHealth : MonoBehaviour
         _e.data.currentHP = _e.data.maxHP;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, int critChance = 0)
     {
         _e.data.currentHP -= amount;
         Debug.Log($"[EntityMaster] {_e.data.entityName} took {amount} damage! HP left: {_e.data.currentHP}");

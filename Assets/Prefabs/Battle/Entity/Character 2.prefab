@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -8832286806230440299}
   - component: {fileID: -378663300267994121}
   - component: {fileID: 3295712993575113262}
+  - component: {fileID: 5693894389094886033}
   m_Layer: 0
   m_Name: Character 2
   m_TagString: Untagged
@@ -141,6 +142,7 @@ MonoBehaviour:
   deathManager: {fileID: 0}
   summonManager: {fileID: 0}
   movementManager: {fileID: 0}
+  statusManager: {fileID: 0}
 --- !u!114 &286796407928965024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,3 +209,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveRange: 0
+--- !u!114 &5693894389094886033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782075751541447720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146ae3634027a0787a78234dcda4f82d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

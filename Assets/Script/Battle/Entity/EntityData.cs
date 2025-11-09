@@ -13,8 +13,6 @@ public class EntityData : ScriptableObject
     public int critChance;
     public Faction faction;
 
-
-
 }
 
 public enum Faction

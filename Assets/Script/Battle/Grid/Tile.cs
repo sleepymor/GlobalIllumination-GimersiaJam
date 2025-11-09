@@ -79,7 +79,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 playerManager.SetSelectedEntity(occupyingEntity);
                 ShowMoveAreaBFS(occupyingEntity.movementManager.MoveRange);
 
-                // 🟩 Also show attack range immediately
                 ShowAttackAreaBFS(occupyingEntity.attackManager.AttackRange);
 
                 return;
@@ -89,12 +88,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         if (isMoveArea && PlayerManager.Instance.SelectedEntity != null)
         {
             var entity = PlayerManager.Instance.SelectedEntity;
-            // Only call PlayerManager.TileClicked to trigger movement coroutine
-            PlayerManager.Instance.TileClicked(this); // Or send to MoveAndEnableAttack
+            PlayerManager.Instance.TileClicked(this);
             return;
         }
 
-        // 🔹 Case 3: Attack a target
         if (isAttackArea && PlayerManager.Instance.SelectedEntity != null)
         {
             var attacker = PlayerManager.Instance.SelectedEntity;
@@ -113,7 +110,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         PlayerManager.Instance.ClearAllMoveAreas();
     }
 
-    // 🔹 Show movement range (unchanged)
     public void ShowMoveAreaBFS(int moveRange)
     {
         GridManager grid = FindObjectOfType<GridManager>();
@@ -184,10 +180,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 if (neighbor == null || visited.Contains(neighbor))
                     continue;
 
-                // Only propagate through walkable tiles
                 if (!neighbor.tileData.isMoveArea)
                 {
-                    // Show attack only if there is an enemy
                     if (neighbor.isOccupied && neighbor.occupyingEntity.Faction != attackerFaction)
                         neighbor.ActivateAttackAreaObject();
 
@@ -195,7 +189,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                     continue;
                 }
 
-                // ✅ Normal propagation
                 queue.Enqueue((neighbor, rangeLeft - 1));
                 visited.Add(neighbor);
             }
@@ -207,7 +200,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         isMoveArea = true;
         _moveAreaObject?.SetActive(true);
     }
-    // 🟩 NEW
     public void ActivateAttackAreaObject()
     {
         isAttackArea = true;
