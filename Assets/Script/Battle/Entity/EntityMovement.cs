@@ -44,7 +44,7 @@ public class EntityMovement : MonoBehaviour
 
     public IEnumerator MoveToGridPosition(int targetX, int targetZ)
     {
-        if (isMoving || _e.deathManager.IsDead) yield break;
+        if (isMoving || _e.status.IsDead) yield break;
         if (_e.gridManager == null) yield break;
 
         List<Tile> path = FindPathTo(targetX, targetZ);

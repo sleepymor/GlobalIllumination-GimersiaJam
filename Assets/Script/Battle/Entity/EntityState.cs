@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EntityState : MonoBehaviour
 {
+    private bool isDead = false;
+    public bool IsDead => isDead;
     private int stunDur = 0;
     private int poisonDur = 0;
     private int regenDur = 0;
@@ -30,6 +32,11 @@ public class EntityState : MonoBehaviour
         this.regenAmount = regenAmount;
     }
 
+    public void SetDeath()
+    {
+        isDead = true;
+    }
+
     public void StartTurnEffect()
     {
         if (stunDur > 0)
@@ -55,16 +62,20 @@ public class EntityState : MonoBehaviour
 
     void StunEffect()
     {
-        _e.movementManager.SetHadMove(true);
+        _e.move.SetHadMove(true);
     }
 
     void PoisonEffect()
     {
-        _e.healthManager.TakeDamage(poisonDmg);
+        _e.health.TakeDamage(poisonDmg);
     }
-    
+
     void RegenEffect()
     {
-        _e.healthManager.Heal(regenAmount);
+        _e.health.Heal(regenAmount);
     }
+
+
+
+
 }

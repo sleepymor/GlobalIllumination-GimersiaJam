@@ -71,15 +71,15 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
-            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.movementManager.HasMoved)
+            if (occupyingEntity.Faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
             {
                 var playerManager = PlayerManager.Instance;
                 playerManager.ClearAllMoveAreas();
 
                 playerManager.SetSelectedEntity(occupyingEntity);
-                ShowMoveAreaBFS(occupyingEntity.movementManager.MoveRange);
+                ShowMoveAreaBFS(occupyingEntity.move.MoveRange);
 
-                ShowAttackAreaBFS(occupyingEntity.attackManager.AttackRange);
+                ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
 
                 return;
             }
@@ -99,7 +99,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             if (isOccupied && occupyingEntity != null && occupyingEntity.Faction != attacker.Faction)
             {
                 Debug.Log($"[Tile] {attacker.name} attacks {occupyingEntity.name}!");
-                attacker.attackManager.Attack(occupyingEntity);
+                attacker.attack.Attack(occupyingEntity);
             }
 
             PlayerManager.Instance.ClearAllMoveAreas();

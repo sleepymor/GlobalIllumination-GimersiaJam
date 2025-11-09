@@ -24,7 +24,7 @@ public class EntityHealth : MonoBehaviour
 
         if (_e.data.currentHP <= 0)
         {
-            StartCoroutine(_e.deathManager.DieAnim());
+            StartCoroutine(_e.death.DieAnim());
         }
     }
 }

@@ -22,7 +22,7 @@ public abstract class BattleEntityManager : MonoBehaviour
     public virtual void RefreshTeam()
     {
         TeamList = FindObjectsOfType<EntityMaster>()
-            .Where(e => e.Faction == GetFactionType() && !e.deathManager.IsDead)
+            .Where(e => e.Faction == GetFactionType() && !e.status.IsDead)
             .ToList();
 
         Debug.Log($"[{GetType().Name}] Team refreshed. Count: {TeamList.Count}");
@@ -101,7 +101,7 @@ public abstract class BattleEntityManager : MonoBehaviour
         {
             if (entity == null) continue;
 
-            entity.movementManager.SetHadMove(false);
+            entity.move.SetHadMove(false);
             Debug.Log($"[{GetType().Name}] Reset move for {entity.name}");
         }
     }

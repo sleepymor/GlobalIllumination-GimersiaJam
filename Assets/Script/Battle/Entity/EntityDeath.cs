@@ -8,9 +8,6 @@ public class EntityDeath : MonoBehaviour
     [SerializeField] private float deathSinkSpeed = 5f;
     [SerializeField] private float deathFadeSpeed = 5f;
 
-    private bool isDead = false;
-    public bool IsDead => isDead;
-
     private EntityMaster _e;
 
     public void Initialize(EntityMaster e)
@@ -20,8 +17,8 @@ public class EntityDeath : MonoBehaviour
 
     public IEnumerator DieAnim()
     {
-        if (isDead) yield break;
-        isDead = true;
+        if (_e.status.IsDead) yield break;
+        _e.status.SetDeath();
 
         Debug.Log($"[EntityMaster] Dying... at grid ({_e.GridX},{_e.GridZ})");
 

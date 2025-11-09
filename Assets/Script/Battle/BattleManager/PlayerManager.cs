@@ -28,7 +28,7 @@ public class PlayerManager : BattleEntityManager
         {
             EntityMaster clickedEntity = clickedTile.occupyingEntity;
 
-            if (clickedEntity.Faction == Faction.PLAYER && !clickedEntity.movementManager.HasMoved)
+            if (clickedEntity.Faction == Faction.PLAYER && !clickedEntity.move.HasMoved)
             {
                 SelectEntity(clickedEntity);
                 ShowMovementAndAttackAreas(clickedEntity);
@@ -65,17 +65,17 @@ public class PlayerManager : BattleEntityManager
         Tile currentTile = entity.currentTile;
         if (currentTile != null)
         {
-            currentTile.ShowMoveAreaBFS(entity.movementManager.MoveRange);
+            currentTile.ShowMoveAreaBFS(entity.move.MoveRange);
             currentTile.ShowAttackAreaBFS(entity.data.attackRange);
         }
     }
 
     private void TryAttack(EntityMaster attacker, EntityMaster target)
     {
-        if (attacker.attackManager.CanAttack(target))
+        if (attacker.attack.CanAttack(target))
         {
-            attacker.attackManager.Attack(target);
-            attacker.attackManager.SetHadAttacking(true);
+            attacker.attack.Attack(target);
+            attacker.attack.SetHadAttacking(true);
 
             // After attack, deselect
             SelectedEntity = null;
@@ -91,11 +91,11 @@ public class PlayerManager : BattleEntityManager
     {
         // Move to the target tile
         yield return entity.StartCoroutine(
-            entity.movementManager.MoveToGridPosition(targetTile.gridX, targetTile.gridZ)
+            entity.move.MoveToGridPosition(targetTile.gridX, targetTile.gridZ)
         );
 
         // Mark as moved
-        entity.movementManager.SetHadMove(true);
+        entity.move.SetHadMove(true);
 
         // Show attack area after moving
         targetTile.ShowAttackAreaBFS(entity.data.attackRange);

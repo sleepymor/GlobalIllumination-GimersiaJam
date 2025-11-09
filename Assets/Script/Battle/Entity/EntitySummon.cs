@@ -13,12 +13,12 @@ public class EntitySummon : MonoBehaviour
     public void Initialize(EntityMaster e)
     {
         _e = e;
-        _e.attackManager.SetHadAttacking(true);
+        _e.attack.SetHadAttacking(true);
     }
 
     public IEnumerator Summon()
     {
-        if (_e.deathManager.IsDead) yield break;
+        if (_e.status.IsDead) yield break;
         if (_e.currentTile == null) yield break;
 
         Debug.Log($"[EntityMaster] Summoning at grid ({_e.GridX},{_e.GridZ})");

@@ -24,29 +24,31 @@ public class EntityMaster : MonoBehaviour
     [HideInInspector] public Tile currentTile;
     [HideInInspector] public Material[] materials;
 
-
-    [HideInInspector] public EntityHealth healthManager;
-    [HideInInspector] public EntityAttack attackManager;
-    [HideInInspector] public EntityDeath deathManager;
-    [HideInInspector] public EntitySummon summonManager;
-    [HideInInspector] public EntityMovement movementManager;
-    [HideInInspector] public EntityState statusManager;
+    [HideInInspector] public Animator _animator;
+    [HideInInspector] public EntityHealth health;
+    [HideInInspector] public EntityAttack attack;
+    [HideInInspector] public EntityDeath death;
+    [HideInInspector] public EntitySummon summon;
+    [HideInInspector] public EntityMovement move;
+    [HideInInspector] public EntityState status;
 
     void Awake()
     {
-        healthManager = GetComponent<EntityHealth>();
-        summonManager = GetComponent<EntitySummon>();
-        movementManager = GetComponent<EntityMovement>();
-        attackManager = GetComponent<EntityAttack>();
-        deathManager = GetComponent<EntityDeath>();
-        statusManager = GetComponent<EntityState>();
+        health = GetComponent<EntityHealth>();
+        summon = GetComponent<EntitySummon>();
+        move = GetComponent<EntityMovement>();
+        attack = GetComponent<EntityAttack>();
+        death = GetComponent<EntityDeath>();
+        status = GetComponent<EntityState>();
 
-        healthManager.Initialize(this);
-        summonManager.Initialize(this);
-        movementManager.Initialize(this);
-        attackManager.Initialize(this);
-        deathManager.Initialize(this);
-        statusManager.Initialize(this);
+        _animator = GetComponent<Animator>();
+
+        health.Initialize(this);
+        summon.Initialize(this);
+        move.Initialize(this);
+        attack.Initialize(this);
+        death.Initialize(this);
+        status.Initialize(this);
     }
 
     private void Start()
@@ -62,8 +64,8 @@ public class EntityMaster : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>();
         CacheMaterials();
 
-        movementManager.SnapToGridPosition(gridX, gridZ);
-        healthManager.SetMaxHP();
+        move.SnapToGridPosition(gridX, gridZ);
+        health.SetMaxHP();
         SetManager();
     }
 

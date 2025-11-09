@@ -46,7 +46,7 @@ public class EnemyManager : BattleEntityManager
             if (moveTile != null)
             {
                 yield return enemy.StartCoroutine(
-                    enemy.movementManager.MoveToGridPosition(moveTile.gridX, moveTile.gridZ)
+                    enemy.move.MoveToGridPosition(moveTile.gridX, moveTile.gridZ)
                 );
             }
 
@@ -71,13 +71,13 @@ public class EnemyManager : BattleEntityManager
             return false;
         }
 
-        if (enemy.deathManager.IsDead)
+        if (enemy.status.IsDead)
         {
             Debug.Log($"[EnemyManager] {enemy.name} is dead. Skipping.");
             return false;
         }
 
-        if (enemy.movementManager.HasMoved)
+        if (enemy.move.HasMoved)
         {
             Debug.Log($"[EnemyManager] {enemy.name} has already moved. Skipping.");
             return false;
@@ -93,7 +93,7 @@ public class EnemyManager : BattleEntityManager
 
         foreach (var t in targets)
         {
-            if (t == null || t.deathManager.IsDead) continue;
+            if (t == null || t.status.IsDead) continue;
 
             float dist = Vector3.Distance(self.transform.position, t.transform.position);
             if (dist < bestDist)
@@ -124,7 +124,7 @@ public class EnemyManager : BattleEntityManager
         HashSet<Tile> visited = new HashSet<Tile>();
         List<Tile> reachable = new List<Tile>();
 
-        queue.Enqueue((startTile, self.movementManager.MoveRange));
+        queue.Enqueue((startTile, self.move.MoveRange));
         visited.Add(startTile);
 
         while (queue.Count > 0)
@@ -153,10 +153,10 @@ public class EnemyManager : BattleEntityManager
 
     private void TryAttackTarget(EntityMaster attacker, EntityMaster target)
     {
-        if (attacker.attackManager.CanAttack(target))
+        if (attacker.attack.CanAttack(target))
         {
-            attacker.attackManager.Attack(target);
-            attacker.attackManager.SetHadAttacking(true);
+            attacker.attack.Attack(target);
+            attacker.attack.SetHadAttacking(true);
             Debug.Log($"[EnemyManager] {attacker.name} attacked {target.name}");
         }
         else
