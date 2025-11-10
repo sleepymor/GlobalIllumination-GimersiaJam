@@ -1054,6 +1054,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
   - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
   - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
   cardContainer: {fileID: 305458007}
   cardPrefab: {fileID: 4738557528315137124, guid: 21491b20513119648a6ef039188c9f25, type: 3}
 --- !u!1660057539 &9223372036854775807

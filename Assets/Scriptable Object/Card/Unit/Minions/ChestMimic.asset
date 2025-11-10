@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e15e2a684938f44eb1e4fd53cd2928a, type: 3}
-  m_Name: Elf
+  m_Name: ChestMimic
   m_EditorClassIdentifier: 
-  unitName: Elf
-  attack: 30
-  health: 350
-  crit: 90
+  unitName: Chest Mimic
+  attack: 20
+  health: 70
+  crit: 40
   moveRange: 3
-  attackRange: 5
-  summonCost: 4
-  cardSprite: {fileID: -205228393, guid: 70a29dea21b9cf946a67a21288b20e34, type: 3}
+  attackRange: 1
+  summonCost: 1
+  cardSprite: {fileID: 395245203, guid: b4e7b8bb6472c9541b7a4c09def33df8, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

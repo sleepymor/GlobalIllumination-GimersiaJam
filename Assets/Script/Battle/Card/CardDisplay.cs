@@ -41,16 +41,6 @@ public class CardDisplay : MonoBehaviour
         {
             MiscPoint.text = $"{item.amount}";
         }
-
-        // Show extra info depending on card type
-        // if (data is UnitData unit)
-        // {
-        //     extraText.text = $"ATK: {unit.attack} | HP: {unit.health}";
-        // }
-        // else if (data is SpellData spell)
-        // {
-        //     extraText.text = $"{spell.DamageType} {spell.amount} dmg";
-        // }
     }
 
     public void OnPlayCard(Vector3 spawnPos)

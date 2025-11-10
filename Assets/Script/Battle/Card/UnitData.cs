@@ -18,8 +18,7 @@ public class UnitData : Card
     public Sprite cardSprite;
     public Sprite worldSprite;
     public GameObject prefab;
-
-    // Implement base properties
+    
     public override string CardName => unitName;
     public override Sprite CardSprite => cardSprite;
     public override Sprite WorldSprite => worldSprite;
