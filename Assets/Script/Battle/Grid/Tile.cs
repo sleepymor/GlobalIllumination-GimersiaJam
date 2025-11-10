@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _summonAreaObject;
 
     [HideInInspector] public int moveCost;
-    [HideInInspector] public bool isMoveArea, isAttackArea;
+    [HideInInspector] public bool isMoveArea, isAttackArea, isSummonArea;
 
     private Renderer _renderer;
     private Material _materialInstance;
@@ -77,13 +77,18 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     private void OnMouseEnter()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(true);
+            SummonManager.Instance.targetTile = this;
+        }
     }
 
     private void OnMouseExit()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -254,6 +259,56 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         isAttackArea = false;
         _attackAreaObject?.SetActive(false);
     }
+
+    public void ShowSummonAreaBFS(int summonRange)
+    {
+        GridManager grid = FindObjectOfType<GridManager>();
+        if (grid == null) return;
+
+        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
+        HashSet<Tile> visited = new HashSet<Tile>();
+
+        queue.Enqueue((this, summonRange));
+        visited.Add(this);
+
+        while (queue.Count > 0)
+        {
+            var (currentTile, rangeLeft) = queue.Dequeue();
+
+            if (!currentTile.isOccupied) currentTile.ActivateSummonAreaObject();
+            if (rangeLeft <= 0) continue;
+
+            Vector2Int coords = grid.GetTileCoordinates(currentTile);
+            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+            foreach (var dir in dirs)
+            {
+                Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
+                if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied) continue;
+
+                int newRange = rangeLeft - neighbor.moveCost;
+                if (newRange < 0) continue;
+
+                queue.Enqueue((neighbor, newRange));
+                visited.Add(neighbor);
+            }
+        }
+    }
+
+    public void ActivateSummonAreaObject()
+    {
+        if (_summonAreaObject == null) return;
+        _summonAreaObject.SetActive(true);
+        isSummonArea = true;
+    }
+
+    public void ClearSummonArea()
+    {
+        if (_summonAreaObject == null) return;
+        _summonAreaObject.SetActive(false);
+        isSummonArea = false;
+    }
+
     public void ClearMoveArea()
     {
         isMoveArea = false;

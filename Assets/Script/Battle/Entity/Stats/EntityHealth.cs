@@ -33,16 +33,20 @@ public class EntityHealth
     public void Heal(int hp)
     {
         _e.data.currentHP += hp;
+        _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 
     public void SetMaxHP()
     {
         _e.data.currentHP = _e.data.maxHP;
+        _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 
     public void TakeDamage(int amount, int critChance = 0)
     {
         _e.data.currentHP -= amount;
+        _e.healthStatHandler.SetHealth(_e.data.currentHP);
+        _e.summon.ShowSummonArea();
 
         if (_e.data.currentHP <= 0)
         {

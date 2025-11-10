@@ -8,12 +8,13 @@ public class EntityData : ScriptableObject
     public int maxHP;
     public int currentHP;
     public int attack;
-    public int attackRange;
     public int defense;
+    public int attackRange;
+    public int summonRange = 1;
     public int moveRange;
     public int critChance;
     public Faction faction;
-
+    public bool canSummon;
 }
 
 public enum Faction

@@ -97,6 +97,6 @@ public class EntityAttack
 
     public void BackShot()
     {
-        
+        // Cumi hitam pak kris
     }
 }

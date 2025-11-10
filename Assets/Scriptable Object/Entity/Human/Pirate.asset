@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Pirate
   m_EditorClassIdentifier: 
   entityName: Pirate
-  prefab: {fileID: 1782075751541447720, guid: 7796ea753c8fba853a54eacc920ffabd, type: 3}
+  prefab: {fileID: 1782075751541447720, guid: d8be91f7480da2021b7d4cfe0c2b48bb, type: 3}
   maxHP: 20
   currentHP: 0
   attack: 5
-  attackRange: 2
   defense: 0
+  attackRange: 1
+  summonRange: 2
   moveRange: 7
   critChance: 10
   faction: 0
+  canSummon: 1

@@ -34,6 +34,7 @@ using UnityEngine;
 public abstract class BattleEntityManager : MonoBehaviour
 {
     public List<EntityMaster> TeamList { get; protected set; } = new List<EntityMaster>();
+    public EntityMaster Summoner;
     public EntityMaster SelectedEntity { get; protected set; }
 
     protected Tile[] allTiles;
@@ -41,7 +42,17 @@ public abstract class BattleEntityManager : MonoBehaviour
     protected virtual void Awake()
     {
         allTiles = FindObjectsOfType<Tile>();
+    }
+
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
         RefreshTeam();
+
     }
 
     /// <summary>
@@ -66,7 +77,13 @@ public abstract class BattleEntityManager : MonoBehaviour
         if (entity != null && entity.data.faction == GetFactionType() && !TeamList.Contains(entity))
         {
             TeamList.Add(entity);
-            Debug.Log($"[{GetType().Name}] Added: {entity.name}");
+            if (entity.data.canSummon)
+            {
+                Summoner = entity;
+                Debug.Log($"[{GetType().Name}] Summoner Added: {Summoner.data.entityName}");
+            }
+
+            Debug.Log($"[{GetType().Name}] Added: {entity.data.name}");
         }
     }
 
@@ -132,6 +149,11 @@ public abstract class BattleEntityManager : MonoBehaviour
             entity.move.SetHadMove(false);
             Debug.Log($"[{GetType().Name}] Reset move for {entity.name}");
         }
+    }
+
+    public virtual EntityMaster GetSummoner()
+    {
+        return Summoner;
     }
 
     public abstract void EndTurn();
