@@ -36,6 +36,8 @@ public class TileRow
 public class GridManager : MonoBehaviour
 {
     [Header("Grid Settings")]
+
+    public static GridManager Instance;
     [SerializeField] private float tileSize = 1f;
     [SerializeField] private List<TileRow> tileRows;
 
@@ -49,6 +51,14 @@ public class GridManager : MonoBehaviour
     {
         if (_tiles == null)
             GenerateGrid();
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
 
     public void GenerateGrid()

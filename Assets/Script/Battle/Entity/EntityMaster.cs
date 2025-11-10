@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteAlways]
 public class EntityMaster : MonoBehaviour
 {
     [Header("Entity Data")]
-    public EntityData data;
+    public UnitData data;
 
+    [HideInInspector] public HealthStatHandler healthStatHandler;
     [SerializeField] private int spawnPosX;
     [SerializeField] private int spawnPosZ;
     [SerializeField] private float heightAboveTile = 0.5f;
@@ -21,41 +21,12 @@ public class EntityMaster : MonoBehaviour
     [HideInInspector] public EntitySummon summon;
     [HideInInspector] public EntityMovement move;
     [HideInInspector] public EntityState status;
+    [HideInInspector] public EntityItem item;
     [HideInInspector] public EntityEquip equip;
     [HideInInspector] public EntityAnim anim;
     [HideInInspector] public EntityManager manager;
     [HideInInspector] public EntityPosition pos;
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (Application.isPlaying) return;
-
-        // Coba cari GridManager di scene
-        if (gridManager == null)
-            gridManager = FindObjectOfType<GridManager>();
-
-        // Kalau belum ada grid, keluar
-        if (gridManager == null || gridManager.GetTileAt(spawnPosX, spawnPosZ) == null)
-            return;
-
-        // Pindahkan entity ke posisi tile yang sesuai
-        Tile tile = gridManager.GetTileAt(spawnPosX, spawnPosZ);
-        Vector3 targetPos = tile.transform.position + Vector3.up * heightAboveTile;
-
-        // Hanya update posisi kalau benar-benar berubah (biar tidak spam redraw)
-        if (transform.position != targetPos)
-        {
-            transform.position = targetPos;
-            currentTile = tile;
-
-#if UNITY_EDITOR
-            // biar posisi tersimpan ke scene
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-        }
-    }
-#endif
+    [HideInInspector] public SoulHelper soul;
 
     void Awake()
     {
@@ -68,8 +39,13 @@ public class EntityMaster : MonoBehaviour
         summon = new EntitySummon(this);
         health = new EntityHealth(this);
         status = new EntityState(this);
+        item = new EntityItem(this);
         equip = new EntityEquip(this);
+        soul = new SoulHelper(this);
+
         pos = new EntityPosition(spawnPosX, spawnPosZ);
+
+        healthStatHandler = GetComponent<HealthStatHandler>();
 
         anim = new EntityAnim(this, GetComponent<Animator>());
     }
@@ -88,11 +64,12 @@ public class EntityMaster : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>();
         CacheMaterials();
 
-        manager = new EntityManager(this);
-
+        manager = new EntityManager();
+        manager.SetManager(this);
         move.SnapToGridPosition(pos.gridX, pos.gridZ);
         health.SetMaxHP();
     }
+
 
     private void CacheMaterials()
     {
