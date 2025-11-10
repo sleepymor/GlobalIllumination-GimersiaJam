@@ -19,7 +19,7 @@ MonoBehaviour:
   crit: 200
   defense: 0
   moveRange: 5
-  attackRange: 1
+  attackRange: 2
   critChance: 0
   canSummon: 1
   summonRange: 2
@@ -27,4 +27,4 @@ MonoBehaviour:
   faction: 0
   cardSprite: {fileID: -484557588, guid: e18e5ced31e951942babca32d2660a21, type: 3}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1782075751541447720, guid: d8be91f7480da2021b7d4cfe0c2b48bb, type: 3}
