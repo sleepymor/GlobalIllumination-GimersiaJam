@@ -33,6 +33,8 @@ public class EntityHealth
     public void Heal(int hp)
     {
         _e.data.currentHP += hp;
+
+        // if (_e.data.currentHP > _e.data.health) _e.data.currentHP = _e.data.health;
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 
@@ -42,19 +44,31 @@ public class EntityHealth
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 
-    public void TakeDamage(int amount, int critChance = 0)
+    public void TakeDamage(int amount, int critDmg = 0, int critChance = 0)
     {
-        _e.data.currentHP -= amount;
+        // Determine if this hit is a critical hit
+        bool isCritical = UnityEngine.Random.Range(0, 100) < critChance;
+
+        int finalDamage = amount;
+
+        if (isCritical)
+        {
+            finalDamage = amount * critDmg;
+            Debug.Log($"Critical hit! Damage dealt: {finalDamage}");
+        }
+
+        // Apply damage
+        _e.data.currentHP -= finalDamage;
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
         _e.summon.ShowSummonArea();
 
+        // Check for death
         if (_e.data.currentHP <= 0)
         {
             Debug.Log($"[{_e.name}] has died!");
-
             _e.StartCoroutine(_e.anim.DieAnim());
-
         }
     }
+
 }
 

@@ -392,7 +392,7 @@ MonoBehaviour:
   _hoverObject: {fileID: 1137668847578613137}
   _moveAreaObject: {fileID: 6145520094036757153}
   _attackAreaObject: {fileID: 2551242813945283833}
-  _summonAreaObject: {fileID: 9068840942803143292}
+  _actionAreaObject: {fileID: 9068840942803143292}
   moveCost: 0
   isMoveArea: 0
   isAttackArea: 0
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 5766181580742895822}
   - component: {fileID: 4148929368571764456}
   m_Layer: 0
-  m_Name: SummonArea
+  m_Name: ActionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,6 +21,7 @@ public class EntityEquip
 
     public void CritBuff(int buff)
     {
+        _e.data.critDmg += buff;
         _e.data.critChance += buff;
     }
 

@@ -16,14 +16,17 @@ MonoBehaviour:
   health: 500
   attack: 40
   currentHP: 0
-  crit: 200
+  critDmg: 0
   defense: 0
   moveRange: 5
-  attackRange: 2
+  attackRange: 1
   critChance: 0
+  summonCost: 5
   canSummon: 1
   summonRange: 2
-  summonCost: 5
+  maxSoul: 5
+  soulRecovery: 2
+  currentSoul: 0
   faction: 0
   cardSprite: {fileID: -484557588, guid: e18e5ced31e951942babca32d2660a21, type: 3}
   worldSprite: {fileID: 0}

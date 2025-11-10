@@ -248,24 +248,79 @@ public class CardContainer : MonoBehaviour
     public void OnCardDragStart(CardWrapper card)
     {
         currentDraggedCard = card;
-        UnitCard unitCard = card.GetComponent<UnitCard>();
-        if (unitCard != null && unitCard.data != null)
+
+        CardDisplay cardDisplay = card.GetComponent<CardDisplay>();
+        if (cardDisplay == null || cardDisplay.cardData == null)
         {
-            EntityMaster summoner = PlayerManager.Instance.GetSummoner();
-            SummonManager.Instance.ShowSummonArea(summoner, unitCard.data);
+            Debug.LogWarning("[CardContainer] CardDisplay or cardData not found!");
+            currentDraggedCard = null;
+            return;
         }
-        else
+
+        Card data = cardDisplay.cardData;
+
+
+        if (cardDisplay == null && cardDisplay.cardData == null)
         {
             Debug.LogWarning("[CardContainer] UnitCard atau EntityData tidak ditemukan!");
+            return;
         }
+
+        EntityMaster summoner = PlayerManager.Instance.GetSummoner();
+        if (data is UnitData unitData)
+        {
+            SummonManager.Instance.ShowSummonArea(summoner, cardDisplay.cardData);
+            return;
+        }
+
+        if (data is ItemData itemData)
+        {
+            List<EntityMaster> unit = PlayerManager.Instance.TeamList;
+            ItemManager.Instance.ShowEquipArea(summoner, unit, cardDisplay.cardData);
+        }
+
     }
 
     public void OnCardDragEnd()
     {
-        SummonManager.Instance.SummonAtTile();
+        if (currentDraggedCard == null) return;
+
+        CardDisplay cardDisplay = currentDraggedCard.GetComponent<CardDisplay>();
+        if (cardDisplay == null || cardDisplay.cardData == null)
+        {
+            Debug.LogWarning("[CardContainer] CardDisplay or cardData not found!");
+            currentDraggedCard = null;
+            return;
+        }
+
+        Card data = cardDisplay.cardData;
+
+        if (data is UnitData unitData)
+        {
+            SummonManager.Instance.ShowSummonArea(PlayerManager.Instance.GetSummoner(), unitData);
+            SummonManager.Instance.SummonAtTile(currentDraggedCard);
+        }
+        else if (data is SpellData spellData)
+        {
+            // SpellManager.Instance.CastSpell(spellData);
+            // Destroy(currentDraggedCard.gameObject);
+        }
+        else if (data is ItemData itemData)
+        {
+            ItemManager.Instance.ShowEquipArea(PlayerManager.Instance.GetSummoner(), PlayerManager.Instance.TeamList, itemData);
+            ItemManager.Instance.EquipAt(currentDraggedCard);
+
+        }
+        else
+        {
+            Debug.LogWarning("[CardContainer] Unknown card type!");
+            Destroy(currentDraggedCard.gameObject);
+        }
+
         SummonManager.Instance.HideSummonArea();
         currentDraggedCard = null;
     }
+
 
     public void DestroyCard(CardWrapper card)
     {

@@ -41,10 +41,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _hoverObject;
     [SerializeField] private GameObject _moveAreaObject;
     [SerializeField] private GameObject _attackAreaObject;
-    [SerializeField] private GameObject _summonAreaObject;
+    [SerializeField] private GameObject _actionAreaObject;
 
     [HideInInspector] public int moveCost;
-    [HideInInspector] public bool isMoveArea, isAttackArea, isSummonArea;
+    [HideInInspector] public bool isMoveArea, isAttackArea, isActionArea;
 
     private Renderer _renderer;
     private Material _materialInstance;
@@ -80,6 +80,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             _hoverObject.SetActive(true);
             SummonManager.Instance.targetTile = this;
+            ItemManager.Instance.targetTile = this;
         }
     }
 
@@ -260,7 +261,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         _attackAreaObject?.SetActive(false);
     }
 
-    public void ShowSummonAreaBFS(int summonRange)
+    public void ShowActionAreaBFS(int summonRange, bool isEquip = false)
     {
         GridManager grid = FindObjectOfType<GridManager>();
         if (grid == null) return;
@@ -275,7 +276,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             var (currentTile, rangeLeft) = queue.Dequeue();
 
-            if (!currentTile.isOccupied) currentTile.ActivateSummonAreaObject();
+            if (!currentTile.isOccupied || isEquip) currentTile.ActivateActionAreaObject();
             if (rangeLeft <= 0) continue;
 
             Vector2Int coords = grid.GetTileCoordinates(currentTile);
@@ -295,18 +296,18 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void ActivateSummonAreaObject()
+    public void ActivateActionAreaObject()
     {
-        if (_summonAreaObject == null) return;
-        _summonAreaObject.SetActive(true);
-        isSummonArea = true;
+        if (_actionAreaObject == null) return;
+        _actionAreaObject.SetActive(true);
+        isActionArea = true;
     }
 
-    public void ClearSummonArea()
+    public void ClearActionArea()
     {
-        if (_summonAreaObject == null) return;
-        _summonAreaObject.SetActive(false);
-        isSummonArea = false;
+        if (_actionAreaObject == null) return;
+        _actionAreaObject.SetActive(false);
+        isActionArea = false;
     }
 
     public void ClearMoveArea()

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
   healthStatHandler: {fileID: 4292483655132072810}
+  soulCountHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
   heightAboveTile: 0.5

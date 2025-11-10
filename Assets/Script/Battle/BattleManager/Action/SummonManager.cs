@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 
 /*
  * This class handle summoning, by telling this class who will summon and activating the tile near it.
@@ -21,7 +21,7 @@ public class SummonManager : MonoBehaviour
         Instance = this;
     }
 
-    public void ShowSummonArea(EntityMaster summoner, UnitData data)
+    public void ShowSummonArea(EntityMaster summoner, Card data)
     {
         if (summoner == null || data == null)
         {
@@ -30,7 +30,7 @@ public class SummonManager : MonoBehaviour
         }
 
         currentSummoner = summoner;
-        pendingSummonData = data;
+        pendingSummonData = (UnitData) data;
 
         new EntitySummon(summoner).ShowSummonArea();
     }
@@ -44,23 +44,33 @@ public class SummonManager : MonoBehaviour
         }
     }
 
-    public void SummonAtTile()
+    public void SummonAtTile(CardWrapper cardWrapper)
     {
         if (pendingSummonData == null || currentSummoner == null)
         {
+            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
             Debug.LogWarning("[SummonManager] Tidak ada data summon yang sedang aktif.");
             return;
         }
 
         if (targetTile == null || targetTile.isOccupied)
         {
+            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
             Debug.LogWarning("[SummonManager] Tile target tidak valid atau sudah ditempati.");
             return;
         }
 
-        if (!targetTile.isSummonArea)
+        if (!targetTile.isActionArea)
         {
+            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
             Debug.LogWarning("[SummonManager] Tile target bukan untuk summon");
+            return;
+        }
+
+        if (currentSummoner.soul.GetSoulCount() < pendingSummonData.summonCost)
+        {
+            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
+            Debug.LogWarning("[SummonManager] Tidak cukup soul untuk mensummon!");
             return;
         }
 
@@ -89,7 +99,45 @@ public class SummonManager : MonoBehaviour
         // 5️⃣ Bersihkan area summon
         HideSummonArea();
 
+        currentSummoner.soul.ReduceSoul(pendingSummonData.summonCost);
+        Destroy(cardWrapper.gameObject);
+        pendingSummonData = null;
+
         Debug.Log($"[SummonManager] Summoned {pendingSummonData.unitName} di ({targetTile.gridX},{targetTile.gridZ}).");
     }
+
+    private IEnumerator BlinkCardRed(CardWrapper card, float duration = 0.3f)
+    {
+        if (card == null) yield break;
+
+        var renderer = card.GetComponent<SpriteRenderer>();
+        if (renderer == null) yield break;
+
+        Color originalColor = renderer.color;
+        Color blinkColor = Color.red;
+
+        float elapsed = 0f;
+        float halfDuration = duration / 2f;
+
+        while (elapsed < halfDuration)
+        {
+            renderer.color = Color.Lerp(originalColor, blinkColor, elapsed / halfDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        renderer.color = blinkColor;
+
+        elapsed = 0f;
+        while (elapsed < halfDuration)
+        {
+            renderer.color = Color.Lerp(blinkColor, originalColor, elapsed / halfDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        renderer.color = originalColor;
+    }
+
 
 }

@@ -34,7 +34,7 @@ using UnityEngine;
 public abstract class BattleEntityManager : MonoBehaviour
 {
     public List<EntityMaster> TeamList { get; protected set; } = new List<EntityMaster>();
-    public EntityMaster Summoner;
+    private EntityMaster _summoner;
     public EntityMaster SelectedEntity { get; protected set; }
 
     protected Tile[] allTiles;
@@ -44,20 +44,12 @@ public abstract class BattleEntityManager : MonoBehaviour
         allTiles = FindObjectsOfType<Tile>();
     }
 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         RefreshTeam();
 
     }
 
-    /// <summary>
-    /// Rebuilds the list of all entities for this faction currently in the scene.
-    /// </summary>
     public virtual void RefreshTeam()
     {
         TeamList = FindObjectsOfType<EntityMaster>()
@@ -67,9 +59,6 @@ public abstract class BattleEntityManager : MonoBehaviour
         Debug.Log($"[{GetType().Name}] Team refreshed. Count: {TeamList.Count}");
     }
 
-    /// <summary>
-    /// Returns the faction managed by this class.
-    /// </summary>
     protected abstract Faction GetFactionType();
 
     public virtual void AddEntity(EntityMaster entity)
@@ -79,8 +68,8 @@ public abstract class BattleEntityManager : MonoBehaviour
             TeamList.Add(entity);
             if (entity.data.canSummon)
             {
-                Summoner = entity;
-                Debug.Log($"[{GetType().Name}] Summoner Added: {Summoner.data.unitName}");
+                _summoner = entity;
+                Debug.Log($"[{GetType().Name}] Summoner Added: {_summoner.data.unitName}");
             }
 
             Debug.Log($"[{GetType().Name}] Added: {entity.data.name}");
@@ -93,7 +82,6 @@ public abstract class BattleEntityManager : MonoBehaviour
         {
             TeamList.Remove(entity);
 
-            // Clear the tile if still linked
             Tile tile = FindObjectOfType<GridManager>()?.GetTileAt(entity.pos.GridX, entity.pos.GridZ);
             if (tile != null && tile.GetOccupyingEntity() == entity)
                 tile.SetOccupyingEntity(null);
@@ -102,10 +90,6 @@ public abstract class BattleEntityManager : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Clears both move and attack highlights from all tiles.
-    /// </summary>
     public virtual void ClearAllMoveAreas()
     {
         GridManager grid = FindObjectOfType<GridManager>();
@@ -118,9 +102,6 @@ public abstract class BattleEntityManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Clears only attack highlights (red tiles).
-    /// </summary>
     public virtual void ClearAllAttackAreas()
     {
         GridManager grid = FindObjectOfType<GridManager>();
@@ -137,14 +118,12 @@ public abstract class BattleEntityManager : MonoBehaviour
         allTiles = FindObjectsOfType<Tile>();
     }
 
-    /// <summary>
-    /// Resets movement flags for all units in this team at the start of a turn.
-    /// </summary>
     public virtual void ResetEntityMoves()
     {
         foreach (var entity in TeamList)
         {
             if (entity == null) continue;
+            if (entity.data.canSummon) entity.soul.IncreaseSoul(entity.data.soulRecovery);
 
             entity.move.SetHadMove(false);
             Debug.Log($"[{GetType().Name}] Reset move for {entity.name}");
@@ -153,7 +132,7 @@ public abstract class BattleEntityManager : MonoBehaviour
 
     public virtual EntityMaster GetSummoner()
     {
-        return Summoner;
+        return _summoner;
     }
 
     public abstract void EndTurn();

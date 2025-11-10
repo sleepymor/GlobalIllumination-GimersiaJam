@@ -65,7 +65,7 @@ public class EntityAttack
         _e.anim.IdleAnim();
 
         int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.health;
-        target.health.TakeDamage(scaledDamage, _e.data.critChance);
+        target.health.TakeDamage(scaledDamage, _e.data.critDmg, _e.data.critChance);
         isAlreadyAttacking = true;
 
         int distance = Mathf.Abs(target.pos.GridX - _e.pos.GridX) + Mathf.Abs(target.pos.GridZ - _e.pos.GridZ);
@@ -91,7 +91,7 @@ public class EntityAttack
         _e.anim.IdleAnim();
 
         int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.health;
-        target.health.TakeDamage(scaledDamage, _e.data.critChance);
+        target.health.TakeDamage(scaledDamage, _e.data.critDmg, _e.data.critChance);
     }
 
 

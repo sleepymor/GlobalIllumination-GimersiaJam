@@ -10,16 +10,20 @@ public class UnitData : Card
     public int health;
     public int attack;
     [HideInInspector] public int currentHP;
-    public int crit;
+    public int critDmg;
     public int defense;
     public int moveRange;
     public int attackRange;
     public int critChance;
+    public int summonCost;
+
 
     [Header("Summoner stat")]
     public bool canSummon;
     public int summonRange;
-    public int summonCost;
+    public int maxSoul;
+    public int soulRecovery;
+    [HideInInspector] public int currentSoul;
 
 
     public Faction faction;

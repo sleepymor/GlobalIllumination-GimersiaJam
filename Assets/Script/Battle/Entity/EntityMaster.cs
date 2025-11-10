@@ -21,10 +21,12 @@ public class EntityMaster : MonoBehaviour
     [HideInInspector] public EntitySummon summon;
     [HideInInspector] public EntityMovement move;
     [HideInInspector] public EntityState status;
+    [HideInInspector] public EntityItem item;
     [HideInInspector] public EntityEquip equip;
     [HideInInspector] public EntityAnim anim;
     [HideInInspector] public EntityManager manager;
     [HideInInspector] public EntityPosition pos;
+    [HideInInspector] public SoulHelper soul;
 
     void Awake()
     {
@@ -37,12 +39,15 @@ public class EntityMaster : MonoBehaviour
         summon = new EntitySummon(this);
         health = new EntityHealth(this);
         status = new EntityState(this);
+        item = new EntityItem(this);
         equip = new EntityEquip(this);
+        soul = new SoulHelper(this);
+
         pos = new EntityPosition(spawnPosX, spawnPosZ);
+
         healthStatHandler = GetComponent<HealthStatHandler>();
 
         anim = new EntityAnim(this, GetComponent<Animator>());
-
     }
 
     private void Start()
