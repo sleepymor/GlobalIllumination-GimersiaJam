@@ -40,9 +40,10 @@ public class TurnManager : MonoBehaviour
     }
     public static void PlayerTurn()
     {
-        
+
         _currentTurn = Faction.PLAYER;
         EnemyManager.Instance.ResetEntityMoves();
+        SoulCountManager.Instance.SetSoul(PlayerManager.Instance.GetSummoner().soul.GetSoulCount());
     }
 
     public static void EnemyTurn()
@@ -51,6 +52,7 @@ public class TurnManager : MonoBehaviour
         _currentTurn = Faction.ENEMY;
         Instance.StartCoroutine(EnemyManager.Instance.RunEnemyTurn());
         PlayerManager.Instance.ResetEntityMoves();
+        SoulCountManager.Instance.SetSoul(EnemyManager.Instance.GetSummoner().soul.GetSoulCount());
     }
 
     public static void AllyTurn()

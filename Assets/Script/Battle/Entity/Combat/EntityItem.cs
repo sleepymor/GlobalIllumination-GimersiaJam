@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class EntitySummon
+public class EntityItem
 {
     private EntityMaster _e;
 
-    public EntitySummon(EntityMaster e)
+    public EntityItem(EntityMaster e)
     {
         _e = e;
     }
 
-    public void ShowSummonArea()
+    public void ShowEquipArea()
     {
         if (_e.data.faction != Faction.PLAYER) return;
         if (TurnManager.GetCurrentTurn() != Faction.PLAYER) return;
@@ -20,31 +20,30 @@ public class EntitySummon
         GridManager grid = GridManager.Instance;
         if (grid == null)
         {
-            Debug.LogError("[EntitySummon] GridManager tidak ditemukan!");
+            Debug.LogError("[EntityItem] GridManager tidak ditemukan!");
             return;
         }
 
         Tile startTile = grid.GetTileAt(x, z);
         if (startTile == null)
         {
-            Debug.LogError($"[EntitySummon] Tile di posisi ({x}, {z}) tidak ditemukan!");
+            Debug.LogError($"[EntityItem] Tile di posisi ({x}, {z}) tidak ditemukan!");
             return;
         }
 
         PlayerManager.Instance.ClearAllMoveAreas();
 
-        int summonRange = _e.data.summonRange;
-        startTile.ShowActionAreaBFS(summonRange);
+        startTile.ShowActionAreaBFS(1, true);
 
-        Debug.Log($"[EntitySummon] Menampilkan area summon dari tile ({x}, {z}) dengan jangkauan {summonRange}.");
+        Debug.Log($"[EntityItem] Menampilkan area equip");
     }
 
-    public void HideSummonArea()
+    public void HideEquipArea()
     {
         GridManager grid = GridManager.Instance;
         if (grid == null)
         {
-            Debug.LogError("[EntitySummon] GridManager tidak ditemukan!");
+            Debug.LogError("[EntityItem] GridManager tidak ditemukan!");
             return;
         }
 
@@ -53,12 +52,7 @@ public class EntitySummon
             tile.ClearActionArea();
         }
 
-        Debug.Log("[EntitySummon] Semua area summon disembunyikan.");
+        Debug.Log("[EntityItem] Semua area summon disembunyikan.");
     }
-
-
-    public void Summon()
-    {
-        _e.StartCoroutine(_e.anim.SummonAnim());
-    }
+    
 }

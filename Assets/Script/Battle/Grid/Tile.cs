@@ -41,10 +41,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _hoverObject;
     [SerializeField] private GameObject _moveAreaObject;
     [SerializeField] private GameObject _attackAreaObject;
-    [SerializeField] private GameObject _summonAreaObject;
+    [SerializeField] private GameObject _actionAreaObject;
 
     [HideInInspector] public int moveCost;
-    [HideInInspector] public bool isMoveArea, isAttackArea;
+    [HideInInspector] public bool isMoveArea, isAttackArea, isActionArea;
 
     private Renderer _renderer;
     private Material _materialInstance;
@@ -77,13 +77,19 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     private void OnMouseEnter()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(true);
+            SummonManager.Instance.targetTile = this;
+            ItemManager.Instance.targetTile = this;
+        }
     }
 
     private void OnMouseExit()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -254,6 +260,56 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         isAttackArea = false;
         _attackAreaObject?.SetActive(false);
     }
+
+    public void ShowActionAreaBFS(int summonRange, bool isEquip = false)
+    {
+        GridManager grid = FindObjectOfType<GridManager>();
+        if (grid == null) return;
+
+        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
+        HashSet<Tile> visited = new HashSet<Tile>();
+
+        queue.Enqueue((this, summonRange));
+        visited.Add(this);
+
+        while (queue.Count > 0)
+        {
+            var (currentTile, rangeLeft) = queue.Dequeue();
+
+            if (!currentTile.isOccupied || isEquip) currentTile.ActivateActionAreaObject();
+            if (rangeLeft <= 0) continue;
+
+            Vector2Int coords = grid.GetTileCoordinates(currentTile);
+            Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+            foreach (var dir in dirs)
+            {
+                Tile neighbor = grid.GetTileAt(coords.x + dir.x, coords.y + dir.y);
+                if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied) continue;
+
+                int newRange = rangeLeft - neighbor.moveCost;
+                if (newRange < 0) continue;
+
+                queue.Enqueue((neighbor, newRange));
+                visited.Add(neighbor);
+            }
+        }
+    }
+
+    public void ActivateActionAreaObject()
+    {
+        if (_actionAreaObject == null) return;
+        _actionAreaObject.SetActive(true);
+        isActionArea = true;
+    }
+
+    public void ClearActionArea()
+    {
+        if (_actionAreaObject == null) return;
+        _actionAreaObject.SetActive(false);
+        isActionArea = false;
+    }
+
     public void ClearMoveArea()
     {
         isMoveArea = false;

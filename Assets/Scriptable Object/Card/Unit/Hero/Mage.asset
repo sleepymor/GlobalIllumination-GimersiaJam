@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: Mage
   m_EditorClassIdentifier: 
   unitName: Mage
-  attack: 70
   health: 200
-  crit: 120
+  attack: 70
+  currentHP: 0
+  critDmg: 0
+  defense: 0
   moveRange: 2
   attackRange: 4
+  critChance: 0
+  canSummon: 0
+  summonRange: 0
   summonCost: 7
+  faction: 2
   cardSprite: {fileID: 522850069, guid: 3f75e49ca81235e4f8a97673f3aab22c, type: 3}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1782075751541447720, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}

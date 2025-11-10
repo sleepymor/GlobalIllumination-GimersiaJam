@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   unitName: Elf
-  attack: 30
   health: 350
-  crit: 90
+  attack: 30
+  currentHP: 0
+  critDmg: 0
+  defense: 0
   moveRange: 3
   attackRange: 5
+  critChance: 0
+  canSummon: 0
+  summonRange: 0
   summonCost: 4
+  faction: 0
   cardSprite: {fileID: -205228393, guid: 70a29dea21b9cf946a67a21288b20e34, type: 3}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1782075751541447720, guid: 952aada6ef87f6c07b622eaab07bf69a, type: 3}
