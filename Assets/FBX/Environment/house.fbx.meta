@@ -1,9 +1,39 @@
 fileFormatVersion: 2
-guid: b77a70fc1bd4e6d3697131b6ad451101
+guid: 2e367075c63ece270b1c7692edf9549e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AxeHead.004
+    second: {fileID: 2100000, guid: 82ef0d661805bf04592596610269c288, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black.008
+    second: {fileID: 2100000, guid: 884f4c0394a51c540bff705e321683ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Thatch.008
+    second: {fileID: 2100000, guid: 75401b21dec3fae45b3c448df188b19a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodBeam.004
+    second: {fileID: 2100000, guid: 7a48802799feda44eb030775a1324289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodPlank.004
+    second: {fileID: 2100000, guid: 21a34257f87757c48946c03c5f824f20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodWall.004
+    second: {fileID: 2100000, guid: 0b4996527ca005d49950a1e914c01d84, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
