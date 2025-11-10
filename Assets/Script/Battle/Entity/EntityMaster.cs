@@ -5,7 +5,7 @@ using UnityEngine;
 public class EntityMaster : MonoBehaviour
 {
     [Header("Entity Data")]
-    public EntityData data;
+    public UnitData data;
 
     [HideInInspector] public HealthStatHandler healthStatHandler;
     [SerializeField] private int spawnPosX;

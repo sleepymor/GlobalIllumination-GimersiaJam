@@ -80,7 +80,7 @@ public abstract class BattleEntityManager : MonoBehaviour
             if (entity.data.canSummon)
             {
                 Summoner = entity;
-                Debug.Log($"[{GetType().Name}] Summoner Added: {Summoner.data.entityName}");
+                Debug.Log($"[{GetType().Name}] Summoner Added: {Summoner.data.unitName}");
             }
 
             Debug.Log($"[{GetType().Name}] Added: {entity.data.name}");

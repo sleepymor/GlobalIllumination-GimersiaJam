@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: Pirate
   m_EditorClassIdentifier: 
   unitName: Pirate
-  attack: 40
   health: 500
+  attack: 40
+  currentHP: 0
   crit: 200
+  defense: 0
   moveRange: 5
   attackRange: 1
+  critChance: 0
+  canSummon: 1
+  summonRange: 2
   summonCost: 5
+  faction: 0
   cardSprite: {fileID: -484557588, guid: e18e5ced31e951942babca32d2660a21, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

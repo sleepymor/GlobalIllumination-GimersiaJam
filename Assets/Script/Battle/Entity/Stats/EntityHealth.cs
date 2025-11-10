@@ -38,7 +38,7 @@ public class EntityHealth
 
     public void SetMaxHP()
     {
-        _e.data.currentHP = _e.data.maxHP;
+        _e.data.currentHP = _e.data.health;
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 

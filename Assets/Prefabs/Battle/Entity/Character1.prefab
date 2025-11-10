@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fbd03c6dbb8a5a92db4c2b0fc7d549ac, type: 2}
+  data: {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
   healthStatHandler: {fileID: 4292483655132072810}
   spawnPosX: 0
   spawnPosZ: 0

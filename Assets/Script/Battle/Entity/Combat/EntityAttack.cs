@@ -64,7 +64,7 @@ public class EntityAttack
 
         _e.anim.IdleAnim();
 
-        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
+        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.health;
         target.health.TakeDamage(scaledDamage, _e.data.critChance);
         isAlreadyAttacking = true;
 
@@ -90,7 +90,7 @@ public class EntityAttack
 
         _e.anim.IdleAnim();
 
-        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.maxHP;
+        int scaledDamage = _e.data.attack * _e.data.currentHP / _e.data.health;
         target.health.TakeDamage(scaledDamage, _e.data.critChance);
     }
 
