@@ -1,27 +1,29 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewEntityData", menuName = "Entities/Entity Data")]
-public class EntityData : ScriptableObject
+[CreateAssetMenu(fileName = "UnitData", menuName = "Scriptable Objects/UnitData")]
+public class UnitData : Card
 {
-    public string entityName;
-    public GameObject prefab;
-    public int maxHP;
-    public int currentHP;
+    [Header("Card Info")]
+    public string unitName;
+
+    [Header("Stats")]
     public int attack;
-    public int defense;
-    public int attackRange;
-    public int summonRange = 1;
+    public int health;
+    public int crit;
     public int moveRange;
-    public int critChance;
-    public Faction faction;
-    public bool canSummon;
-}
+    public int attackRange;
+    public int summonRange;
+    public int summonCost;
 
-public enum Faction
-{
-    PLAYER,
-    ALLY,
-    ENEMY,
-    WILD
-}
+    [Header("Visual")]
+    public Sprite cardSprite;
+    public Sprite worldSprite;
+    public GameObject prefab;
 
+    // Implement base properties
+    public override string CardName => unitName;
+    public override Sprite CardSprite => cardSprite;
+    public override Sprite WorldSprite => worldSprite;
+    public override GameObject Prefab => prefab;
+    public override int SummonCost => summonCost;
+}
