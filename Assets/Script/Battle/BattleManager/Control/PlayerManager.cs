@@ -21,6 +21,7 @@ public class PlayerManager : BattleEntityManager
     {
         PlayerDeckManager.Instance.InitDeck();
         PlayerDeckManager.Instance.DrawMultiple(5);
+        TurnSwitcherBtnChanger.Instance.SetPlayerTurn();
     }
 
     protected override Faction GetFactionType() => Faction.PLAYER;
