@@ -415,6 +415,88 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &454217989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 872699803}
+    m_Modifications:
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782075751541447720, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_Name
+      value: Character 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470217883534837545, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470217883534837545, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473471216752999400, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: gridX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473471216752999400, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: spawnPosX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473471216752999400, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+      propertyPath: spawnPosZ
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+--- !u!4 &454217990 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 383497455901963607, guid: 53dcac6da2c49a197a37c8438e8f8c2f, type: 3}
+  m_PrefabInstance: {fileID: 454217989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &799098749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -542,6 +624,7 @@ Transform:
   m_Children:
   - {fileID: 1923235686}
   - {fileID: 1803352614}
+  - {fileID: 454217990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &879727698
@@ -795,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31339d440dda30f2b1f3a62f27fdf95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
 --- !u!114 &1859316060
 MonoBehaviour:
   m_ObjectHideFlags: 0
