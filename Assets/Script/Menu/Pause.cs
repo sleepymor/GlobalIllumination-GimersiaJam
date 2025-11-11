@@ -98,9 +98,9 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
 
         if (SceneController.instance != null)
-            SceneController.instance.LoadScene("MainMenu");
+            SceneController.instance.LoadScene("Main_menu");
         else
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Main_menu");
     }
 
     private void PlayButtonSound()
