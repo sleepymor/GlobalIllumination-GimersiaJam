@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e15e2a684938f44eb1e4fd53cd2928a, type: 3}
-  m_Name: Warlock
+  m_Name: BalorEye
   m_EditorClassIdentifier: 
-  unitName: Warlock
-  health: 600
-  attack: 40
+  unitName: Balor Eye
+  health: 70
+  attack: 20
   currentHP: 0
   critDmg: 0
   defense: 0
-  moveRange: 4
+  moveRange: 3
   attackRange: 1
   critChance: 0
-  summonCost: 7
+  summonCost: 1
   canSummon: 0
   summonRange: 0
   maxSoul: 0
   soulRecovery: 0
   currentSoul: 0
   faction: 0
-  cardSprite: {fileID: -1856452409, guid: 7255948d84bca3af086b9db9fc2daaec, type: 3}
+  cardSprite: {fileID: -587555864, guid: a2c8966218e1a3a429a0978987f35b22, type: 3}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 1782075751541447720, guid: 05084e6fec51f77a98e705948cc26134, type: 3}
+  prefab: {fileID: 1782075751541447720, guid: 74c43bd068ffd706997ba5b1534d5944, type: 3}
