@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: -3856791589528915358}
   - component: {fileID: 2470217883534837545}
   - component: {fileID: 4473471216752999400}
-  - component: {fileID: 4292483655132072810}
+  - component: {fileID: 382916880689799860}
   m_Layer: 0
-  m_Name: Character1
+  m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 1782075751541447720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.043619405, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3679318586682887269}
+  - {fileID: 5269140455674477379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 5, z: 0}
 --- !u!95 &-3856791589528915358
@@ -46,7 +46,7 @@ Animator:
   m_GameObject: {fileID: 1782075751541447720}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 822b5afb27cebb1cd8b47f0880222aa6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0ec35f2acf797a5f3a003a15e843cf61, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1173269127, guid: 9a5bf2182e0bef82ea7e200b27543cdf, type: 3}
+  m_Sprite: {fileID: 1891640255, guid: 7f09280acc08aa49d9dcf60af1d7467e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,16 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
-  healthStatHandler: {fileID: 4292483655132072810}
-  soulCountHandler: {fileID: 0}
+  data: {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  healthStatHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
-  heightAboveTile: 0.5
+  heightAboveTile: 4.5
   gridManager: {fileID: 0}
   currentTile: {fileID: 0}
   materials: []
---- !u!114 &4292483655132072810
+  outlineMaterial: {fileID: 2100000, guid: b65a91bc2044fe311ae9869d7a394299, type: 2}
+--- !u!114 &382916880689799860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3f1db04c5ea4244a28e9e369d0734e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpText: {fileID: 3707873998590327640}
---- !u!1001 &556754908814230405
+  tmpText: {fileID: 5288682063271431294}
+--- !u!1001 &9054999641023050915
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -244,15 +244,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f43581edd96a87ca98cd6aac2afab6e7, type: 3}
---- !u!224 &3679318586682887269 stripped
+--- !u!224 &5269140455674477379 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3798343601133064160, guid: f43581edd96a87ca98cd6aac2afab6e7, type: 3}
-  m_PrefabInstance: {fileID: 556754908814230405}
+  m_PrefabInstance: {fileID: 9054999641023050915}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3707873998590327640 stripped
+--- !u!114 &5288682063271431294 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3804695483879913693, guid: f43581edd96a87ca98cd6aac2afab6e7, type: 3}
-  m_PrefabInstance: {fileID: 556754908814230405}
+  m_PrefabInstance: {fileID: 9054999641023050915}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

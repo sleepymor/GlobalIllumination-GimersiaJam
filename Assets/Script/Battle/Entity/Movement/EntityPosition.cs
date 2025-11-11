@@ -4,7 +4,6 @@ public class EntityPosition
     [Header("Entity Grid Position")]
     public int gridX;
     public int gridZ;
-    public float heightAboveTile = 3f;
     public int GridX => gridX;
     public int GridZ => gridZ;
 

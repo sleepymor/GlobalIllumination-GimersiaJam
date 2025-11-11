@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4473471216752999400}
   - component: {fileID: 5798360857735720268}
   m_Layer: 0
-  m_Name: Character 2
+  m_Name: Elf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,10 +129,11 @@ MonoBehaviour:
   healthStatHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
-  heightAboveTile: 5
+  heightAboveTile: 5.5
   gridManager: {fileID: 0}
   currentTile: {fileID: 0}
   materials: []
+  outlineMaterial: {fileID: 2100000, guid: b65a91bc2044fe311ae9869d7a394299, type: 2}
 --- !u!114 &5798360857735720268
 MonoBehaviour:
   m_ObjectHideFlags: 0
