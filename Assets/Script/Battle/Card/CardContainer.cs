@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using config;
 using DefaultNamespace;
@@ -52,6 +53,82 @@ public class CardContainer : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         InitCards();
+    }
+
+
+    // Tambahkan ini di dalam class CardContainer
+    public CardWrapper AddCard(Card cardData, GameObject cardPrefab)
+    {
+        if (cardPrefab == null)
+        {
+            Debug.LogError("[CardContainer] Card prefab tidak diset!");
+            return null;
+        }
+
+        // Spawn kartu sebagai child tapi biar posisinya bisa bebas
+        GameObject newCardObj = Instantiate(cardPrefab, transform, false);
+        newCardObj.name = cardData.name;
+
+        // Pastikan RectTransform dan wrapper ada
+        RectTransform rect = newCardObj.GetComponent<RectTransform>();
+        CardWrapper wrapper = newCardObj.GetComponent<CardWrapper>() ?? newCardObj.AddComponent<CardWrapper>();
+        CardDisplay display = newCardObj.GetComponent<CardDisplay>() ?? newCardObj.AddComponent<CardDisplay>();
+
+        // Assign data
+        display.cardData = cardData;
+
+        // Setup konfigurasi wrapper
+        AddOtherComponentsIfNeeded(wrapper);
+        wrapper.zoomConfig = zoomConfig;
+        wrapper.animationSpeedConfig = animationSpeedConfig;
+        wrapper.eventsConfig = eventsConfig;
+        wrapper.preventCardInteraction = preventCardInteraction;
+        wrapper.container = this;
+
+        // --- 💥 Spawn di luar layar kanan dulu ---
+        Vector3 startPos = new Vector3(Screen.width + 500f, transform.position.y, 0); // kanan luar layar
+        rect.position = startPos;
+
+        // Masukkan ke daftar kartu
+        cards.Add(wrapper);
+
+        // Jalankan animasi masuk ke tangan
+        StartCoroutine(AnimateCardEntry(wrapper));
+
+        return wrapper;
+    }
+
+    private IEnumerator AnimateCardEntry(CardWrapper wrapper)
+    {
+        yield return null; // tunggu 1 frame biar layout container siap
+
+        SetCardsAnchor();
+        SetCardsPosition();
+        SetCardsRotation();
+        SetCardsUILayers();
+
+        // posisi target akhir (sesuai layout)
+        Vector3 targetPos = wrapper.targetPosition;
+
+        // kita ambil posisi dunia target
+        Vector3 worldTarget = new Vector3(targetPos.x, targetPos.y, 0);
+
+        float duration = 0.5f; // durasi animasi
+        float elapsed = 0f;
+
+        Vector3 startPos = wrapper.transform.position;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            // pakai ease-out cubic
+            t = 1f - Mathf.Pow(1f - t, 3);
+            wrapper.transform.position = Vector3.Lerp(startPos, worldTarget, t);
+            yield return null;
+        }
+
+        wrapper.transform.position = worldTarget;
     }
 
     private void InitCards()
@@ -294,7 +371,7 @@ public class CardContainer : MonoBehaviour
         if (currentDraggedCard == null) return;
 
         CardDisplay cardDisplay = currentDraggedCard.GetComponent<CardDisplay>();
-        
+
         if (cardDisplay == null || cardDisplay.cardData == null)
         {
             Debug.LogWarning("[CardContainer] CardDisplay or cardData not found!");

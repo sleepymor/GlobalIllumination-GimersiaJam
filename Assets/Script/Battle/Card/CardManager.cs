@@ -2,37 +2,59 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [Header("Available Cards")]
-    public Card[] allCards;
+    [Header("References")]
+    [Tooltip("Player deck manager — sumber data kartu pemain")]
+    public PlayerDeckManager playerDeckManager;
 
-    [Header("Hand Settings")]
-    [Tooltip("Drag your 'card-container' object here")]
+    [Tooltip("Tempat menampilkan kartu di tangan (biasanya CardContainer)")]
     public Transform cardContainer;
 
-    [Tooltip("Prefab that has CardDisplay script")]
+    [Tooltip("Prefab kartu yang memiliki script CardDisplay")]
     public GameObject cardPrefab;
 
     private void Start()
     {
-        LoadHand();
+        if (playerDeckManager == null)
+        {
+            Debug.LogError("[CardManager] PlayerDeckManager belum di-assign!");
+            return;
+        }
+
+        LoadHandFromDeck();
     }
 
-    public void LoadHand()
+    public void LoadHandFromDeck()
     {
-        // Clear old cards
+        // Bersihkan tampilan lama
         foreach (Transform child in cardContainer)
         {
             Destroy(child.gameObject);
         }
 
-        // Instantiate new ones
-        foreach (Card card in allCards)
+        // Pastikan deck tidak kosong
+        if (playerDeckManager.Hand == null || playerDeckManager.Hand.Count == 0)
+        {
+            Debug.LogWarning("[CardManager] Tidak ada kartu di tangan PlayerDeckManager!");
+            return;
+        }
+
+        // Tampilkan semua kartu dari tangan
+        foreach (Card card in playerDeckManager.Hand)
         {
             if (card == null) continue;
 
             GameObject newCard = Instantiate(cardPrefab, cardContainer);
             CardDisplay display = newCard.GetComponent<CardDisplay>();
-            display.LoadCard(card);
+
+            if (display != null)
+                display.LoadCard(card);
+            else
+                Debug.LogWarning("[CardManager] CardPrefab tidak punya komponen CardDisplay!");
         }
+    }
+
+    public void RefreshHand()
+    {
+        LoadHandFromDeck();
     }
 }

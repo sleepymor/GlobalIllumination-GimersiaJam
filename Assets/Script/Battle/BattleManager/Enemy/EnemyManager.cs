@@ -36,6 +36,12 @@ public class EnemyManager : BattleEntityManager
 {
     public static EnemyManager Instance { get; private set; }
 
+    private AIAttack ai_attack;
+    private AIEquip ai_equip;
+    private AISpell ai_spell;
+    private AISummon ai_summon;
+    public GridManager grid;
+
     protected override void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,6 +52,18 @@ public class EnemyManager : BattleEntityManager
 
         Instance = this;
         base.Awake();
+
+        ai_attack = new AIAttack(this);
+        ai_equip = new AIEquip(this);
+        ai_spell = new AISpell(this);
+        ai_summon = new AISummon(this);
+
+    }
+
+    public void Start()
+    {
+        EnemyDeckManager.Instance.InitDeck();
+        EnemyDeckManager.Instance.DrawMultiple(5); // Enemy draws initial hand
     }
 
     protected override Faction GetFactionType() => Faction.ENEMY;
@@ -53,8 +71,21 @@ public class EnemyManager : BattleEntityManager
     public IEnumerator RunEnemyTurn()
     {
         Debug.Log("<color=orange>[EnemyManager]</color> Enemy turn started...");
+        EnemyDeckManager.Instance.DrawCard();
 
         RefreshTeam();
+
+        // 🧠 Coba summon dan equip sebelum mulai aksi unit
+        ai_summon.TryAutoSummon();
+        yield return new WaitForSeconds(0.5f);
+
+        ai_equip.TryAutoEquip();
+        yield return new WaitForSeconds(0.5f);
+
+        // 🧙‍♂️ Musuh coba cast spell
+        ai_spell.TryAutoSpell();
+        yield return new WaitForSeconds(0.5f);
+
 
         if (TeamList.Count == 0)
         {
@@ -67,24 +98,27 @@ public class EnemyManager : BattleEntityManager
         {
             if (!IsEnemyValid(enemy)) continue;
 
-            EntityMaster target = FindNearestTarget(enemy, PlayerManager.Instance.TeamList);
+            EntityMaster target = ai_spell.FindNearestTarget(enemy, PlayerManager.Instance.TeamList);
             if (target == null) continue;
 
-            // Move enemy toward target
-            Tile moveTile = FindClosestTileTowardsTarget(enemy, target);
-            if (moveTile != null)
+            float distToTarget = Vector3.Distance(enemy.transform.position, target.transform.position);
+            int attackRange = enemy.data.attackRange;
+
+            if (distToTarget > attackRange)
             {
-                yield return enemy.StartCoroutine(
-                    enemy.move.MoveToGridPosition(moveTile.gridX, moveTile.gridZ)
-                );
+                GridManager grid = FindObjectOfType<GridManager>();
+
+                Tile moveTile = ai_attack.FindClosestTileTowardsTarget(enemy, target, grid);
+                if (moveTile != null)
+                {
+                    yield return enemy.StartCoroutine(
+                        enemy.move.MoveToGridPosition(moveTile.gridX, moveTile.gridZ)
+                    );
+                }
             }
 
-            yield return new WaitForSeconds(0.2f); // small pause before attacking
-
-            // Attack if in range
-            TryAttackTarget(enemy, target);
-
-            // Optional: small pause after attack
+            yield return new WaitForSeconds(0.2f);
+            ai_attack.TryAttackTarget(enemy, target);
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -115,85 +149,6 @@ public class EnemyManager : BattleEntityManager
         return true;
     }
 
-    private EntityMaster FindNearestTarget(EntityMaster self, List<EntityMaster> targets)
-    {
-        EntityMaster nearest = null;
-        float bestDist = float.MaxValue;
-
-        foreach (var t in targets)
-        {
-            if (t == null || t.status.IsDead) continue;
-
-            float dist = Vector3.Distance(self.transform.position, t.transform.position);
-            if (dist < bestDist)
-            {
-                bestDist = dist;
-                nearest = t;
-            }
-        }
-
-        if (nearest != null)
-            Debug.Log($"[EnemyManager] {self.name} selected nearest target: {nearest.name}");
-        else
-            Debug.LogWarning($"[EnemyManager] {self.name} found no alive player targets!");
-
-        return nearest;
-    }
-
-    private Tile FindClosestTileTowardsTarget(EntityMaster self, EntityMaster target)
-    {
-        GridManager grid = FindObjectOfType<GridManager>();
-        if (grid == null) return null;
-
-        Tile startTile = grid.GetTileAt(self.pos.GridX, self.pos.GridZ);
-        Tile targetTile = grid.GetTileAt(target.pos.GridX, target.pos.GridZ);
-        if (startTile == null || targetTile == null) return null;
-
-        Queue<(Tile tile, int remainingRange)> queue = new Queue<(Tile, int)>();
-        HashSet<Tile> visited = new HashSet<Tile>();
-        List<Tile> reachable = new List<Tile>();
-
-        queue.Enqueue((startTile, self.move.MoveRange));
-        visited.Add(startTile);
-
-        while (queue.Count > 0)
-        {
-            var (current, rangeLeft) = queue.Dequeue();
-            if (rangeLeft <= 0) continue;
-
-            foreach (Tile neighbor in grid.GetNeighbors(current))
-            {
-                if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied) continue;
-
-                int newRange = rangeLeft - neighbor.tileMove.moveCost;
-                if (newRange < 0) continue;
-
-                visited.Add(neighbor);
-                queue.Enqueue((neighbor, newRange));
-                reachable.Add(neighbor);
-            }
-        }
-
-        // Pick tile closest to target
-        return reachable
-            .OrderBy(t => Vector3.Distance(t.transform.position, targetTile.transform.position))
-            .FirstOrDefault();
-    }
-
-    private void TryAttackTarget(EntityMaster attacker, EntityMaster target)
-    {
-        if (attacker.attack.CanAttack(target))
-        {
-            attacker.attack.Attack(target);
-            attacker.attack.SetHadAttacking(true);
-            Debug.Log($"[EnemyManager] {attacker.name} attacked {target.name}");
-        }
-        else
-        {
-            Debug.Log($"[EnemyManager] {attacker.name} could not attack {target.name} (out of range)");
-        }
-    }
-
     public override void EndTurn()
     {
         if (TurnManager.GetCurrentTurn() != Faction.ENEMY)
@@ -206,4 +161,6 @@ public class EnemyManager : BattleEntityManager
         TurnManager.PlayerTurn();
         PlayerManager.Instance.ClearAllMoveAndAttackAreas();
     }
+
+
 }

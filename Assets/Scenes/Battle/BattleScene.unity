@@ -735,6 +735,8 @@ GameObject:
   - component: {fileID: 1859316062}
   - component: {fileID: 1859316060}
   - component: {fileID: 1859316061}
+  - component: {fileID: 1859316065}
+  - component: {fileID: 1859316064}
   m_Layer: 0
   m_Name: ====== Manager ======
   m_TagString: Untagged
@@ -844,7 +846,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52c1e94d7a16ea9982253a84eb6ba75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pendingSpellData: {fileID: 0}
   targetTile: {fileID: 0}
+--- !u!114 &1859316064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859316055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029262492e35284c4b3dc7d02fbb5848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckData: {fileID: 11400000, guid: 3a664948bd93164ff98a089d82575db7, type: 2}
+--- !u!114 &1859316065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859316055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786fc8fc25b2112529646b6e0e85d0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckData: {fileID: 11400000, guid: 2172250ebbe3523bda42886923f73cc7, type: 2}
+  handContainer: {fileID: 1967260163}
+  cardPrefab: {fileID: 4738557528315137124, guid: 21491b20513119648a6ef039188c9f25, type: 3}
 --- !u!4 &1923235686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 383497455901963607, guid: d8be91f7480da2021b7d4cfe0c2b48bb, type: 3}
@@ -954,9 +985,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4873585924876405677, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: playerDeckManager
+      value: 
+      objectReference: {fileID: 1859316065}
+    - target: {fileID: 6524999695669508168, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: cardPlayConfig.playArea
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7742288357273260206, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
       propertyPath: m_Name
-      value: ui
+      value: HandCard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -969,6 +1008,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3290207104788731625, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
   m_PrefabInstance: {fileID: 1967260161}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967260163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6524999695669508168, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+  m_PrefabInstance: {fileID: 1967260161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5382299738ef9514c9079bf7778b5de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064165067
 GameObject:
   m_ObjectHideFlags: 0

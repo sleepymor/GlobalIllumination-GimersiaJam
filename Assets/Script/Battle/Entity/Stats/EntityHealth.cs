@@ -34,7 +34,7 @@ public class EntityHealth
     {
         _e.data.currentHP += hp;
 
-        // if (_e.data.currentHP > _e.data.health) _e.data.currentHP = _e.data.health;
+        if (_e.data.currentHP > _e.data.health) _e.data.currentHP = _e.data.health;
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
     }
 
@@ -60,7 +60,6 @@ public class EntityHealth
         // Apply damage
         _e.data.currentHP -= finalDamage;
         _e.healthStatHandler.SetHealth(_e.data.currentHP);
-        _e.summon.ShowSummonArea();
 
         // Check for death
         if (_e.data.currentHP <= 0)
