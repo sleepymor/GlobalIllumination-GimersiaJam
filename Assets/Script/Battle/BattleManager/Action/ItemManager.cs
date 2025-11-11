@@ -47,7 +47,7 @@ public class ItemManager : MonoBehaviour
 
         foreach (Tile tile in grid.GetAllTiles())
         {
-            tile.ClearActionArea();
+            tile.tileAction.ClearActionArea();
         }
 
         Debug.Log("[EntitySummon] Semua area summon disembunyikan.");

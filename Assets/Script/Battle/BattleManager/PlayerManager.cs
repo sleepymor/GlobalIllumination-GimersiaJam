@@ -65,8 +65,8 @@ public class PlayerManager : BattleEntityManager
         Tile currentTile = entity.currentTile;
         if (currentTile != null)
         {
-            currentTile.ShowMoveAreaBFS(entity.move.MoveRange);
-            currentTile.ShowAttackAreaBFS(entity.data.attackRange);
+            currentTile.tileMove.ShowMoveAreaBFS(entity.move.MoveRange);
+            currentTile.tileAttack.ShowAttackAreaBFS(entity.data.attackRange);
         }
     }
 
@@ -98,7 +98,7 @@ public class PlayerManager : BattleEntityManager
         entity.move.SetHadMove(true);
 
         // Show attack area after moving
-        targetTile.ShowAttackAreaBFS(entity.data.attackRange);
+        targetTile.tileAttack.ShowAttackAreaBFS(entity.data.attackRange);
 
         // Keep the entity selected so player can attack
         SelectedEntity = entity;
@@ -114,7 +114,7 @@ public class PlayerManager : BattleEntityManager
         foreach (var tile in FindObjectsOfType<Tile>())
         {
             if (tile.isMoveArea)
-                tile.ClearMoveArea();
+                tile.tileMove.ClearMoveArea();
         }
     }
 
@@ -129,12 +129,13 @@ public class PlayerManager : BattleEntityManager
         TurnManager.EnemyTurn();
     }
 
-    private void ClearAllMoveAndAttackAreas()
+    public void ClearAllMoveAndAttackAreas()
     {
         foreach (var tile in FindObjectsOfType<Tile>())
         {
-            tile.ClearMoveArea();
-            tile.ClearAttackArea();
+            tile.tileMove.ClearMoveArea();
+            tile.tileAttack.ClearAttackArea();
+            tile.tileAction.ClearActionArea();
         }
     }
 
@@ -142,7 +143,7 @@ public class PlayerManager : BattleEntityManager
     {
         foreach (var tile in FindObjectsOfType<Tile>())
         {
-            tile.ClearAttackArea();
+            tile.tileAttack.ClearAttackArea();
         }
     }
 }

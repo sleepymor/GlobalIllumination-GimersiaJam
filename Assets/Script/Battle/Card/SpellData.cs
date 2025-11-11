@@ -9,7 +9,9 @@ public class SpellData : Card
     [Header("Stats")]
     public DamageType DamageType;
     public int amount;
-    public int spellRange;
+    // public int spellRange;
+    public int spellDuration;
+    public int aoeRange;
     public int summonCost;
 
     [Header("Visual")]

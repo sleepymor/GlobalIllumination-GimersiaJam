@@ -1,17 +1,31 @@
 using UnityEngine;
 
-public class EntityItem
+public class EntitySpell
 {
     private EntityMaster _e;
 
-    public EntityItem(EntityMaster e)
+    public EntitySpell(EntityMaster e)
     {
         _e = e;
     }
 
-    public void ShowEquipArea()
+    public void ShowActionArea(SpellData data)
     {
-        if (_e.data.faction != Faction.PLAYER) return;
+        // if (data.DamageType == DamageType.AOE)
+        // {
+        //     ShowAOEArea(data);
+        //     return;
+        // }
+
+        // else
+        // {
+            ShowAttachArea();
+        // }
+    }
+
+    public void ShowAttachArea()
+    {
+        if (_e.data.faction != Faction.ENEMY) return;
         if (TurnManager.GetCurrentTurn() != Faction.PLAYER) return;
 
         int x = _e.pos.GridX;
@@ -38,7 +52,7 @@ public class EntityItem
         Debug.Log($"[EntityItem] Menampilkan area equip");
     }
 
-    public void HideEquipArea()
+    public void HideActionArea()
     {
         GridManager grid = GridManager.Instance;
         if (grid == null)
@@ -54,5 +68,5 @@ public class EntityItem
 
         Debug.Log("[EntityItem] Semua area summon disembunyikan.");
     }
-    
+
 }
