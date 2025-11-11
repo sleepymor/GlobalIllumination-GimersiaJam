@@ -95,6 +95,7 @@ public class SpellManager : MonoBehaviour
 
             return;
         }
+
         DamageType spellType = pendingSpellData.DamageType;
         EntityMaster targetEntity = targetTile.GetOccupyingEntity();
 

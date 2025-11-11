@@ -30,7 +30,7 @@ public class SummonManager : MonoBehaviour
         }
 
         currentSummoner = summoner;
-        pendingSummonData = (UnitData) data;
+        pendingSummonData = (UnitData)data;
 
         new EntitySummon(summoner).ShowSummonArea();
     }
@@ -74,37 +74,43 @@ public class SummonManager : MonoBehaviour
             return;
         }
 
+        if (targetTile.isTileHovered)
+        {
+            GameObject newUnit = GameObject.Instantiate(
+          pendingSummonData.prefab,
+          targetTile.transform.position,
+          Quaternion.identity
+      );
+
+            EntityMaster newEntity = newUnit.GetComponent<EntityMaster>();
+
+            // 2️⃣ Hubungkan tile & posisi grid
+            int x = targetTile.gridX;
+            int z = targetTile.gridZ;
+            newEntity.pos.SetPos(x, z);
+            newEntity.currentTile = targetTile;
+            targetTile.SetOccupyingEntity(newEntity);
+
+            // 3️⃣ Tambahkan ke tim player
+            PlayerManager.Instance.AddEntity(newEntity);
+            newEntity.data.faction = currentSummoner.data.faction;
+            newEntity.data.canSummon = false;
+            // 4️⃣ Jalankan animasi summon
+            newEntity.StartCoroutine(newEntity.anim.SummonAnim());
+
+            currentSummoner.soul.ReduceSoul(pendingSummonData.summonCost);
+            Destroy(cardWrapper.gameObject);
+        }
+
         // 1️⃣ Buat unit baru
-        GameObject newUnit = GameObject.Instantiate(
-            pendingSummonData.prefab,
-            targetTile.transform.position,
-            Quaternion.identity
-        );
 
-        EntityMaster newEntity = newUnit.GetComponent<EntityMaster>();
-
-        // 2️⃣ Hubungkan tile & posisi grid
-        int x = targetTile.gridX;
-        int z = targetTile.gridZ;
-        newEntity.pos.SetPos(x, z);
-        newEntity.currentTile = targetTile;
-        targetTile.SetOccupyingEntity(newEntity);
-
-        // 3️⃣ Tambahkan ke tim player
-        PlayerManager.Instance.AddEntity(newEntity);
-        newEntity.data.faction = currentSummoner.data.faction;
-        // 4️⃣ Jalankan animasi summon
-        newEntity.StartCoroutine(newEntity.anim.SummonAnim());
 
         // 5️⃣ Bersihkan area summon
         HideSummonArea();
-
-        currentSummoner.soul.ReduceSoul(pendingSummonData.summonCost);
-        Destroy(cardWrapper.gameObject);
         pendingSummonData = null;
 
     }
-
+    
     private IEnumerator BlinkCardRed(CardWrapper card, float duration = 0.3f)
     {
         if (card == null) yield break;

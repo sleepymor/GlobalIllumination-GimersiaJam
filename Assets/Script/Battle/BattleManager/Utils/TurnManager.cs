@@ -48,6 +48,8 @@ public class TurnManager : MonoBehaviour
         _currentTurn = Faction.PLAYER;
         EnemyManager.Instance.ResetEntityMoves();
         SoulCountManager.Instance.SetSoul(PlayerManager.Instance.GetSummoner().soul.GetSoulCount());
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+        PlayerDeckManager.Instance.DrawCard();
     }
 
     public static void EnemyTurn()
@@ -57,12 +59,12 @@ public class TurnManager : MonoBehaviour
         {
             i.status.StartTurnEffect();
         }
-        
+
         Debug.Log("Change to enemy turn");
         _currentTurn = Faction.ENEMY;
         Instance.StartCoroutine(EnemyManager.Instance.RunEnemyTurn());
         PlayerManager.Instance.ResetEntityMoves();
-
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
         if (EnemyManager.Instance.GetSummoner() != null) SoulCountManager.Instance.SetSoul(EnemyManager.Instance.GetSummoner().soul.GetSoulCount());
     }
 

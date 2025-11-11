@@ -17,6 +17,12 @@ public class PlayerManager : BattleEntityManager
         base.Awake();
     }
 
+    public void Start()
+    {
+        PlayerDeckManager.Instance.InitDeck();
+        PlayerDeckManager.Instance.DrawMultiple(5);
+    }
+
     protected override Faction GetFactionType() => Faction.PLAYER;
 
     public void TileClicked(Tile clickedTile)

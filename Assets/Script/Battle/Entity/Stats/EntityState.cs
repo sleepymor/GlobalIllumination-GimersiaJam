@@ -69,7 +69,6 @@ public class EntityState
 
     public void StartTurnEffect()
     {
-        Debug.Log("doeassdnwo");
         if (stunDur > 0)
         {
             stunDur--;
