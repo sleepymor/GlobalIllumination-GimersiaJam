@@ -27,6 +27,8 @@
  * - Effects durations decrement automatically each turn.
  */
 
+using UnityEngine;
+
 public class EntityState
 {
     private bool isDead = false;
@@ -42,18 +44,19 @@ public class EntityState
     {
         _e = e;
     }
-    public void SetStun(int stunDur)
+    public void SetStun(int stunDmg, int stunDur)
     {
+        _e.health.TakeDamage(stunDmg);
         this.stunDur = stunDur;
     }
 
-    public void SetPoison(int poisonDur, int poisonDmg)
+    public void SetPoison(int poisonDmg, int poisonDur)
     {
         this.poisonDur = poisonDur;
         this.poisonDmg = poisonDmg;
     }
 
-    public void SetRegen(int regenDur, int regenAmount)
+    public void SetRegen(int regenAmount, int regenDur)
     {
         this.regenDur = regenDur;
         this.regenAmount = regenAmount;
@@ -66,6 +69,7 @@ public class EntityState
 
     public void StartTurnEffect()
     {
+        Debug.Log("doeassdnwo");
         if (stunDur > 0)
         {
             stunDur--;

@@ -34,7 +34,7 @@ public class EntitySummon
         PlayerManager.Instance.ClearAllMoveAreas();
 
         int summonRange = _e.data.summonRange;
-        startTile.ShowActionAreaBFS(summonRange);
+        startTile.tileAction.ShowActionAreaBFS(summonRange);
 
         Debug.Log($"[EntitySummon] Menampilkan area summon dari tile ({x}, {z}) dengan jangkauan {summonRange}.");
     }
@@ -50,15 +50,10 @@ public class EntitySummon
 
         foreach (Tile tile in grid.GetAllTiles())
         {
-            tile.ClearActionArea();
+            tile.tileAction.ClearActionArea();
         }
 
         Debug.Log("[EntitySummon] Semua area summon disembunyikan.");
     }
 
-
-    public void Summon()
-    {
-        _e.StartCoroutine(_e.anim.SummonAnim());
-    }
 }

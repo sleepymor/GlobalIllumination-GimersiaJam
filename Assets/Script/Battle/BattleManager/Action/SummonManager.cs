@@ -92,7 +92,7 @@ public class SummonManager : MonoBehaviour
 
         // 3️⃣ Tambahkan ke tim player
         PlayerManager.Instance.AddEntity(newEntity);
-
+        newEntity.data.faction = currentSummoner.data.faction;
         // 4️⃣ Jalankan animasi summon
         newEntity.StartCoroutine(newEntity.anim.SummonAnim());
 
@@ -103,7 +103,6 @@ public class SummonManager : MonoBehaviour
         Destroy(cardWrapper.gameObject);
         pendingSummonData = null;
 
-        Debug.Log($"[SummonManager] Summoned {pendingSummonData.unitName} di ({targetTile.gridX},{targetTile.gridZ}).");
     }
 
     private IEnumerator BlinkCardRed(CardWrapper card, float duration = 0.3f)

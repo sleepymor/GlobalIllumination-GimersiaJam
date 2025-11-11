@@ -11,7 +11,9 @@ public class UnitDataEditor : Editor
         // Draw default fields up to "canSummon"
         data.unitName = EditorGUILayout.TextField("Unit Name", data.unitName);
         data.health = EditorGUILayout.IntField("Health", data.health);
+        data.moveRange = EditorGUILayout.IntField("Move Range", data.moveRange);
         data.attack = EditorGUILayout.IntField("Attack", data.attack);
+        data.attackRange = EditorGUILayout.IntField("Attack Range", data.attackRange);
         // ... draw other fields as needed
         data.canSummon = EditorGUILayout.Toggle("Can Summon", data.canSummon);
 

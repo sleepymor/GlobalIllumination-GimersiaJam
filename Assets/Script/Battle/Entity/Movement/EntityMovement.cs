@@ -158,7 +158,7 @@ public class EntityMovement
                 if (!neighbor.tileData.isMoveArea) // or neighbor.isWalkable if you use that
                     continue;
 
-                int newCost = costSoFar + neighbor.moveCost;
+                int newCost = costSoFar + neighbor.tileMove.moveCost;
                 if (newCost > _e.data.moveRange)
                     continue;
 

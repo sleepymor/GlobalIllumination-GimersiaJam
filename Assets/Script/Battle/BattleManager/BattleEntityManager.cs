@@ -97,8 +97,8 @@ public abstract class BattleEntityManager : MonoBehaviour
 
         foreach (Tile t in grid.GetAllTiles())
         {
-            t.ClearMoveArea();
-            t.ClearAttackArea();
+            t.tileMove.ClearMoveArea();
+            t.tileAttack.ClearAttackArea();
         }
     }
 
@@ -108,7 +108,7 @@ public abstract class BattleEntityManager : MonoBehaviour
         if (grid == null) return;
 
         foreach (Tile t in grid.GetAllTiles())
-            t.ClearAttackArea();
+            t.tileAttack.ClearAttackArea();
 
         Debug.Log($"[{GetType().Name}] Cleared all attack area highlights.");
     }

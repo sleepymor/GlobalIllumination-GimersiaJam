@@ -19,11 +19,14 @@ MonoBehaviour:
   critDmg: 0
   defense: 0
   moveRange: 2
-  attackRange: 4
+  attackRange: 1
   critChance: 0
+  summonCost: 7
   canSummon: 0
   summonRange: 0
-  summonCost: 7
+  maxSoul: 0
+  soulRecovery: 0
+  currentSoul: 0
   faction: 2
   cardSprite: {fileID: 522850069, guid: 3f75e49ca81235e4f8a97673f3aab22c, type: 3}
   worldSprite: {fileID: 0}

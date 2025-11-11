@@ -40,7 +40,11 @@ public class TurnManager : MonoBehaviour
     }
     public static void PlayerTurn()
     {
-
+        List<EntityMaster> unit = PlayerManager.Instance.TeamList;
+        foreach (var i in unit)
+        {
+            i.status.StartTurnEffect();
+        }
         _currentTurn = Faction.PLAYER;
         EnemyManager.Instance.ResetEntityMoves();
         SoulCountManager.Instance.SetSoul(PlayerManager.Instance.GetSummoner().soul.GetSoulCount());
@@ -48,11 +52,18 @@ public class TurnManager : MonoBehaviour
 
     public static void EnemyTurn()
     {
+        List<EntityMaster> unit = EnemyManager.Instance.TeamList;
+        foreach (var i in unit)
+        {
+            i.status.StartTurnEffect();
+        }
+        
         Debug.Log("Change to enemy turn");
         _currentTurn = Faction.ENEMY;
         Instance.StartCoroutine(EnemyManager.Instance.RunEnemyTurn());
         PlayerManager.Instance.ResetEntityMoves();
-        SoulCountManager.Instance.SetSoul(EnemyManager.Instance.GetSummoner().soul.GetSoulCount());
+
+        if (EnemyManager.Instance.GetSummoner() != null) SoulCountManager.Instance.SetSoul(EnemyManager.Instance.GetSummoner().soul.GetSoulCount());
     }
 
     public static void AllyTurn()
