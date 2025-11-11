@@ -21,9 +21,12 @@ MonoBehaviour:
   moveRange: 3
   attackRange: 5
   critChance: 0
+  summonCost: 4
   canSummon: 0
   summonRange: 0
-  summonCost: 4
+  maxSoul: 0
+  soulRecovery: 0
+  currentSoul: 0
   faction: 0
   cardSprite: {fileID: -205228393, guid: 70a29dea21b9cf946a67a21288b20e34, type: 3}
   worldSprite: {fileID: 0}
