@@ -19,12 +19,12 @@ MonoBehaviour:
   critDmg: 0
   defense: 0
   moveRange: 2
-  attackRange: 1
+  attackRange: 2
   critChance: 0
   summonCost: 7
-  canSummon: 0
-  summonRange: 0
-  maxSoul: 0
+  canSummon: 1
+  summonRange: 4
+  maxSoul: 10
   soulRecovery: 0
   currentSoul: 0
   faction: 2

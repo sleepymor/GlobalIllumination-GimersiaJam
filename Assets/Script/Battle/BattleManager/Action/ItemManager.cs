@@ -88,25 +88,29 @@ public class ItemManager : MonoBehaviour
 
         BuffType buffType = pendingItemData.BuffType;
 
-        switch (buffType)
+        if (targetTile.isTileHovered)
         {
-            case BuffType.Heal:
-                targetEntity.health.Heal(pendingItemData.amount);
-                break;
-            case BuffType.Attack:
-                targetEntity.equip.AttackBuff(pendingItemData.amount);
-                break;
-            case BuffType.Defense:
-                targetEntity.equip.DefenseBuff(pendingItemData.amount);
-                break;
-            case BuffType.Crit:
-                targetEntity.equip.CritBuff(pendingItemData.amount);
-                break;
+            switch (buffType)
+            {
+                case BuffType.Heal:
+                    targetEntity.health.Heal(pendingItemData.amount);
+                    break;
+                case BuffType.Attack:
+                    targetEntity.equip.AttackBuff(pendingItemData.amount);
+                    break;
+                case BuffType.Defense:
+                    targetEntity.equip.DefenseBuff(pendingItemData.amount);
+                    break;
+                case BuffType.Crit:
+                    targetEntity.equip.CritBuff(pendingItemData.amount);
+                    break;
+            }
+            currentSummoner.soul.ReduceSoul(pendingItemData.summonCost);
+            Destroy(cardWrapper.gameObject);
         }
 
         HideEquipArea();
-        currentSummoner.soul.ReduceSoul(pendingItemData.summonCost);
-        Destroy(cardWrapper.gameObject);
+
         pendingItemData = null;
     }
 
