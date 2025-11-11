@@ -277,6 +277,14 @@ public class CardContainer : MonoBehaviour
         {
             List<EntityMaster> unit = PlayerManager.Instance.TeamList;
             ItemManager.Instance.ShowEquipArea(summoner, unit, cardDisplay.cardData);
+            return;
+        }
+
+        if (data is SpellData spellData)
+        {
+            List<EntityMaster> unit = EnemyManager.Instance.TeamList;
+            SpellManager.Instance.ShowActionArea(summoner, unit, cardDisplay.cardData);
+            return;
         }
 
     }
@@ -286,6 +294,7 @@ public class CardContainer : MonoBehaviour
         if (currentDraggedCard == null) return;
 
         CardDisplay cardDisplay = currentDraggedCard.GetComponent<CardDisplay>();
+        
         if (cardDisplay == null || cardDisplay.cardData == null)
         {
             Debug.LogWarning("[CardContainer] CardDisplay or cardData not found!");
@@ -302,14 +311,13 @@ public class CardContainer : MonoBehaviour
         }
         else if (data is SpellData spellData)
         {
-            // SpellManager.Instance.CastSpell(spellData);
-            // Destroy(currentDraggedCard.gameObject);
+            SpellManager.Instance.ShowActionArea(PlayerManager.Instance.GetSummoner(), EnemyManager.Instance.TeamList, spellData);
+            SpellManager.Instance.ActivateAt(currentDraggedCard);
         }
         else if (data is ItemData itemData)
         {
             ItemManager.Instance.ShowEquipArea(PlayerManager.Instance.GetSummoner(), PlayerManager.Instance.TeamList, itemData);
             ItemManager.Instance.EquipAt(currentDraggedCard);
-
         }
         else
         {

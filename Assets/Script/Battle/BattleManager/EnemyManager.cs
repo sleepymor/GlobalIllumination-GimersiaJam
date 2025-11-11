@@ -165,7 +165,7 @@ public class EnemyManager : BattleEntityManager
             {
                 if (neighbor == null || visited.Contains(neighbor) || neighbor.isOccupied) continue;
 
-                int newRange = rangeLeft - neighbor.moveCost;
+                int newRange = rangeLeft - neighbor.tileMove.moveCost;
                 if (newRange < 0) continue;
 
                 visited.Add(neighbor);
@@ -204,5 +204,6 @@ public class EnemyManager : BattleEntityManager
 
         Debug.Log("<color=orange>[EnemyManager]</color> Ending enemy turn, switching to player.");
         TurnManager.PlayerTurn();
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
     }
 }
