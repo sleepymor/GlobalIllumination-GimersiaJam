@@ -18,7 +18,7 @@ public class SoulHelper
         if (!_e.data.canSummon) return;
 
         _e.data.currentSoul = value;
-        SoulCountManager.Instance.SetSoul(value);
+        SoulCountManager.Instance.SetSoul(value, _e.data.maxSoul);
     }
 
     public void IncreaseSoul(int amount)

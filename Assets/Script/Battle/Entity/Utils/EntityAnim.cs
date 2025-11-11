@@ -28,7 +28,7 @@ public class EntityAnim
 
         Debug.Log($"[EntityMaster] Summoning at grid ({_e.pos.GridX},{_e.pos.GridZ})");
 
-        Vector3 tileCenter = _e.currentTile.transform.position + Vector3.up * _e.pos.heightAboveTile;
+        Vector3 tileCenter = _e.currentTile.transform.position + Vector3.up * _e.heightAboveTile;
         Vector3 startPos = tileCenter - Vector3.up * 2f;
         Vector3 targetPos = tileCenter;
 

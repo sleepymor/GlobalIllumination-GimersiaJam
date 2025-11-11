@@ -126,7 +126,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         Faction currentTurn = TurnManager.GetCurrentTurn();
         if (currentTurn != Faction.PLAYER) return;
 
-        // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
             if (occupyingEntity.data.faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
@@ -137,7 +136,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 playerManager.SetSelectedEntity(occupyingEntity);
                 tileMove.ShowMoveAreaBFS(occupyingEntity.move.MoveRange);
 
-                tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
+                if (!occupyingEntity.attack.IsAlreadyAttacking) tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
 
                 return;
             }
