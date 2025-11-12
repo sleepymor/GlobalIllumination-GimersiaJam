@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e15e2a684938f44eb1e4fd53cd2928a, type: 3}
   m_Name: Psyrock
   m_EditorClassIdentifier: 
-  unitName: 
+  unitName: Payrock
   health: 0
   attack: 0
   currentHP: 0
@@ -28,6 +28,6 @@ MonoBehaviour:
   soulRecovery: 0
   currentSoul: 0
   faction: 0
-  cardSprite: {fileID: 0}
+  cardSprite: {fileID: 330344196, guid: c8eb845b04c26dd43af6a71e35ba99a5, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

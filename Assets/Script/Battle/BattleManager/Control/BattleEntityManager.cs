@@ -66,7 +66,7 @@ public abstract class BattleEntityManager : MonoBehaviour
         if (entity != null && entity.data.faction == GetFactionType() && !TeamList.Contains(entity))
         {
             TeamList.Add(entity);
-            if (entity.data.canSummon)
+            if (entity.data.canSummon && _summoner == null)
             {
                 _summoner = entity;
                 Debug.Log($"[{GetType().Name}] Summoner Added: {_summoner.data.unitName}");
@@ -85,7 +85,8 @@ public abstract class BattleEntityManager : MonoBehaviour
                 if (entity.data.faction == Faction.PLAYER)
                 {
                     TurnManager.PlayerLose();
-                } else if (entity.data.faction == Faction.ENEMY)
+                }
+                else if (entity.data.faction == Faction.ENEMY)
                 {
                     TurnManager.PlayerWin();
                 }

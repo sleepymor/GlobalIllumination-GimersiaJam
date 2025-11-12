@@ -38,6 +38,15 @@ public class TurnManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        SoulCountManager.Instance.SetSoul(PlayerManager.Instance.GetSummoner().soul.GetSoulCount(), PlayerManager.Instance.GetSummoner().data.maxSoul);
+    }
     public static void PlayerTurn()
     {
         List<EntityMaster> unit = PlayerManager.Instance.TeamList;
