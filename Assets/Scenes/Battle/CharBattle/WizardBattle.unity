@@ -1041,6 +1041,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2064165068}
     m_Modifications:
+    - target: {fileID: 531912803565733337, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 531912803565733337, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3290207104788731625, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1129,9 +1137,29 @@ PrefabInstance:
       propertyPath: cardPlayConfig.playArea
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7624654125033274821, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624654125033274821, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624654125033274821, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7742288357273260206, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
       propertyPath: m_Name
       value: HandCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336956634866858774, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336956634866858774, guid: 90c14e109325b3a8f866bd553ba6407f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
