@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: ChestMimic
   m_EditorClassIdentifier: 
   unitName: Chest Mimic
-  attack: 20
   health: 70
-  crit: 40
+  attack: 20
+  currentHP: 0
+  critDmg: 0
+  defense: 0
   moveRange: 3
   attackRange: 1
+  critChance: 0
   summonCost: 1
+  canSummon: 0
+  summonRange: 0
+  maxSoul: 0
+  soulRecovery: 0
+  currentSoul: 0
+  faction: 0
   cardSprite: {fileID: 395245203, guid: b4e7b8bb6472c9541b7a4c09def33df8, type: 3}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1782075751541447720, guid: ec14b8d95f03bd2a98e9aa294aee80fa, type: 3}

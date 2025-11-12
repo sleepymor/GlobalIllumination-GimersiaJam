@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4473471216752999400}
   - component: {fileID: 382916880689799860}
   m_Layer: 0
-  m_Name: BalorEye
+  m_Name: Payrock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,12 +102,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -354456954, guid: 9042fccfcc143da609abe2110e9c9bd2, type: 3}
+  m_Sprite: {fileID: 1144240330, guid: 1d9f3078e4815bd42bce8923c8d2fb79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.48, y: 0.4}
+  m_Size: {x: 1.92, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 7134dda47bbcebe75a0859f543ad8103, type: 2}
+  data: {fileID: 11400000, guid: 38ca49fdb0648eb40afa89fff8fbc576, type: 2}
   charStatHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
