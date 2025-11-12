@@ -68,10 +68,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c1e764b96c0774440914885cf853e9df, type: 3}
   - trackName: PirateBattle
     clip: {fileID: 8300000, guid: 5728a82a55a924c4ab1d91204e8d6a41, type: 3}
-  - trackName: PirateBattle
+  - trackName: ElfBattle
     clip: {fileID: 8300000, guid: 3ee88d384c6af89489414e737f3e37a4, type: 3}
   - trackName: Level_1
     clip: {fileID: 8300000, guid: f34fcc00b6d49fd46ba786ead816bd7b, type: 3}
+  - trackName: WizardBattle
+    clip: {fileID: 8300000, guid: b4c1d206741703d4a8a80dfa7963b12b, type: 3}
 --- !u!114 &5345434853116968258
 MonoBehaviour:
   m_ObjectHideFlags: 0
