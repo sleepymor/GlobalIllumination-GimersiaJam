@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Psyrock
   m_EditorClassIdentifier: 
   unitName: Payrock
-  health: 0
-  attack: 0
+  health: 140
+  attack: 35
   currentHP: 0
   critDmg: 0
   defense: 0
-  moveRange: 0
-  attackRange: 0
+  moveRange: 1
+  attackRange: 2
   critChance: 0
-  summonCost: 0
+  summonCost: 3
   canSummon: 0
   summonRange: 0
   maxSoul: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   currentSoul: 0
   faction: 0
   cardSprite: {fileID: 330344196, guid: c8eb845b04c26dd43af6a71e35ba99a5, type: 3}
-  worldSprite: {fileID: 0}
+  worldSprite: {fileID: 1144240330, guid: 1d9f3078e4815bd42bce8923c8d2fb79, type: 3}
   prefab: {fileID: 0}
