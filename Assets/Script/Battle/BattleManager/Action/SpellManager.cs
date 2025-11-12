@@ -97,6 +97,16 @@ public class SpellManager : MonoBehaviour
         DamageType spellType = pendingSpellData.DamageType;
         EntityMaster targetEntity = targetTile.GetOccupyingEntity();
 
+        if (spellType == DamageType.AOE && targetTile.isTileHovered)
+        {
+            targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
+            Destroy(cardWrapper.gameObject);
+            currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
+            HideActionArea();
+            pendingSpellData = null;
+            return;
+        }
+
         if (targetTile.GetOccupyingEntity().data.faction == Faction.ENEMY)
         {
             switch (spellType)
@@ -115,12 +125,6 @@ public class SpellManager : MonoBehaviour
 
         }
 
-        if (spellType == DamageType.AOE && targetTile.isTileHovered)
-        {
-            targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
-            Destroy(cardWrapper.gameObject);
-            currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
-        }
 
 
         HideActionArea();

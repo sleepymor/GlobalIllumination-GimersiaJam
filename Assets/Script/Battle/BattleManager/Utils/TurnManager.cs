@@ -87,7 +87,8 @@ public class TurnManager : MonoBehaviour
 
     public static void PlayerWin()
     {
-        LoadScene("Level_1");
+        PlayerPrefs.SetInt(BattleKey.Instance.key, 1);
+        SceneController.instance.LoadPreviousScene();
     }
 
     public static void PlayerLose()

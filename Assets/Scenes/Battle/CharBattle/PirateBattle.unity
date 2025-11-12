@@ -730,6 +730,7 @@ GameObject:
   - component: {fileID: 1859316061}
   - component: {fileID: 1859316065}
   - component: {fileID: 1859316064}
+  - component: {fileID: 1859316066}
   m_Layer: 0
   m_Name: ====== Manager ======
   m_TagString: Untagged
@@ -870,6 +871,19 @@ MonoBehaviour:
   deckData: {fileID: 11400000, guid: 2172250ebbe3523bda42886923f73cc7, type: 2}
   handContainer: {fileID: 1967260163}
   cardPrefab: {fileID: 4738557528315137124, guid: 21491b20513119648a6ef039188c9f25, type: 3}
+--- !u!114 &1859316066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859316055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a218762d1c31bef16a5ab948f285d301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Pirate
 --- !u!1001 &1892015947
 PrefabInstance:
   m_ObjectHideFlags: 0

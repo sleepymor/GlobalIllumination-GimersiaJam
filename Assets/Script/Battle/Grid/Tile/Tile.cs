@@ -74,7 +74,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         tileAttack = new TileAttackUtils(this);
         tileAction = new TileActionUtils(this);
 
-        grid = FindObjectOfType<GridManager>();
+        grid = FindFirstObjectByType<GridManager>();
     }
 
     public void Init(bool isOffset)

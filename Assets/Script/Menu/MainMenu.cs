@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject kontrolPanel;
     [SerializeField] private GameObject keluarPanel;
+    [SerializeField] private List<string> battleList = new List<string>();
 
     private int sceneToContinue;
 
@@ -58,6 +60,13 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
+        PlayerPrefs.SetFloat("PlayerX", -45.74f);
+        PlayerPrefs.SetFloat("PlayerY", 0.948f);
+        PlayerPrefs.SetFloat("PlayerZ", 1.31f);
+        foreach (var i in battleList)
+        {
+            PlayerPrefs.SetInt(i, 0);
+        }
         SceneManager.LoadScene("Level_1");
     }
 
