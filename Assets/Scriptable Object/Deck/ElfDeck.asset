@@ -13,7 +13,23 @@ MonoBehaviour:
   m_Name: ElfDeck
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
+  - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
+  - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
+  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
+  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
+  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
+  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
