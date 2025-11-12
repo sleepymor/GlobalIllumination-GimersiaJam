@@ -95,11 +95,10 @@ public class TileAttackUtils
         {
             var (currentTile, rangeLeft) = queue.Dequeue();
 
-            if (currentTile != _t)
-            {
-                currentTile.tileAttack.ActivateAttackAreaObject();
-                _previousAOETiles.Add(currentTile);
-            }
+
+            currentTile.tileAction.ActivateActionAreaObject();
+            _previousAOETiles.Add(currentTile);
+
 
             if (rangeLeft <= 0)
                 continue;
@@ -122,7 +121,7 @@ public class TileAttackUtils
     public void ClearAOEArea()
     {
         foreach (var tile in _previousAOETiles)
-            tile.tileAttack.ClearAttackArea();
+            tile.tileAction.ClearActionArea();
 
         _previousAOETiles.Clear();
     }

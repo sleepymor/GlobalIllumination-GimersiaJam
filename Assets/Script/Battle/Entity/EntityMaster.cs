@@ -7,7 +7,7 @@ public class EntityMaster : MonoBehaviour
     [Header("Entity Data")]
     public UnitData data;
 
-    [HideInInspector] public HealthStatHandler healthStatHandler;
+    [HideInInspector] public CharStatHandler charStatHandler;
     [SerializeField] private int spawnPosX;
     [SerializeField] private int spawnPosZ;
     [SerializeField] public float heightAboveTile = 0.5f;
@@ -47,7 +47,7 @@ public class EntityMaster : MonoBehaviour
 
         pos = new EntityPosition(spawnPosX, spawnPosZ);
 
-        healthStatHandler = GetComponent<HealthStatHandler>();
+        charStatHandler = GetComponent<CharStatHandler>();
 
         anim = new EntityAnim(this, GetComponent<Animator>());
 

@@ -78,12 +78,11 @@ public class SpellManager : MonoBehaviour
 
         if (!targetTile.isActionArea)
         {
-            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
-
             if (pendingSpellData.DamageType != DamageType.AOE)
             {
                 Debug.LogWarning("[SpellManager] Tile target bukan untuk spell");
                 pendingSpellData = null;
+                if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
                 return;
             }
         }
@@ -110,10 +109,14 @@ public class SpellManager : MonoBehaviour
                 case DamageType.Freeze:
                     targetEntity.status.SetStun(pendingSpellData.amount, pendingSpellData.spellDuration);
                     break;
-                case DamageType.AOE:
-                    targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
-                    break;
             }
+            Destroy(cardWrapper.gameObject);
+            currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
+        }
+
+        if (spellType == DamageType.AOE)
+        {
+            targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
             Destroy(cardWrapper.gameObject);
             currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
         }

@@ -248,23 +248,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 751448746041523486, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -277,6 +277,10 @@ PrefabInstance:
     - target: {fileID: 2063829020684149244, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
       propertyPath: m_Name
       value: ActionArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063829020684149244, guid: 95ded7b0d0b61f7f4ad613e9c1d6b8c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -345,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Highlight
       objectReference: {fileID: 0}
+    - target: {fileID: 7318636008813243774, guid: 4d82063c094f35f0da6f4dbd6bc78d0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -372,6 +380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveArea
       objectReference: {fileID: 0}
+    - target: {fileID: 530050665651135148, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -386,23 +398,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2490746850883869769, guid: c915cdb484fb05c1e9fb10d8d1e4ae03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -478,6 +490,10 @@ PrefabInstance:
     - target: {fileID: 7036768543403082177, guid: 1f4539f11445040b98538684796fb935, type: 3}
       propertyPath: m_Name
       value: AttackArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036768543403082177, guid: 1f4539f11445040b98538684796fb935, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
