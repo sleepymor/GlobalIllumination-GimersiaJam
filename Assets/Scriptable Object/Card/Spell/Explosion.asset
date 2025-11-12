@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Explosion
   DamageType: 1
-  amount: 5
+  amount: 1000
   spellDuration: 0
   aoeRange: 2
   summonCost: 0
-  cardSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  cardSprite: {fileID: 308582769, guid: 8d8cbf03889bcd5ce9b75e93b42fac2a, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

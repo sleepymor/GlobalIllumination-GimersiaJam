@@ -107,7 +107,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     private void OnMouseExit()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(false);
+        }
 
         if (SpellManager.Instance.pendingSpellData != null)
         {
@@ -119,6 +121,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             }
         }
         isTileHovered = false;
+        SummonManager.Instance.targetTile = this;
+        ItemManager.Instance.targetTile = this;
+        SpellManager.Instance.targetTile = this;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -126,7 +131,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         Faction currentTurn = TurnManager.GetCurrentTurn();
         if (currentTurn != Faction.PLAYER) return;
 
-        // 🔹 Case 1: Clicked Player unit
         if (isOccupied && occupyingEntity != null)
         {
             if (occupyingEntity.data.faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
@@ -137,7 +141,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 playerManager.SetSelectedEntity(occupyingEntity);
                 tileMove.ShowMoveAreaBFS(occupyingEntity.move.MoveRange);
 
-                tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
+                if (!occupyingEntity.attack.IsAlreadyAttacking) tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
 
                 return;
             }
@@ -147,6 +151,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             var entity = PlayerManager.Instance.SelectedEntity;
             PlayerManager.Instance.TileClicked(this);
+            PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+
             return;
         }
 
@@ -160,12 +166,13 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 attacker.attack.Attack(occupyingEntity);
             }
 
-            PlayerManager.Instance.ClearAllMoveAreas();
             PlayerManager.Instance.SetSelectedEntity(null);
             return;
         }
 
-        PlayerManager.Instance.ClearAllMoveAreas();
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+
+
     }
 
     public void SetOccupyingEntity(EntityMaster entity)

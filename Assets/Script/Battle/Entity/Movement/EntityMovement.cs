@@ -62,7 +62,7 @@ public class EntityMovement
 
         _e.pos.SetPos(x, z);
 
-        Vector3 tileCenter = tile.transform.position + Vector3.up * _e.pos.heightAboveTile;
+        Vector3 tileCenter = tile.transform.position + Vector3.up * _e.heightAboveTile;
         _e.transform.position = tileCenter;
     }
 
@@ -97,7 +97,7 @@ public class EntityMovement
         if (targetTile == null) yield break;
 
         Vector3 startPos = _e.transform.position;
-        Vector3 targetPos = targetTile.transform.position + Vector3.up * _e.pos.heightAboveTile;
+        Vector3 targetPos = targetTile.transform.position + Vector3.up * _e.heightAboveTile;
 
         float distance = Vector3.Distance(startPos, targetPos);
         float duration = distance / _e.anim.moveSpeed;

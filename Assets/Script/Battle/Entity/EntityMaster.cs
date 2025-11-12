@@ -7,10 +7,10 @@ public class EntityMaster : MonoBehaviour
     [Header("Entity Data")]
     public UnitData data;
 
-    [HideInInspector] public HealthStatHandler healthStatHandler;
+    [HideInInspector] public CharStatHandler charStatHandler;
     [SerializeField] private int spawnPosX;
     [SerializeField] private int spawnPosZ;
-    [SerializeField] private float heightAboveTile = 0.5f;
+    [SerializeField] public float heightAboveTile = 0.5f;
 
     private Renderer[] renderers;
     [HideInInspector] public GridManager gridManager;
@@ -27,6 +27,8 @@ public class EntityMaster : MonoBehaviour
     [HideInInspector] public EntityManager manager;
     [HideInInspector] public EntityPosition pos;
     [HideInInspector] public SoulHelper soul;
+
+    public Material outlineMaterial;
 
     void Awake()
     {
@@ -45,9 +47,17 @@ public class EntityMaster : MonoBehaviour
 
         pos = new EntityPosition(spawnPosX, spawnPosZ);
 
-        healthStatHandler = GetComponent<HealthStatHandler>();
+        charStatHandler = GetComponent<CharStatHandler>();
 
         anim = new EntityAnim(this, GetComponent<Animator>());
+
+        if (data.faction == Faction.ENEMY)
+        {
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            sr.material = outlineMaterial;
+            sr.material.SetColor("_OutlineColor", Color.red);
+            sr.material.SetFloat("_OutlineThickness", 1.5f);
+        }
     }
 
     private void Start()

@@ -27,9 +27,9 @@ public class SoulCountManager : MonoBehaviour
             tmpText.text = text;
     }
 
-    public void SetSoul(int current, int max = 0)
+    public void SetSoul(int current, int max)
     {
         if (tmpText != null)
-            tmpText.text = $"{current:0}";
+            tmpText.text = $"{current:0}/{max:0}";
     }
 }

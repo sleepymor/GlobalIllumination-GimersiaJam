@@ -72,18 +72,16 @@ public class SpellManager : MonoBehaviour
             if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
             Debug.LogWarning("[SpellManager] Tile target tidak valid atau merupakan tile player");
             pendingSpellData = null;
-
             return;
         }
 
         if (!targetTile.isActionArea)
         {
-            if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
-
             if (pendingSpellData.DamageType != DamageType.AOE)
             {
                 Debug.LogWarning("[SpellManager] Tile target bukan untuk spell");
                 pendingSpellData = null;
+                if (cardWrapper != null) StartCoroutine(BlinkCardRed(cardWrapper));
                 return;
             }
         }
@@ -99,21 +97,27 @@ public class SpellManager : MonoBehaviour
         DamageType spellType = pendingSpellData.DamageType;
         EntityMaster targetEntity = targetTile.GetOccupyingEntity();
 
-
-        if (!targetTile.isTileHovered)
+        if (targetTile.GetOccupyingEntity().data.faction == Faction.ENEMY)
         {
             switch (spellType)
             {
                 case DamageType.DOT:
                     targetEntity.status.SetPoison(pendingSpellData.amount, pendingSpellData.spellDuration);
+                    Destroy(cardWrapper.gameObject);
+                    currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
                     break;
                 case DamageType.Freeze:
                     targetEntity.status.SetStun(pendingSpellData.amount, pendingSpellData.spellDuration);
-                    break;
-                case DamageType.AOE:
-                    targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
+                    Destroy(cardWrapper.gameObject);
+                    currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
                     break;
             }
+
+        }
+
+        if (spellType == DamageType.AOE && targetTile.isTileHovered)
+        {
+            targetTile.tileAttack.DealAOEDamage(pendingSpellData.aoeRange, pendingSpellData.amount);
             Destroy(cardWrapper.gameObject);
             currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
         }

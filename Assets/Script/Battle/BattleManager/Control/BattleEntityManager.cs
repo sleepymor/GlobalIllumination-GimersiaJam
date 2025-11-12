@@ -80,11 +80,21 @@ public abstract class BattleEntityManager : MonoBehaviour
     {
         if (entity != null && TeamList.Contains(entity))
         {
-            TeamList.Remove(entity);
+            if (entity.data.canSummon)
+            {
+                if (entity.data.faction == Faction.PLAYER)
+                {
+                    TurnManager.PlayerLose();
+                } else if (entity.data.faction == Faction.ENEMY)
+                {
+                    TurnManager.PlayerWin();
+                }
+            }
 
             Tile tile = FindObjectOfType<GridManager>()?.GetTileAt(entity.pos.GridX, entity.pos.GridZ);
             if (tile != null && tile.GetOccupyingEntity() == entity)
                 tile.SetOccupyingEntity(null);
+            TeamList.Remove(entity);
 
             Debug.Log($"[{GetType().Name}] Removed: {entity.name}");
         }

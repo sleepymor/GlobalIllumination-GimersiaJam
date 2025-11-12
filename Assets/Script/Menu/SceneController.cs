@@ -9,8 +9,8 @@ public class SceneController : MonoBehaviour
 
     [Header("Transition + Loading UI")]
     [SerializeField] private Animator transitionAnim;
-    [SerializeField] private GameObject transitionUI; 
-    [SerializeField] private Slider loadingSlider;    
+    [SerializeField] private GameObject transitionUI;
+    [SerializeField] private Slider loadingSlider;
     [SerializeField] private TMP_Text loadingText;
 
     private void Awake()
@@ -32,7 +32,7 @@ public class SceneController : MonoBehaviour
             }
 
             if (loadingSlider != null)
-                loadingSlider.gameObject.SetActive(false); // awalnya mati
+                loadingSlider.gameObject.SetActive(false); 
         }
         else
         {
