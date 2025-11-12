@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
 
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
+    private int sceneToContinue;
 
     [Header("Transition + Loading UI")]
     [SerializeField] private Animator transitionAnim;
@@ -32,7 +34,7 @@ public class SceneController : MonoBehaviour
             }
 
             if (loadingSlider != null)
-                loadingSlider.gameObject.SetActive(false); 
+                loadingSlider.gameObject.SetActive(false);
         }
         else
         {
@@ -49,6 +51,38 @@ public class SceneController : MonoBehaviour
             StartCoroutine(HideTransitionUIAfterDelay(1.5f));
         }
     }
+
+
+    public void ContinueGame()
+    {
+        string lastScene = PlayerPrefs.GetString("LastScene", "");
+
+        if (!string.IsNullOrEmpty(lastScene))
+        {
+            LoadScene(lastScene);
+        }
+        else
+        {
+            Debug.LogWarning("Belum ada progress yang disimpan!");
+        }
+    }
+
+
+    public void LoadPreviousScene()
+    {
+        int previousSceneIndex = PlayerPrefs.GetInt("SavedScene", -1);
+
+        if (previousSceneIndex >= 0)
+        {
+            Debug.Log($"[SceneController] Loading previous scene index {previousSceneIndex}...");
+            StartCoroutine(LoadLevelByIndex(previousSceneIndex));
+        }
+        else
+        {
+            Debug.LogWarning("Tidak ada scene sebelumnya yang tersimpan!");
+        }
+    }
+
 
     private System.Collections.IEnumerator HideTransitionUIAfterDelay(float delay)
     {

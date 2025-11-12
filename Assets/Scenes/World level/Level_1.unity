@@ -688,8 +688,9 @@ GameObject:
   - component: {fileID: 120306983}
   - component: {fileID: 120306985}
   - component: {fileID: 120306984}
+  - component: {fileID: 120306986}
   m_Layer: 0
-  m_Name: Pirate
+  m_Name: Witch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,8 +705,8 @@ Transform:
   m_GameObject: {fileID: 120306981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.07, y: 2.041, z: 9.29}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: -26.07, y: 2.25, z: 9.29}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1734571851}
@@ -744,7 +745,7 @@ Animator:
   m_GameObject: {fileID: 120306981}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 822b5afb27cebb1cd8b47f0880222aa6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 271ed0b8c6bc1679b80cfb123023b680, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -800,7 +801,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1451743869, guid: 4ae48ce9ad3e294478393c3644fa4807, type: 3}
+  m_Sprite: {fileID: 1089708628, guid: 3c8be1af8120bd3e98ced355be0d5c2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -811,6 +812,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &120306986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120306981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d878bfd3b3c1d22a06c0cb71e735df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Witch
 --- !u!1 &134742311
 GameObject:
   m_ObjectHideFlags: 0
@@ -8383,11 +8397,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1924985402}
-  - component: {fileID: 1924985407}
-  - component: {fileID: 1924985406}
   - component: {fileID: 1924985405}
   - component: {fileID: 1924985404}
   - component: {fileID: 1924985403}
+  - component: {fileID: 1924985408}
+  - component: {fileID: 1924985410}
+  - component: {fileID: 1924985409}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8476,22 +8491,56 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1924985406
-MeshRenderer:
+--- !u!114 &1924985408
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924985401}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a482239dc4c9ca6f587ac83ef417d613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1924985409
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924985401}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &1924985410
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924985401}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
@@ -8499,7 +8548,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e73bff97a4dabc418f8d5c4c49cbc85, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8512,7 +8561,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -8520,15 +8569,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1924985407
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924985401}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Sprite: {fileID: 681658435, guid: 6af1526cd17261b5fa0efaa2516bbff1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.56, y: 2.56}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2037366413
 GameObject:
   m_ObjectHideFlags: 0
@@ -8955,6 +9006,14 @@ PrefabInstance:
     - target: {fileID: 4920527860096899064, guid: 5364485ef84829645a8cb08ec2c0f140, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327075844444877694, guid: 5364485ef84829645a8cb08ec2c0f140, type: 3}
+      propertyPath: battleList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327075844444877694, guid: 5364485ef84829645a8cb08ec2c0f140, type: 3}
+      propertyPath: 'battleList.Array.data[0]'
+      value: Pirate
       objectReference: {fileID: 0}
     - target: {fileID: 8898665355051557308, guid: 5364485ef84829645a8cb08ec2c0f140, type: 3}
       propertyPath: m_AnchoredPosition.y
