@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Crit
   BuffType: 3
   amount: 50
-  summonCost: 2
+  summonCost: 3
   cardSprite: {fileID: 554815450, guid: 0ea5b34bf8f149909ab223e5ca65d714, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

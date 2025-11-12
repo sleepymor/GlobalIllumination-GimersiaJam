@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Healing Potion
   BuffType: 0
-  amount: 200
+  amount: 120
   summonCost: 3
   cardSprite: {fileID: 1061120319, guid: efb87522d46a33644aac69d614ef3d73, type: 3}
   worldSprite: {fileID: 0}
