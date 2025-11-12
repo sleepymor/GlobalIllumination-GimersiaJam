@@ -52,7 +52,7 @@ public class EntityItem
             tile.tileAction.ClearActionArea();
         }
 
-        Debug.Log("[EntityItem] Semua area summon disembunyikan.");
+        Debug.Log("[EntityItem] Semua area equip disembunyikan.");
     }
     
 }

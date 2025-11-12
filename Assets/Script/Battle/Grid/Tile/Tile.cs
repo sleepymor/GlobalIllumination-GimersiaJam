@@ -107,7 +107,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     private void OnMouseExit()
     {
         if (_hoverObject != null)
+        {
             _hoverObject.SetActive(false);
+        }
 
         if (SpellManager.Instance.pendingSpellData != null)
         {
@@ -119,6 +121,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             }
         }
         isTileHovered = false;
+        SummonManager.Instance.targetTile = this;
+        ItemManager.Instance.targetTile = this;
+        SpellManager.Instance.targetTile = this;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -146,6 +151,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             var entity = PlayerManager.Instance.SelectedEntity;
             PlayerManager.Instance.TileClicked(this);
+            PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+
             return;
         }
 
@@ -159,12 +166,13 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 attacker.attack.Attack(occupyingEntity);
             }
 
-            PlayerManager.Instance.ClearAllMoveAreas();
             PlayerManager.Instance.SetSelectedEntity(null);
             return;
         }
 
-        PlayerManager.Instance.ClearAllMoveAreas();
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+
+
     }
 
     public void SetOccupyingEntity(EntityMaster entity)

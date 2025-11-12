@@ -49,7 +49,7 @@ public class EntitySpell
 
         startTile.tileAction.ShowActionAreaBFS(1, true);
 
-        Debug.Log($"[EntityItem] Menampilkan area equip");
+        Debug.Log($"[EntityItem] Menampilkan area spell");
     }
 
     public void HideActionArea()
@@ -66,7 +66,7 @@ public class EntitySpell
             tile.tileAction.ClearActionArea();
         }
 
-        Debug.Log("[EntityItem] Semua area summon disembunyikan.");
+        Debug.Log("[EntityItem] Semua area spell disembunyikan.");
     }
 
 }

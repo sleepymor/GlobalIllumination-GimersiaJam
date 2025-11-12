@@ -59,7 +59,7 @@ public class EntityAttack
     private IEnumerator AttackRoutine(EntityMaster target)
     {
         _e.anim.AttackAnim();
-
+        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
         yield return new WaitForSeconds(1f);
 
         _e.anim.IdleAnim();
