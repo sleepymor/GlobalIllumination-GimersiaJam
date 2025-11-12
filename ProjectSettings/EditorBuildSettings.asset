@@ -6,11 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Scenes/World level/Level_1.unity
     guid: acef5030952d50644854d541b25a687d
+  - enabled: 1
+    path: Assets/Scenes/Battle/CharBattle/PirateBattle.unity
+    guid: a741d47bc3f1f95f9b8669f290d02c40
+  - enabled: 1
+    path: Assets/Scenes/Battle/CharBattle/WizardBattle.unity
+    guid: 2b2eb2f74a9616a58b61c0ef83c3fe3e
+  - enabled: 1
+    path: Assets/Scenes/Battle/CharBattle/ElfBattle.unity
+    guid: 3e3fee57c1ff341309ffc667e58ad0c9
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Main Menu/Main_menu.unity
     guid: 5a3a85bcd40e289439113f1f34d2f5b7

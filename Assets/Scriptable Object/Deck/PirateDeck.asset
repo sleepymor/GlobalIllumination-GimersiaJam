@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9354e18bd34e1338e8073f3ce2abc44d, type: 3}
-  m_Name: PlayerDeck
+  m_Name: PirateDeck
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
   - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
+  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
+  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
+  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}

@@ -85,4 +85,32 @@ public class TurnManager : MonoBehaviour
         return _currentTurn;
     }
 
+    public static void PlayerWin()
+    {
+        LoadScene("Level_1");
+    }
+
+    public static void PlayerLose()
+    {
+        LoadScene("Main_menu");
+    }
+
+    public static void LoadScene(string sceneName)
+    {
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            if (SceneController.instance != null)
+            {
+                SceneController.instance.LoadScene(sceneName);
+            }
+            else
+            {
+                Debug.LogWarning("SceneController instance tidak ditemukan!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Nama scene belum diisi!");
+        }
+    }
 }
