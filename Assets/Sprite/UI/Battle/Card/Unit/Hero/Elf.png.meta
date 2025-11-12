@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 226ebb1fb381d234fb95e824afd0a4f0
+guid: 70a29dea21b9cf946a67a21288b20e34
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dark-Knight_0
+      name: Elf_0
       rect:
         serializedVersion: 2
         x: 53
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38f5e1312fa122f439d063cd42aa9f86
-      internalID: -1645139458
+      spriteID: 8d3a1f4d42ad3fc47bb4d3668c11d464
+      internalID: -205228393
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8a8e3b45429572f44bb0c3eddae6ecb1
+    spriteID: 06d28ab9c087c834384ba05569388a03
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dark-Knight_0: -1645139458
+      Elf_0: -205228393
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
