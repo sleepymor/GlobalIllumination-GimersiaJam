@@ -2405,7 +2405,6 @@ GameObject:
   - component: {fileID: 512856275}
   - component: {fileID: 512856277}
   - component: {fileID: 512856276}
-  - component: {fileID: 512856278}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -8581,7 +8580,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1924985404}
   spriteRenderer: {fileID: 1924985410}
-  spriteRenderer: {fileID: 1924985410}
   speed: 5
   jumpPower: 5
   gravity: 9.81
@@ -8720,7 +8718,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!1 &2037366413
 GameObject:
