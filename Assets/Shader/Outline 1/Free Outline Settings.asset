@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28765dc7302cd49b59c0e9ac8862cf45, type: 3}
   m_Name: Free Outline Settings
   m_EditorClassIdentifier: 
-  injectionPoint: 600
+  injectionPoint: 450
   showInSceneView: 1
   outlines:
   - {fileID: 6892601816083211318}
