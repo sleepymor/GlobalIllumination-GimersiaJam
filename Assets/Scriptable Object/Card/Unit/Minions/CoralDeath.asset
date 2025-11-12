@@ -28,6 +28,6 @@ MonoBehaviour:
   soulRecovery: 0
   currentSoul: 0
   faction: 0
-  cardSprite: {fileID: 0}
+  cardSprite: {fileID: 141373934, guid: 8cbbc7a77a8d31b468b580a719b3d081, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 1782075751541447720, guid: 2447903ddb5a82b76a975b2a0769a06e, type: 3}
