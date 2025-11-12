@@ -14,5 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deck:
   - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
+  - {fileID: 11400000, guid: f4b0331fdf943587580a6beac0e91b13, type: 2}
+  - {fileID: 11400000, guid: 644c84e649b0c0f84b075fc2b3cc110e, type: 2}
+  - {fileID: 11400000, guid: 644c84e649b0c0f84b075fc2b3cc110e, type: 2}
   - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
+  - {fileID: 11400000, guid: 268eac81412b4334d90bbff71169fbc1, type: 2}
+  - {fileID: 11400000, guid: 268eac81412b4334d90bbff71169fbc1, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 06b50ce63bac52246943da6ba4e17bec, type: 2}
+  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  - {fileID: 11400000, guid: e984edf2ca6429aabadb7c5eb96e05b0, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 0ba3c18a25b7f33d8867c7bd8175f7ee, type: 2}
+  - {fileID: 11400000, guid: 0ba3c18a25b7f33d8867c7bd8175f7ee, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
   - {fileID: 11400000, guid: 51d36b078328bfb42a91253ead1de2f9, type: 2}
