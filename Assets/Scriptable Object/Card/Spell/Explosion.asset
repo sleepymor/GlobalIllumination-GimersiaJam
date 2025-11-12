@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Explosion
   DamageType: 1
-  amount: 5
+  amount: 1000
   spellDuration: 0
   aoeRange: 2
   summonCost: 0

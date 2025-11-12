@@ -97,7 +97,6 @@ public class SpellManager : MonoBehaviour
         DamageType spellType = pendingSpellData.DamageType;
         EntityMaster targetEntity = targetTile.GetOccupyingEntity();
 
-
         if (targetTile.GetOccupyingEntity().data.faction == Faction.ENEMY)
         {
             switch (spellType)
