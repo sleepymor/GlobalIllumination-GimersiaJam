@@ -13,7 +13,23 @@ MonoBehaviour:
   m_Name: PirateDeck
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
-  - {fileID: 11400000, guid: 0911baaf80e50a0fd8bf2d0426440bfb, type: 2}
+  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
+  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
+  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: c78a1ea1608c1af459eaa18e746d2caf, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 148785b75af50571a8aefe7ed932923c, type: 2}
+  - {fileID: 11400000, guid: 0ba3c18a25b7f33d8867c7bd8175f7ee, type: 2}
+  - {fileID: 11400000, guid: 0ba3c18a25b7f33d8867c7bd8175f7ee, type: 2}
+  - {fileID: 11400000, guid: 0ba3c18a25b7f33d8867c7bd8175f7ee, type: 2}
