@@ -63,7 +63,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9962b7513bf9914a82b665a182f79de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracks: []
+  tracks:
+  - trackName: Main_menu
+    clip: {fileID: 8300000, guid: c1e764b96c0774440914885cf853e9df, type: 3}
+  - trackName: PirateBattle
+    clip: {fileID: 8300000, guid: 5728a82a55a924c4ab1d91204e8d6a41, type: 3}
+  - trackName: PirateBattle
+    clip: {fileID: 8300000, guid: 3ee88d384c6af89489414e737f3e37a4, type: 3}
+  - trackName: Level_1
+    clip: {fileID: 8300000, guid: f34fcc00b6d49fd46ba786ead816bd7b, type: 3}
 --- !u!114 &5345434853116968258
 MonoBehaviour:
   m_ObjectHideFlags: 0
