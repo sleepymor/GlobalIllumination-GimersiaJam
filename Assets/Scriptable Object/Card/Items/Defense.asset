@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e917ed853a99084c92c326eeeb9c74f, type: 3}
-  m_Name: Poison
+  m_Script: {fileID: 11500000, guid: e937deb9697664244980215baef13611, type: 3}
+  m_Name: Defense
   m_EditorClassIdentifier: 
-  spellName: Poison
-  DamageType: 0
-  amount: 100
-  spellDuration: 4
-  aoeRange: 0
-  summonCost: 1
-  cardSprite: {fileID: 1687495206, guid: 1869ba82e21cad63ca91ba8745e943fc, type: 3}
+  itemName: Defense
+  BuffType: 2
+  amount: 50
+  summonCost: 2
+  cardSprite: {fileID: 1321712526, guid: c3bdbc70e7ec27726b8be315d9c7a44d, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

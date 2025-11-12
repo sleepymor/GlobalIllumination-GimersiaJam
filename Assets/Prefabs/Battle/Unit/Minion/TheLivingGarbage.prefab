@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4473471216752999400}
   - component: {fileID: 382916880689799860}
   m_Layer: 0
-  m_Name: ChestMimic
+  m_Name: TheLivingGarbage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ Animator:
   m_GameObject: {fileID: 1782075751541447720}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0c579738a34d328c498cea69705307dd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1361ac71a044ae2ffac99af7317b60f1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1033667584, guid: 93a40b1e990ca124cb2026fd5b1dc4d5, type: 3}
+  m_Sprite: {fileID: 294546252, guid: 4151c39f74aeba3b98344442315ecbbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,11 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
+  data: {fileID: 11400000, guid: 6e7b0f10f5403815a80b848e2eb1bc58, type: 2}
   healthStatHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
-  heightAboveTile: 4.5
+  heightAboveTile: 2.5
   gridManager: {fileID: 0}
   currentTile: {fileID: 0}
   materials: []
@@ -225,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3798343601133064160, guid: f43581edd96a87ca98cd6aac2afab6e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.424
       objectReference: {fileID: 0}
     - target: {fileID: 3798343601133064160, guid: f43581edd96a87ca98cd6aac2afab6e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
