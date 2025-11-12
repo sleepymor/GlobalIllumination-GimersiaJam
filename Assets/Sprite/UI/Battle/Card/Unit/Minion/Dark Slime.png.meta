@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7255948d84bca3af086b9db9fc2daaec
+guid: 5515fd293a5ea7d45bf928cd7ba26ecb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,24 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Warlock_0
+      name: Dark Slime_0
       rect:
         serializedVersion: 2
         x: 53
@@ -125,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e106c6d0e9f48089fb61aef9c9da1970
-      internalID: -1856452409
+      spriteID: d1b90d5171a2923498a22e18a6f3a5b8
+      internalID: -2050906631
       vertices: []
       indices: 
       edges: []
@@ -135,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 00216efa1222493f3a7765d861790ba2
+    spriteID: 9dd6285132b568043979671c3bdf3ad2
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Warlock_0: -1856452409
+      Dark Slime_0: -2050906631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
