@@ -95,14 +95,15 @@ public class TileAttackUtils
         {
             var (currentTile, rangeLeft) = queue.Dequeue();
 
-            if (currentTile != _t)
-            {
-                currentTile.tileAttack.ActivateAttackAreaObject();
-                _previousAOETiles.Add(currentTile);
-            }
+            // 🔹 Aktifkan area dan ubah warna
+            currentTile.tileAction.ActivateActionAreaObject();
+            _previousAOETiles.Add(currentTile);
 
-            if (rangeLeft <= 0)
-                continue;
+            var sr = currentTile.tileAction._t.GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.color = Color.red; // warna AOE
+
+            if (rangeLeft <= 0) continue;
 
             Vector2Int coords = _t.grid.GetTileCoordinates(currentTile);
             Vector2Int[] dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
@@ -122,7 +123,14 @@ public class TileAttackUtils
     public void ClearAOEArea()
     {
         foreach (var tile in _previousAOETiles)
-            tile.tileAttack.ClearAttackArea();
+        {
+            tile.tileAction.ClearActionArea();
+
+            // 🔹 Kembalikan ke warna asli sprite (Color.white = no tint)
+            var sr = tile.tileAction._t.GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.color = Color.white;
+        }
 
         _previousAOETiles.Clear();
     }

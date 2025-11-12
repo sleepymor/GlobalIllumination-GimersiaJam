@@ -402,7 +402,6 @@ public class CardContainer : MonoBehaviour
             Destroy(currentDraggedCard.gameObject);
         }
 
-        SummonManager.Instance.HideSummonArea();
         currentDraggedCard = null;
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TileActionUtils
 {
-    private Tile _t;
+    public Tile _t;
     public TileActionUtils(Tile tile)
     {
         _t = tile;

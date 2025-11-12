@@ -35,13 +35,13 @@ public class EntityHealth
         _e.data.currentHP += hp;
 
         if (_e.data.currentHP > _e.data.health) _e.data.currentHP = _e.data.health;
-        _e.healthStatHandler.SetHealth(_e.data.currentHP);
+        _e.charStatHandler.SetHealth(_e.data.currentHP);
     }
 
     public void SetMaxHP()
     {
         _e.data.currentHP = _e.data.health;
-        _e.healthStatHandler.SetHealth(_e.data.currentHP);
+        _e.charStatHandler.SetHealth(_e.data.currentHP);
     }
 
     public void TakeDamage(int amount, int critDmg = 0, int critChance = 0)
@@ -53,13 +53,16 @@ public class EntityHealth
 
         if (isCritical)
         {
-            finalDamage = amount * critDmg;
+            finalDamage = amount * critDmg - _e.data.defense;
             Debug.Log($"Critical hit! Damage dealt: {finalDamage}");
         }
 
+        if (finalDamage < 0) finalDamage = 0;
+
         // Apply damage
         _e.data.currentHP -= finalDamage;
-        _e.healthStatHandler.SetHealth(_e.data.currentHP);
+        _e.charStatHandler.SetHealth(_e.data.currentHP);
+        _e.charStatHandler.ShowDamage(finalDamage);
 
         // Check for death
         if (_e.data.currentHP <= 0)
