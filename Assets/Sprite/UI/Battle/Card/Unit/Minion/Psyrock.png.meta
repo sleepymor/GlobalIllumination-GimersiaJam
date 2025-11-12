@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a2c8966218e1a3a429a0978987f35b22
+guid: c8eb845b04c26dd43af6a71e35ba99a5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Balor-Eye_0
+      name: Psyrock_0
       rect:
         serializedVersion: 2
         x: 53
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 051efcfc851ece444b8ac6a848508441
-      internalID: -587555864
+      spriteID: 7598061fb355e59458f8dead59ce6ef6
+      internalID: 330344196
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 664d581139149bf448d5f9e47071bb12
+    spriteID: 2863db6075fef8e4c8073fdbf2d7d227
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Balor-Eye_0: -587555864
+      Psyrock_0: 330344196
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

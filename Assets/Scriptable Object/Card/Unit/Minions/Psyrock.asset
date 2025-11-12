@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e15e2a684938f44eb1e4fd53cd2928a, type: 3}
-  m_Name: MutantLandfill
+  m_Name: Psyrock
   m_EditorClassIdentifier: 
-  unitName: Mutant Landfill
-  health: 70
-  attack: 20
+  unitName: 
+  health: 0
+  attack: 0
   currentHP: 0
   critDmg: 0
   defense: 0
-  moveRange: 3
-  attackRange: 1
+  moveRange: 0
+  attackRange: 0
   critChance: 0
-  summonCost: 1
+  summonCost: 0
   canSummon: 0
   summonRange: 0
   maxSoul: 0
@@ -30,4 +30,4 @@ MonoBehaviour:
   faction: 0
   cardSprite: {fileID: 0}
   worldSprite: {fileID: 0}
-  prefab: {fileID: 1782075751541447720, guid: 0a37fa5df53b618e1b1224507a8df474, type: 3}
+  prefab: {fileID: 0}
