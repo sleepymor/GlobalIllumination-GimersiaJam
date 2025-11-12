@@ -60,6 +60,13 @@ public class TurnManager : MonoBehaviour
         PlayerManager.Instance.ClearAllMoveAndAttackAreas();
         PlayerDeckManager.Instance.DrawCard();
         TurnSwitcherBtnChanger.Instance.SetPlayerTurn();
+
+        List<EntityMaster> units = PlayerManager.Instance.TeamList;
+
+        foreach (var i in units)
+        {
+            i.attack.SetHadAttacking(false);
+        }
     }
 
     public static void EnemyTurn()

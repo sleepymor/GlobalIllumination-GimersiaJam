@@ -126,10 +126,10 @@ public class TileAttackUtils
         {
             tile.tileAction.ClearActionArea();
 
-            // 🔹 Kembalikan ke warna asli sprite (Color.white = no tint)
-            var sr = tile.tileAction._t.GetComponent<SpriteRenderer>();
-            if (sr != null)
-                sr.color = Color.white;
+            // // 🔹 Kembalikan ke warna asli sprite (Color.white = no tint)
+            // var sr = tile.tileAction._t.GetComponent<SpriteRenderer>();
+            // if (sr != null)
+            //     sr.color = Color.white;
         }
 
         _previousAOETiles.Clear();
