@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PirateDeck
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
-  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
-  - {fileID: 11400000, guid: 5101f53609fe95c4e82a207fbffdb264, type: 2}
+  - {fileID: 11400000, guid: 38ca49fdb0648eb40afa89fff8fbc576, type: 2}
+  - {fileID: 11400000, guid: 9b4cf34bd8cfc303bb41bf3012c894e9, type: 2}
+  - {fileID: 11400000, guid: f1506d951c26788c69a417a9f8f383bc, type: 2}
   - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
   - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
   - {fileID: 11400000, guid: 6e7b0f10f5403815a80b848e2eb1bc58, type: 2}

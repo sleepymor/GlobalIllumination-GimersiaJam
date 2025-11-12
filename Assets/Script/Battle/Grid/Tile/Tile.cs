@@ -131,34 +131,39 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         Faction currentTurn = TurnManager.GetCurrentTurn();
         if (currentTurn != Faction.PLAYER) return;
 
-        if (isOccupied && occupyingEntity != null)
-        {
-            if (occupyingEntity.data.faction == Faction.PLAYER && !occupyingEntity.move.HasMoved)
-            {
-                var playerManager = PlayerManager.Instance;
-                playerManager.ClearAllMoveAreas();
+        var playerManager = PlayerManager.Instance;
 
-                playerManager.SetSelectedEntity(occupyingEntity);
+        // 1️⃣ Klik tile yang ada unit milik player → pilih unit & tampilkan area gerak + serang
+        if (isOccupied && occupyingEntity != null && occupyingEntity.data.faction == Faction.PLAYER)
+        {
+            // Cegah pemilihan unit yang sudah menyerang, tapi masih izinkan lihat area gerak
+            playerManager.ClearAllMoveAndAttackAreas();
+            playerManager.SetSelectedEntity(occupyingEntity);
+
+            // Selalu tampilkan area gerak kalau unit belum move
+            if (!occupyingEntity.move.HasMoved)
                 tileMove.ShowMoveAreaBFS(occupyingEntity.move.MoveRange);
 
-                if (!occupyingEntity.attack.IsAlreadyAttacking) tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
-
-                return;
-            }
-        }
-
-        if (isMoveArea && PlayerManager.Instance.SelectedEntity != null)
-        {
-            var entity = PlayerManager.Instance.SelectedEntity;
-            PlayerManager.Instance.TileClicked(this);
-            PlayerManager.Instance.ClearAllMoveAndAttackAreas();
+            // Selalu tampilkan area serang kalau belum menyerang
+            if (!occupyingEntity.attack.IsAlreadyAttacking)
+                tileAttack.ShowAttackAreaBFS(occupyingEntity.attack.AttackRange);
 
             return;
         }
 
-        if (isAttackArea && PlayerManager.Instance.SelectedEntity != null)
+        // 2️⃣ Klik tile gerak → pindahkan unit ke tile itu
+        if (isMoveArea && playerManager.SelectedEntity != null)
         {
-            var attacker = PlayerManager.Instance.SelectedEntity;
+            var entity = playerManager.SelectedEntity;
+            playerManager.TileClicked(this);
+            playerManager.ClearAllMoveAndAttackAreas();
+            return;
+        }
+
+        // 3️⃣ Klik tile serang → lakukan serangan
+        if (isAttackArea && playerManager.SelectedEntity != null)
+        {
+            var attacker = playerManager.SelectedEntity;
 
             if (isOccupied && occupyingEntity != null && occupyingEntity.data.faction != attacker.data.faction)
             {
@@ -166,14 +171,14 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 attacker.attack.Attack(occupyingEntity);
             }
 
-            PlayerManager.Instance.SetSelectedEntity(null);
+            playerManager.SetSelectedEntity(null);
             return;
         }
 
-        PlayerManager.Instance.ClearAllMoveAndAttackAreas();
-
-
+        // 4️⃣ Klik tile kosong di luar area → bersihkan semua area
+        playerManager.ClearAllMoveAndAttackAreas();
     }
+
 
     public void SetOccupyingEntity(EntityMaster entity)
     {

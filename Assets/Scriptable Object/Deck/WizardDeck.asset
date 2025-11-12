@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WizardDeck
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
-  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
-  - {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  - {fileID: 11400000, guid: e984edf2ca6429aabadb7c5eb96e05b0, type: 2}
+  - {fileID: 11400000, guid: f1506d951c26788c69a417a9f8f383bc, type: 2}
+  - {fileID: 11400000, guid: 9d3d442268b3e8f42b27d4e880828af5, type: 2}
   - {fileID: 11400000, guid: e984edf2ca6429aabadb7c5eb96e05b0, type: 2}
   - {fileID: 11400000, guid: e984edf2ca6429aabadb7c5eb96e05b0, type: 2}
   - {fileID: 11400000, guid: 38ca49fdb0648eb40afa89fff8fbc576, type: 2}

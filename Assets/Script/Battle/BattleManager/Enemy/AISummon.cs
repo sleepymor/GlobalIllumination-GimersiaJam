@@ -79,6 +79,11 @@ public class AISummon
 
         Tile targetTile = summonTiles[Random.Range(0, summonTiles.Count)];
 
+        if (TurnManager.GetCurrentTurn() == Faction.PLAYER) chosenCard.faction = Faction.PLAYER;
+        if (TurnManager.GetCurrentTurn() == Faction.ENEMY) chosenCard.faction = Faction.ENEMY;
+        chosenCard.canSummon = false;
+
+
         // Instantiate the summoned unit
         GameObject newUnit = GameObject.Instantiate(
             chosenCard.prefab,
@@ -97,11 +102,6 @@ public class AISummon
         newEntity.pos.SetPos(targetTile.gridX, targetTile.gridZ);
         newEntity.currentTile = targetTile;
         targetTile.SetOccupyingEntity(newEntity);
-
-        // Assign faction and add to team
-        newEntity.data.faction = Faction.ENEMY;
-        newEntity.data.canSummon = false;
-        _m.AddEntity(newEntity);
 
         // Reduce soul and remove card from hand
         summoner.soul.ReduceSoul(chosenCard.summonCost);

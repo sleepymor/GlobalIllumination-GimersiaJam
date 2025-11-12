@@ -76,11 +76,16 @@ public class SummonManager : MonoBehaviour
 
         if (targetTile.isTileHovered)
         {
+
+            if (TurnManager.GetCurrentTurn() == Faction.PLAYER) pendingSummonData.faction = Faction.PLAYER;
+            if (TurnManager.GetCurrentTurn() == Faction.ENEMY) pendingSummonData.faction = Faction.ENEMY;
+            pendingSummonData.canSummon = false;
+
             GameObject newUnit = GameObject.Instantiate(
-          pendingSummonData.prefab,
-          targetTile.transform.position,
-          Quaternion.identity
-      );
+                  pendingSummonData.prefab,
+                  targetTile.transform.position,
+                  Quaternion.identity
+              );
 
             EntityMaster newEntity = newUnit.GetComponent<EntityMaster>();
 
@@ -93,8 +98,7 @@ public class SummonManager : MonoBehaviour
 
             // 3️⃣ Tambahkan ke tim player
             PlayerManager.Instance.AddEntity(newEntity);
-            newEntity.data.faction = currentSummoner.data.faction;
-            newEntity.data.canSummon = false;
+
             // 4️⃣ Jalankan animasi summon
             newEntity.StartCoroutine(newEntity.anim.SummonAnim());
 
@@ -110,7 +114,7 @@ public class SummonManager : MonoBehaviour
         pendingSummonData = null;
 
     }
-    
+
     private IEnumerator BlinkCardRed(CardWrapper card, float duration = 0.3f)
     {
         if (card == null) yield break;
