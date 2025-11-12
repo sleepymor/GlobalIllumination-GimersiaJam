@@ -23,7 +23,14 @@ public class SoulHelper
 
     public void IncreaseSoul(int amount)
     {
+        int x = GetSoulCount() + amount;
+        if (x > _e.data.maxSoul)
+        {
+            SetSoulCount(_e.data.maxSoul);
+            return;
+        }
         SetSoulCount(GetSoulCount() + amount);
+
     }
 
     public void ReduceSoul(int amount)

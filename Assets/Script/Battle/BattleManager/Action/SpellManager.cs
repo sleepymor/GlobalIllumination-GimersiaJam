@@ -104,7 +104,6 @@ public class SpellManager : MonoBehaviour
             currentSummoner.soul.ReduceSoul(pendingSpellData.summonCost);
             HideActionArea();
             pendingSpellData = null;
-            return;
         }
 
         if (targetTile.GetOccupyingEntity().data.faction == Faction.ENEMY)

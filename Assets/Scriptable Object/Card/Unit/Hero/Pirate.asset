@@ -22,12 +22,12 @@ MonoBehaviour:
   attackRange: 1
   critChance: 0
   summonCost: 5
-  canSummon: 0
-  summonRange: 2
-  maxSoul: 5
-  soulRecovery: 2
+  canSummon: 1
+  summonRange: 1
+  maxSoul: 8
+  soulRecovery: 1
   currentSoul: 0
-  faction: 0
+  faction: 2
   cardSprite: {fileID: -484557588, guid: e18e5ced31e951942babca32d2660a21, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 1782075751541447720, guid: d8be91f7480da2021b7d4cfe0c2b48bb, type: 3}
