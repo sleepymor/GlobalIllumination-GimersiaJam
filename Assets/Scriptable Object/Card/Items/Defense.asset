@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Defense
   BuffType: 2
-  amount: 50
+  amount: 60
   summonCost: 2
   cardSprite: {fileID: 1321712526, guid: c3bdbc70e7ec27726b8be315d9c7a44d, type: 3}
   worldSprite: {fileID: 0}

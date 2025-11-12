@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Warlock
   m_EditorClassIdentifier: 
   unitName: Warlock
-  health: 600
-  attack: 40
+  health: 500
+  attack: 45
   currentHP: 0
   critDmg: 0
   defense: 0
-  moveRange: 4
-  attackRange: 1
+  moveRange: 2
+  attackRange: 3
   critChance: 0
   summonCost: 7
   canSummon: 0

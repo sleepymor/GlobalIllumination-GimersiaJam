@@ -14,6 +14,7 @@ public class UnitDataEditor : Editor
         data.moveRange = EditorGUILayout.IntField("Move Range", data.moveRange);
         data.attack = EditorGUILayout.IntField("Attack", data.attack);
         data.attackRange = EditorGUILayout.IntField("Attack Range", data.attackRange);
+        data.summonCost = EditorGUILayout.IntField("Summon Cost", data.summonCost);
         // ... draw other fields as needed
         data.canSummon = EditorGUILayout.Toggle("Can Summon", data.canSummon);
 

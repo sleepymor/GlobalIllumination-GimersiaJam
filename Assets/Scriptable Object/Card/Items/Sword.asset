@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Sword
   BuffType: 1
-  amount: 50
+  amount: 60
   summonCost: 2
   cardSprite: {fileID: 1215142997, guid: 4273afd34dcbc2e4c9ca0500f6dee081, type: 3}
   worldSprite: {fileID: 0}

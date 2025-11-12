@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pirate
   m_EditorClassIdentifier: 
   unitName: Pirate
-  health: 500
+  health: 450
   attack: 40
   currentHP: 0
   critDmg: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   attackRange: 1
   critChance: 0
   summonCost: 5
-  canSummon: 1
+  canSummon: 0
   summonRange: 2
   maxSoul: 5
   soulRecovery: 2

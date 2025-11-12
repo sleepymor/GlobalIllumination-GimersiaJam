@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Freeze
   DamageType: 2
-  amount: 2
-  spellDuration: 2
+  amount: 20
+  spellDuration: 3
   aoeRange: 0
-  summonCost: 1
+  summonCost: 2
   cardSprite: {fileID: -719734514, guid: 7695d3a3b217a0354970a142917d41cf, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}

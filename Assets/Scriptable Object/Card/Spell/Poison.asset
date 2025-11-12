@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Poison
   DamageType: 0
-  amount: 100
-  spellDuration: 4
+  amount: 30
+  spellDuration: 3
   aoeRange: 0
-  summonCost: 1
+  summonCost: 3
   cardSprite: {fileID: 1687495206, guid: 1869ba82e21cad63ca91ba8745e943fc, type: 3}
   worldSprite: {fileID: 0}
   prefab: {fileID: 0}
