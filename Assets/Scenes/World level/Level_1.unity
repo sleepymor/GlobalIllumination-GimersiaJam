@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 120306984}
   - component: {fileID: 120306986}
   m_Layer: 0
-  m_Name: Witch
+  m_Name: Pirate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,7 +705,7 @@ Transform:
   m_GameObject: {fileID: 120306981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.07, y: 2.25, z: 9.29}
+  m_LocalPosition: {x: -26.07, y: 1.58, z: 9.29}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -745,7 +745,7 @@ Animator:
   m_GameObject: {fileID: 120306981}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 271ed0b8c6bc1679b80cfb123023b680, type: 2}
+  m_Controller: {fileID: 9100000, guid: 822b5afb27cebb1cd8b47f0880222aa6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -801,7 +801,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1089708628, guid: 3c8be1af8120bd3e98ced355be0d5c2a, type: 3}
+  m_Sprite: {fileID: 688649901, guid: 4ae48ce9ad3e294478393c3644fa4807, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d878bfd3b3c1d22a06c0cb71e735df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Witch
+  key: Pirate
 --- !u!1 &134742311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2405,7 @@ GameObject:
   - component: {fileID: 512856275}
   - component: {fileID: 512856277}
   - component: {fileID: 512856276}
+  - component: {fileID: 512856278}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -2421,8 +2422,8 @@ Transform:
   m_GameObject: {fileID: 512856273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.91, y: 2.16, z: 8.48}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: -16.06, y: 1.61, z: 8.48}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1367721673}
@@ -2528,6 +2529,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &512856278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512856273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d878bfd3b3c1d22a06c0cb71e735df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Wizard
 --- !u!1 &555921342
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,6 +3332,7 @@ GameObject:
   - component: {fileID: 723016814}
   - component: {fileID: 723016816}
   - component: {fileID: 723016815}
+  - component: {fileID: 723016817}
   m_Layer: 0
   m_Name: Elf
   m_TagString: Untagged
@@ -3334,8 +3349,8 @@ Transform:
   m_GameObject: {fileID: 723016812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9, y: 2.36, z: 8.13}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: -5.18, y: 1.99, z: 8.13}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 880489450}
@@ -3441,6 +3456,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &723016817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723016812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d878bfd3b3c1d22a06c0cb71e735df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Elf
 --- !u!1 &727474598
 GameObject:
   m_ObjectHideFlags: 0
@@ -5351,7 +5379,7 @@ Transform:
   m_GameObject: {fileID: 1181734307}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3582638, y: 0.000000018461783, z: -0.00000000708445, w: 0.93362045}
-  m_LocalPosition: {x: -39.6221, y: 10.267916, z: -6.831914}
+  m_LocalPosition: {x: -39.6221, y: 11.089916, z: -6.831914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8247,7 +8275,7 @@ Transform:
   m_GameObject: {fileID: 1912921487}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35826382, y: 0.000000018461783, z: -0.0000000070844526, w: 0.9336204}
-  m_LocalPosition: {x: -39.6221, y: 10.267916, z: -6.831914}
+  m_LocalPosition: {x: -39.6221, y: 11.089916, z: -6.831914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8419,8 +8447,8 @@ Transform:
   m_GameObject: {fileID: 1924985401}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.74, y: 0.948, z: 1.31}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -45.74, y: 1.77, z: 1.31}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 555921343}
@@ -8438,9 +8466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1924985404}
-  capsule: {fileID: 1924985405}
+  spriteRenderer: {fileID: 1924985410}
   speed: 5
-  turnSmoothTime: 0.1
   jumpPower: 5
   gravity: 9.81
 --- !u!143 &1924985404
@@ -8513,7 +8540,7 @@ Animator:
   m_GameObject: {fileID: 1924985401}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 271ed0b8c6bc1679b80cfb123023b680, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8569,7 +8596,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 681658435, guid: 6af1526cd17261b5fa0efaa2516bbff1, type: 3}
+  m_Sprite: {fileID: 1089708628, guid: 3c8be1af8120bd3e98ced355be0d5c2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

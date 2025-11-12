@@ -2394,6 +2394,10 @@ MonoBehaviour:
   settingsPanel: {fileID: 284824086}
   kontrolPanel: {fileID: 2001655757}
   keluarPanel: {fileID: 1882843985}
+  battleList:
+  - Pirate
+  - Wizard
+  - Elf
 --- !u!114 &662538347
 MonoBehaviour:
   m_ObjectHideFlags: 0
