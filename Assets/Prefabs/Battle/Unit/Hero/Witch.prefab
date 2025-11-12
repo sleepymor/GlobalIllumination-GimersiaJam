@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2ae528ba02c482a4106018209e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9054bdfdeb1aa6245bf62bd0bef62663, type: 2}
+  data: {fileID: 11400000, guid: b4d230a9cd6ef16c19414e16a9e547aa, type: 2}
   charStatHandler: {fileID: 0}
   spawnPosX: 0
   spawnPosZ: 0
